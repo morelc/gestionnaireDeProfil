@@ -108,6 +108,7 @@ public class PanneauProfilDisponible extends Pane
 
             public void handle(ActionEvent event)
             {
+                new PanneauEditionProfil(dim, PanneauProfilDisponible.this, listeOuAjouterLeProfil.getStageDeLApplication(), nomDuProfil, listeOuAjouterLeProfil.getText());
                 System.err.println("ATTENTION: L'ACTION N'EST PAS ENCORE DEFINIE!");
             }
         });

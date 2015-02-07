@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -28,7 +29,7 @@ class ListeProfilsDisponiblesMachine extends TitledPane
     public ListeProfilsDisponiblesMachine(double i, String nomMachine, Stage stagePrincipal)
     {
         this.setText(nomMachine);
-        this.setFont(new Font(7 * i));
+        this.setStyle("-fx-background-color: #E9E9E9; -fx-font-size:" + Double.toString(7*i) + "; -fx-text-fill: black;");
 
         this.stageDeLApplication = stagePrincipal;
         this.profilsDisponibles = new ArrayList();

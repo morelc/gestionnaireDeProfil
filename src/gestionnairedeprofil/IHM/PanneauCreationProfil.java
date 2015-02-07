@@ -81,13 +81,13 @@ public class PanneauCreationProfil extends Stage
         textAreaNomProfil.setMinSize(170 * i, 25 * i);
         textAreaNomProfil.setStyle("-fx-font-size: " + Double.toString(11 * i));
 
-        ComboBox cbSelectionMachine = new ComboBox();
-        cbSelectionMachine.setLayoutX(225 * i);
-        cbSelectionMachine.setLayoutY(72 * i);
-        cbSelectionMachine.setPrefSize(100 * i, 25 * i);
-        cbSelectionMachine.setMaxSize(100 * i, 25 * i);
-        cbSelectionMachine.setMinSize(100 * i, 25 * i);
-        cbSelectionMachine.setStyle("-fx-font-size: " + Double.toString(11 * i));
+//        ComboBox cbSelectionMachine = new ComboBox();
+//        cbSelectionMachine.setLayoutX(225 * i);
+//        cbSelectionMachine.setLayoutY(72 * i);
+//        cbSelectionMachine.setPrefSize(100 * i, 25 * i);
+//        cbSelectionMachine.setMaxSize(100 * i, 25 * i);
+//        cbSelectionMachine.setMinSize(100 * i, 25 * i);
+//        cbSelectionMachine.setStyle("-fx-font-size: " + Double.toString(11 * i));
 
         // Configuration du noeud racine Root et de Scene
         Group root = new Group();
@@ -95,7 +95,7 @@ public class PanneauCreationProfil extends Stage
         root.getChildren().add(texteNomProfil);
         root.getChildren().add(texteNomMachine);
         root.getChildren().add(textAreaNomProfil);
-        root.getChildren().add(cbSelectionMachine);
+//        root.getChildren().add(cbSelectionMachine);
         root.getChildren().add(btnCreer);
         root.getChildren().add(btnNon);
         this.setScene(new Scene(root, 400 * i, 150 * i, Color.gray(0.85)));

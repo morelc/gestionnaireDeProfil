@@ -18,39 +18,35 @@ import javafx.stage.Stage;
  *
  * @author MOREL Charles
  */
-public class PanneauConfirmationSuppression extends Stage
+public class PanneauConfirmationAnnulationEditionProfil extends Stage
 {
 
-    public PanneauConfirmationSuppression(double i, final PanneauProfilDisponible profilConcerne, Stage stageParent, String nomProfilASupprimer, String nomMachineDuProfil)
+    public PanneauConfirmationAnnulationEditionProfil(final PanneauEditionProfil profilConcerne)
     {
         // configuration des dépendances
-        this.setTitle("Suppression du profil");
+        this.setTitle("Annuler les changements");
         this.initModality(Modality.APPLICATION_MODAL);
-        this.initOwner(stageParent);
+        this.initOwner(profilConcerne);
         this.setResizable(false);
+        double i = profilConcerne.getDim();
 
         // Configuration des noeuds statiques
 
         Text texteDanger = new Text();
-        texteDanger.setLayoutX(70 * i);
+        texteDanger.setLayoutX(60 * i);
         texteDanger.setLayoutY(30 * i);
         texteDanger.setFont(new Font(15 * i));
         texteDanger.setFill(Color.web("#696969", 1.0));
         texteDanger.setTextAlignment(TextAlignment.CENTER);
-        String nomProfilAAfiicher = nomProfilASupprimer.substring(0, 20);
-        if(nomProfilASupprimer.length()>20)
-            nomProfilAAfiicher += "...";
-        String nomMachineAAfiicher = nomMachineDuProfil.substring(0, 16);
-        if(nomMachineDuProfil.length()>16)
-            nomMachineAAfiicher += "...";
-        texteDanger.setText("Attention, la suppression d'un profil est définitif."
-                + "\nSouhaitez-vous vraiment supprimer le profil\n" + nomProfilAAfiicher + " (" + nomMachineAAfiicher + ") ?");
+        texteDanger.setText("Attention, vous avez effectué des changements sur ce profil."
+                + "\nTout changement non sauvgardé est perdu."
+                + "\nSouhaitez-vous vraiment quitter l'édition ?");
 
-        ImageView fondDanger = new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/warning.png")));
-        fondDanger.setFitHeight(185 * i);
-        fondDanger.setPreserveRatio(true);
-        fondDanger.setLayoutX(-15 * i);
-        fondDanger.setLayoutY(-10 * i);
+        ImageView fond_Danger = new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/warning.png")));
+        fond_Danger.setFitHeight(185 * i);
+        fond_Danger.setPreserveRatio(true);
+        fond_Danger.setLayoutX(-15 * i);
+        fond_Danger.setLayoutY(-10 * i);
 
         // Configuration des contrôles
 
@@ -73,7 +69,7 @@ public class PanneauConfirmationSuppression extends Stage
 
         // Configuration du noeud racine Root et de Scene
         Group root = new Group();
-        root.getChildren().add(fondDanger);
+        root.getChildren().add(fond_Danger);
         root.getChildren().add(texteDanger);
         root.getChildren().add(btnOk);
         root.getChildren().add(btnNon);
@@ -84,8 +80,7 @@ public class PanneauConfirmationSuppression extends Stage
 
             public void handle(ActionEvent event)
             {
-                profilConcerne.supprimerProfil();
-                PanneauConfirmationSuppression.this.close();
+                profilConcerne.close();
             }
         });
 
@@ -94,7 +89,7 @@ public class PanneauConfirmationSuppression extends Stage
 
             public void handle(ActionEvent event)
             {
-                PanneauConfirmationSuppression.this.close();
+                PanneauConfirmationAnnulationEditionProfil.this.close();
             }
         });
 
