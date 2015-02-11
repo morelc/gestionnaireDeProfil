@@ -10,8 +10,8 @@ import javafx.scene.control.Button;
  */
 public class BoutonEditerAssociation extends Button
 {
-    
-    public BoutonEditerAssociation(String texteBtn, final PanneauEditionProfil panneauDEditionDuProfil, final int numDuBtn)
+
+    public BoutonEditerAssociation(String texteBtn, final StageEditionProfil panneauDEditionDuProfil, final int numDuBtn)
     {
         super(texteBtn);
         this.setOnAction(new EventHandler<ActionEvent>()
@@ -24,5 +24,5 @@ public class BoutonEditerAssociation extends Button
             }
         });
     }
-    
+
 }

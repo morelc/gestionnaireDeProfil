@@ -5,6 +5,9 @@
  */
 package gestionnairedeprofil.IHM;
 
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -26,17 +29,18 @@ public class PanneauProfilAEnvoyer extends Pane
     private final Button btnLever;
     private final Button btnDessendre;
 
-    public PanneauProfilAEnvoyer(double dim, final ListeProfilsAEnvoyer listeOuAjouterLePanneau, String nomProfil, int numDuProfil)
+    public PanneauProfilAEnvoyer(double dim, final ListeProfilsAEnvoyer listeOuAjouterLePanneau, StringProperty nomProfil, int numDuProfil)
     {
         this.numProfil = numDuProfil;
 
-        Label nomProfilAAfficher = new Label(nomProfil);
+        final Label nomProfilAAfficher = new Label();
         nomProfilAAfficher.setLayoutX(5 * dim);
         nomProfilAAfficher.setLayoutY(3 * dim);
         nomProfilAAfficher.setPrefWidth(105 * dim);
         nomProfilAAfficher.setMinWidth(105 * dim);
         nomProfilAAfficher.setMaxWidth(105 * dim);
         nomProfilAAfficher.setFont(new Font(7 * dim));
+        nomProfilAAfficher.textProperty().bind(nomProfil);
         this.getChildren().add(nomProfilAAfficher);
 
         this.btnLever = new Button("", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/up.png"))));
@@ -95,6 +99,15 @@ public class PanneauProfilAEnvoyer extends Pane
             public void handle(ActionEvent event)
             {
                 listeOuAjouterLePanneau.dessendreUnProfilDansLaListe(PanneauProfilAEnvoyer.this);
+            }
+        });
+                nomProfilAAfficher.textProperty().addListener(new ChangeListener<String>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends String> ov, String t, String t1)
+            {
+                if("          ".equals(nomProfilAAfficher.getText()))
+                    listeOuAjouterLePanneau.enleverProfilAEnvoyer(PanneauProfilAEnvoyer.this);
             }
         });
 

@@ -5,7 +5,12 @@
  */
 package gestionnairedeprofil.IHM;
 
+import gestionnairedeprofil.donnees.structures.Machine;
+import gestionnairedeprofil.donnees.structures.Profil;
+import gestionnairedeprofil.donnees.structures.ToucheMachine;
+import gestionnairedeprofil.donnees.structures.Association;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javafx.animation.KeyFrame;
@@ -38,7 +43,7 @@ import javafx.util.Duration;
  *
  * @author MOREL Charles
  */
-public class PanneauPrincipal extends Application
+public class StagePrincipal extends Application
 {
 
     int i = 0;
@@ -210,16 +215,128 @@ public class PanneauPrincipal extends Application
 
         // Pour l'exemple
 
-        final ListeProfilsDisponiblesMachine panneau = new ListeProfilsDisponiblesMachine(dim, "Machine 1", Stage);
-        panneauProfilsDuPc.getPanes().add(panneau);
+        ArrayList<Machine> toutesLesMachines = new ArrayList();
+
+
+        Machine machine1 = new Machine(1, "Machine 1");
+
+        ToucheMachine touche1 = new ToucheMachine(1, "A", 1);
+        ToucheMachine touche2 = new ToucheMachine(2, "B", 2);
+        ToucheMachine touche5 = new ToucheMachine(2, "MACHIN", 2);
+        ToucheMachine touche6 = new ToucheMachine(2, "TRUC", 2);
+
+        machine1.ajouterTouche(touche1);
+        machine1.ajouterTouche(touche2);
+        machine1.ajouterTouche(touche5);
+        machine1.ajouterTouche(touche6);
+
+        Profil profil1 = new Profil(1, "Profil 1");
+        Association assoc1 = new Association();
+        profil1.getAssociationsAt(0).add(assoc1);
+        Association assoc2 = new Association(2, false, 0);
+        assoc2.getTouches().add(machine1.getTouches().get(1));
+        profil1.getAssociationsAt(1).add(assoc2);
+        Association assoc3 = new Association(3, false, 0);
+        assoc3.getTouches().add(machine1.getTouches().get(1));
+        assoc3.getTouches().add(machine1.getTouches().get(2));
+        profil1.getAssociationsAt(2).add(assoc3);
+        Association assoc4A = new Association(4, false, 0);
+        assoc4A.getTouches().add(machine1.getTouches().get(1));
+        profil1.getAssociationsAt(3).add(assoc4A);
+        Association assoc4B = new Association(4, false, 0);
+        assoc4B.getTouches().add(machine1.getTouches().get(2));
+        profil1.getAssociationsAt(3).add(assoc4B);
+        Association assoc5 = new Association(5, false, 0);
+        assoc5.getTouches().add(machine1.getTouches().get(1));
+        profil1.getAssociationsAt(4).add(assoc5);
+        Association assoc6 = new Association(6, false, 0);
+        assoc6.getTouches().add(machine1.getTouches().get(0));
+        profil1.getAssociationsAt(5).add(assoc6);
+        Association assoc7 = new Association(7, false, 0);
+        assoc7.getTouches().add(machine1.getTouches().get(0));
+        profil1.getAssociationsAt(6).add(assoc7);
+        Association assoc8 = new Association(8, false, 0);
+        assoc8.getTouches().add(machine1.getTouches().get(0));
+        profil1.getAssociationsAt(7).add(assoc8);
+        Association assoc9 = new Association(9, false, 0);
+        assoc9.getTouches().add(machine1.getTouches().get(0));
+        profil1.getAssociationsAt(8).add(assoc9);
+        Association assoc10 = new Association(10, false, 0);
+        assoc10.getTouches().add(machine1.getTouches().get(0));
+        profil1.getAssociationsAt(9).add(assoc10);
+        Association assoc11 = new Association(11, false, 0);
+        assoc11.getTouches().add(machine1.getTouches().get(0));
+        profil1.getAssociationsAt(10).add(assoc11);
+        Association assoc12 = new Association(12, false, 0);
+        assoc12.getTouches().add(machine1.getTouches().get(0));
+        profil1.getAssociationsAt(11).add(assoc12);
+        machine1.ajouterProfil(profil1);
+
+        toutesLesMachines.add(machine1);
+
+
+        Machine machine2 = new Machine(1, "Machine 2");
+
+        ToucheMachine touche3 = new ToucheMachine(3, "START", 1);
+        ToucheMachine touche4 = new ToucheMachine(4, "SELECT", 2);
+
+        machine2.ajouterTouche(touche3);
+        machine2.ajouterTouche(touche4);
+
+        Profil profil2 = new Profil(1, "Profil 2");
+        Association assocA1 = new Association(21, false, 0);
+        assocA1.getTouches().add(machine1.getTouches().get(1));
+        profil2.getAssociationsAt(0).add(assocA1);
+        Association assocA2 = new Association(22, false, 0);
+        assocA2.getTouches().add(machine1.getTouches().get(1));
+        profil2.getAssociationsAt(1).add(assocA2);
+        Association assocA3 = new Association(23, false, 0);
+        assocA3.getTouches().add(machine1.getTouches().get(1));
+        profil2.getAssociationsAt(2).add(assocA3);
+        Association assocA4 = new Association(24, false, 0);
+        assocA4.getTouches().add(machine1.getTouches().get(1));
+        profil2.getAssociationsAt(3).add(assocA4);
+        Association assocA5 = new Association(25, false, 0);
+        assocA5.getTouches().add(machine1.getTouches().get(1));
+        profil2.getAssociationsAt(4).add(assocA5);
+        Association assocA6 = new Association(26, false, 0);
+        assocA6.getTouches().add(machine1.getTouches().get(0));
+        profil2.getAssociationsAt(5).add(assocA6);
+        Association assocA7 = new Association(27, false, 0);
+        assocA7.getTouches().add(machine1.getTouches().get(0));
+        profil2.getAssociationsAt(6).add(assocA7);
+        Association assocA8 = new Association(28, false, 0);
+        assocA8.getTouches().add(machine1.getTouches().get(0));
+        profil2.getAssociationsAt(7).add(assocA8);
+        Association assocA9 = new Association(29, false, 0);
+        assocA9.getTouches().add(machine1.getTouches().get(0));
+        profil2.getAssociationsAt(8).add(assocA9);
+        Association assocA10 = new Association(30, false, 0);
+        assocA10.getTouches().add(machine1.getTouches().get(0));
+        profil2.getAssociationsAt(9).add(assocA10);
+        Association assocA11 = new Association(31, false, 0);
+        assocA11.getTouches().add(machine1.getTouches().get(0));
+        profil2.getAssociationsAt(10).add(assocA11);
+        Association assocA12 = new Association(32, false, 0);
+        assocA12.getTouches().add(machine1.getTouches().get(0));
+        profil2.getAssociationsAt(11).add(assocA12);
+        machine2.ajouterProfil(profil2);
+
+        toutesLesMachines.add(machine2);
+
+        for (Machine machineAAjouter : toutesLesMachines) {
+            panneauProfilsDuPc.getPanes().add(new ListeProfilsDisponiblesMachine(dim, machineAAjouter, Stage, panneauProfilsVersPad));
+        }
+        //final ListeProfilsDisponiblesMachine panneau = new ListeProfilsDisponiblesMachine(dim, machine1, Stage);
+        //panneauProfilsDuPc.getPanes().add(panneau);
 
         btnCreationProfil.setOnAction(new EventHandler<ActionEvent>()
         {
 
             public void handle(ActionEvent event)
             {
-                new PanneauProfilDisponible(dim, panneau, panneauProfilsVersPad, "Profil 1", 1);
-                new PanneauCreationProfil(dim, Stage);
+//                new PanneauProfilDisponible(dim, panneau, panneauProfilsVersPad, "Profil 1", 1);
+//                new PanneauCreationProfil(dim, Stage);
             }
         });
 
@@ -229,6 +346,7 @@ public class PanneauPrincipal extends Application
             cbSelectionLecteur.getItems().add(s);
         }
         cbSelectionLecteur.setValue(files.get(0).getAbsolutePath().toString());
+
         // Chargement des éléments dynamiques de l'IHM
 
         /* Charger ici la liste des profils et des machines */
@@ -265,7 +383,6 @@ public class PanneauPrincipal extends Application
 
         // Configuration de Scene
         panneauProfilsDuPc.getPanes().get(0).expandedProperty().set(true);
-
         Scene scene = new Scene(root, 720 * dim, 380 * dim, new LinearGradient(0, 1, 1, 0, true, CycleMethod.NO_CYCLE, new Stop[]{new Stop(0, Color.web("#FFFFFF", 1.0)), new Stop(1, Color.web("#B4B4B4", 1.0))}));
 
         // Configuration de Stage

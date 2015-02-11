@@ -18,13 +18,14 @@ import javafx.stage.Stage;
  *
  * @author MOREL Charles
  */
-public class PanneauConfirmationSuppression extends Stage
+public class StageConfirmationSuppression extends Stage
 {
 
-    public PanneauConfirmationSuppression(double i, final PanneauProfilDisponible profilConcerne, Stage stageParent, String nomProfilASupprimer, String nomMachineDuProfil)
+    public StageConfirmationSuppression(double i, final PanneauProfilDisponible profilConcerne, Stage stageParent, String nomProfilASupprimer, String nomMachineDuProfil)
     {
         // configuration des dépendances
         this.setTitle("Suppression du profil");
+        this.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/del.png")));
         this.initModality(Modality.APPLICATION_MODAL);
         this.initOwner(stageParent);
         this.setResizable(false);
@@ -37,12 +38,22 @@ public class PanneauConfirmationSuppression extends Stage
         texteDanger.setFont(new Font(15 * i));
         texteDanger.setFill(Color.web("#696969", 1.0));
         texteDanger.setTextAlignment(TextAlignment.CENTER);
-        String nomProfilAAfiicher = nomProfilASupprimer.substring(0, 20);
-        if(nomProfilASupprimer.length()>20)
-            nomProfilAAfiicher += "...";
-        String nomMachineAAfiicher = nomMachineDuProfil.substring(0, 16);
-        if(nomMachineDuProfil.length()>16)
-            nomMachineAAfiicher += "...";
+
+        String nomProfilAAfiicher;
+        if (nomProfilASupprimer.length() > 20) {
+            nomProfilAAfiicher = nomProfilASupprimer.substring(0, 20) + "...";
+        }
+        else {
+            nomProfilAAfiicher = nomProfilASupprimer;
+        }
+        String nomMachineAAfiicher;
+        if (nomMachineDuProfil.length() > 16) {
+            nomMachineAAfiicher = nomMachineDuProfil.substring(0, 16) + "...";
+        }
+        else {
+            nomMachineAAfiicher = nomMachineDuProfil;
+        }
+
         texteDanger.setText("Attention, la suppression d'un profil est définitif."
                 + "\nSouhaitez-vous vraiment supprimer le profil\n" + nomProfilAAfiicher + " (" + nomMachineAAfiicher + ") ?");
 
@@ -69,7 +80,7 @@ public class PanneauConfirmationSuppression extends Stage
         btnNon.setMaxSize(50 * i, 25 * i);
         btnNon.setMinSize(50 * i, 25 * i);
         btnNon.setFont(new Font(7 * i));
-       
+
 
         // Configuration du noeud racine Root et de Scene
         Group root = new Group();
@@ -85,7 +96,7 @@ public class PanneauConfirmationSuppression extends Stage
             public void handle(ActionEvent event)
             {
                 profilConcerne.supprimerProfil();
-                PanneauConfirmationSuppression.this.close();
+                StageConfirmationSuppression.this.close();
             }
         });
 
@@ -94,7 +105,7 @@ public class PanneauConfirmationSuppression extends Stage
 
             public void handle(ActionEvent event)
             {
-                PanneauConfirmationSuppression.this.close();
+                StageConfirmationSuppression.this.close();
             }
         });
 

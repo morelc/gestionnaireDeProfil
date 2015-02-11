@@ -1,5 +1,7 @@
 package gestionnairedeprofil.IHM;
 
+import gestionnairedeprofil.donnees.structures.Machine;
+import gestionnairedeprofil.donnees.structures.Profil;
 import java.util.ArrayList;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -26,10 +28,10 @@ class ListeProfilsDisponiblesMachine extends TitledPane
     private final double espacementEntreProfils;
     private final Stage stageDeLApplication;
 
-    public ListeProfilsDisponiblesMachine(double i, String nomMachine, Stage stagePrincipal)
+    public ListeProfilsDisponiblesMachine(double i, Machine machineConcernee, Stage stagePrincipal, ListeProfilsAEnvoyer listeDesProfilsAEnvoyer)
     {
-        this.setText(nomMachine);
-        this.setStyle("-fx-background-color: #E9E9E9; -fx-font-size:" + Double.toString(7*i) + "; -fx-text-fill: black;");
+        this.setText(machineConcernee.getNom());
+        this.setStyle("-fx-background-color: #E9E9E9; -fx-font-size:" + Double.toString(7 * i) + "; -fx-text-fill: black;");
 
         this.stageDeLApplication = stagePrincipal;
         this.profilsDisponibles = new ArrayList();
@@ -39,6 +41,10 @@ class ListeProfilsDisponiblesMachine extends TitledPane
         ScrollPane panneauAScrolling = new ScrollPane();
         panneauAScrolling.setContent(this.panneauDesProfilsDisponibles);
         this.setContent(panneauAScrolling);
+
+        for (Profil profilAAjouter : machineConcernee.getProfils()) {
+            new PanneauProfilDisponible(i, this, listeDesProfilsAEnvoyer, profilAAjouter, machineConcernee);
+        }
     }
 
     public void ajouterProfilAEnvoyer(PanneauProfilDisponible panneauAAjouter)

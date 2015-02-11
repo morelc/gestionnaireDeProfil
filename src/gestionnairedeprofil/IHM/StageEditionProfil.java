@@ -1,5 +1,10 @@
 package gestionnairedeprofil.IHM;
 
+import gestionnairedeprofil.donnees.structures.Association;
+import gestionnairedeprofil.donnees.structures.Machine;
+import gestionnairedeprofil.donnees.structures.Profil;
+import gestionnairedeprofil.donnees.structures.ToucheMachine;
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -9,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -16,29 +22,46 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 /**
  *
  * @author MOREL Charles
  */
-public class PanneauEditionProfil extends Stage
+public class StageEditionProfil extends Stage
 {
+
+    private final double dim;
 
     public boolean profilModifie;
 
-    private final double dim;
-    
-    public PanneauEditionProfil(double i, final PanneauProfilDisponible profilConcerne, Stage stageParent, String nomProfilASupprimer, String nomMachineDuProfil)
+    private Profil profilAModifier;
+
+    private ArrayList<ToucheMachine> touchesDisponibles;
+
+    private ArrayList<Association> associationsModifies[];
+
+    private final TextField textFieldNomProfil;
+
+    private PanneauProfilDisponible panneauProfilAModifier;
+
+    public StageEditionProfil(double i, final PanneauProfilDisponible panneauProfilConcerne, Stage stageParent, Profil profilAModifier, Machine machineDuProfil)
     {
         // configuration des dépendances
         this.setTitle("Edition du profil");
+        this.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/edit.png")));
         this.initModality(Modality.APPLICATION_MODAL);
         this.initOwner(stageParent);
         this.setResizable(false);
         this.profilModifie = false;
         this.dim = i;
+        this.profilAModifier = profilAModifier;
+        this.touchesDisponibles = machineDuProfil.getTouches();
+        this.panneauProfilAModifier = panneauProfilConcerne;
+        this.associationsModifies = new ArrayList[12];
+        for (int x = 0; x < 12; x++) {
+            this.associationsModifies[x] = new ArrayList();
+        }
 
         // Configuration des noeuds statiques
 
@@ -292,13 +315,14 @@ public class PanneauEditionProfil extends Stage
         btnModifier.setMinSize(70 * i, 25 * i);
         btnModifier.setFont(new Font(7 * i));
 
-        final TextField textFieldNomProfil = new TextField();
-        textFieldNomProfil.setLayoutX(120 * i);
-        textFieldNomProfil.setLayoutY(7 * i);
-        textFieldNomProfil.setPrefSize(230 * i, 20 * i);
-        textFieldNomProfil.setMaxSize(230 * i, 20 * i);
-        textFieldNomProfil.setMinSize(230 * i, 20 * i);
-        textFieldNomProfil.setStyle("-fx-font-size: " + Double.toString(9 * i));
+        this.textFieldNomProfil = new TextField();
+        this.textFieldNomProfil.setLayoutX(120 * i);
+        this.textFieldNomProfil.setLayoutY(7 * i);
+        this.textFieldNomProfil.setPrefSize(230 * i, 20 * i);
+        this.textFieldNomProfil.setMaxSize(230 * i, 20 * i);
+        this.textFieldNomProfil.setMinSize(230 * i, 20 * i);
+        this.textFieldNomProfil.setStyle("-fx-font-size: " + Double.toString(9 * i));
+        this.textFieldNomProfil.setText(profilAModifier.getNom());
 
         TextField textFieldNomMachine = new TextField();
         textFieldNomMachine.setLayoutX(120 * i);
@@ -308,6 +332,7 @@ public class PanneauEditionProfil extends Stage
         textFieldNomMachine.setMinSize(230 * i, 20 * i);
         textFieldNomMachine.setStyle("-fx-font-size: " + Double.toString(9 * i));
         textFieldNomMachine.setDisable(true);
+        textFieldNomMachine.setText(machineDuProfil.getNom());
 
         // Configuration du noeud racine Root et de Scene
         Group root = new Group();
@@ -338,11 +363,20 @@ public class PanneauEditionProfil extends Stage
         root.getChildren().add(btnD);
         root.getChildren().add(btnE);
         root.getChildren().add(btnF);
-        root.getChildren().add(textFieldNomProfil);
+        root.getChildren().add(this.textFieldNomProfil);
         root.getChildren().add(textFieldNomMachine);
         root.getChildren().add(btnModifier);
         root.getChildren().add(btnAnnulerModifs);
         this.setScene(new Scene(root, 350 * i, 410 * i, Color.gray(0.85)));
+
+        this.textFieldNomProfil.setOnKeyPressed(new EventHandler<KeyEvent>()
+        {
+
+            public void handle(KeyEvent event)
+            {
+                StageEditionProfil.this.profilModifie = true;
+            }
+        });
 
         this.setOnCloseRequest(new EventHandler<WindowEvent>()
         {
@@ -368,8 +402,8 @@ public class PanneauEditionProfil extends Stage
 
             public void handle(ActionEvent event)
             {
-                PanneauEditionProfil.this.sauvgarderProfilCourrant();
-                PanneauEditionProfil.this.close();
+                StageEditionProfil.this.sauvgarderProfilCourrant();
+                StageEditionProfil.this.close();
             }
         });
 
@@ -378,21 +412,31 @@ public class PanneauEditionProfil extends Stage
 
     public void sauvgarderProfilCourrant()
     {
+        this.profilAModifier.setNom(this.textFieldNomProfil.getText());
+        for (int x = 0; x < this.associationsModifies.length; x++) {
+            if (this.associationsModifies[x].size() != 0) {
+                this.profilAModifier.setAssociationsAt(x, this.associationsModifies[x]);
+            }
+        }
+        this.panneauProfilAModifier.rafraichirNomProfil();
         System.err.println("ERR. Action pas encore supportée");
     }
 
     public void modifierUneAssocDeTouches(int numDuBtn)
     {
         this.profilModifie = true;
+        new StageEditionAssociationTouche(dim, this, this.touchesDisponibles, this.profilAModifier.getAssociationsAt(numDuBtn), this.associationsModifies[numDuBtn]);
         System.err.println("ERR. Action pas encore supportée");
     }
 
     private void fermerFenetre()
     {
-        if (this.profilModifie)
-            new PanneauConfirmationAnnulationEditionProfil(PanneauEditionProfil.this);
-        else
+        if (this.profilModifie) {
+            new StageConfirmationAnnulationEditionProfil(StageEditionProfil.this);
+        }
+        else {
             this.close();
+        }
     }
 
     /**
@@ -402,7 +446,6 @@ public class PanneauEditionProfil extends Stage
     {
         return dim;
     }
-    
-    
+
 
 }

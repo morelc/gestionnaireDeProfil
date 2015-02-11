@@ -1,8 +1,12 @@
 package gestionnairedeprofil.IHM;
 
+import gestionnairedeprofil.donnees.structures.Machine;
+import gestionnairedeprofil.donnees.structures.Profil;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -23,19 +27,22 @@ public class PanneauProfilDisponible extends Pane
 {
 
     private ListeProfilsDisponiblesMachine listeDesProfilsDeLaMachine;
+    private Profil profilPanneau;
+    private Label nomProfilAAfficher;
 
-    public PanneauProfilDisponible(final double dim, final ListeProfilsDisponiblesMachine listeOuAjouterLeProfil, final ListeProfilsAEnvoyer listeDesProfilsAEnvoyer, final String nomDuProfil, final int numDuProfil)
+    public PanneauProfilDisponible(final double dim, final ListeProfilsDisponiblesMachine listeOuAjouterLeProfil, final ListeProfilsAEnvoyer listeDesProfilsAEnvoyer, final Profil profilConcernee, final Machine machineConcernee)
     {
         this.listeDesProfilsDeLaMachine = listeOuAjouterLeProfil;
+        this.profilPanneau = profilConcernee;
 
-        Label nomProfilAAfficher = new Label(nomDuProfil);
-        nomProfilAAfficher.setLayoutX(5 * dim);
-        nomProfilAAfficher.setLayoutY(3 * dim);
-        nomProfilAAfficher.setPrefWidth(105 * dim);
-        nomProfilAAfficher.setMinWidth(105 * dim);
-        nomProfilAAfficher.setMaxWidth(105 * dim);
-        nomProfilAAfficher.setFont(new Font(7 * dim));
-        this.getChildren().add(nomProfilAAfficher);
+        this.nomProfilAAfficher = new Label(profilConcernee.getNom());
+        this.nomProfilAAfficher.setLayoutX(5 * dim);
+        this.nomProfilAAfficher.setLayoutY(3 * dim);
+        this.nomProfilAAfficher.setPrefWidth(105 * dim);
+        this.nomProfilAAfficher.setMinWidth(105 * dim);
+        this.nomProfilAAfficher.setMaxWidth(105 * dim);
+        this.nomProfilAAfficher.setFont(new Font(7 * dim));
+        this.getChildren().add(this.nomProfilAAfficher);
 
         final Button btnEditer = new Button("", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/edit.png"))));
         btnEditer.setLayoutX(109 * dim);
@@ -108,7 +115,7 @@ public class PanneauProfilDisponible extends Pane
 
             public void handle(ActionEvent event)
             {
-                new PanneauEditionProfil(dim, PanneauProfilDisponible.this, listeOuAjouterLeProfil.getStageDeLApplication(), nomDuProfil, listeOuAjouterLeProfil.getText());
+                new StageEditionProfil(dim, PanneauProfilDisponible.this, listeOuAjouterLeProfil.getStageDeLApplication(), profilConcernee, machineConcernee);
                 System.err.println("ATTENTION: L'ACTION N'EST PAS ENCORE DEFINIE!");
             }
         });
@@ -118,7 +125,7 @@ public class PanneauProfilDisponible extends Pane
 
             public void handle(ActionEvent event)
             {
-                new PanneauConfirmationSuppression(dim, PanneauProfilDisponible.this, listeOuAjouterLeProfil.getStageDeLApplication(), nomDuProfil, listeOuAjouterLeProfil.getText());
+                new StageConfirmationSuppression(dim, PanneauProfilDisponible.this, listeOuAjouterLeProfil.getStageDeLApplication(), profilConcernee.getNom(), listeOuAjouterLeProfil.getText());
             }
         });
         btnAjouterALaListeDEnvoi.setOnAction(new EventHandler<ActionEvent>()
@@ -126,15 +133,23 @@ public class PanneauProfilDisponible extends Pane
 
             public void handle(ActionEvent event)
             {
-                new PanneauProfilAEnvoyer(dim, listeDesProfilsAEnvoyer, nomDuProfil + " - " + listeOuAjouterLeProfil.getText(), numDuProfil);
+                new PanneauProfilAEnvoyer(dim, listeDesProfilsAEnvoyer, PanneauProfilDisponible.this.nomProfilAAfficher.textProperty(), profilConcernee.getId());
             }
         });
+        
         listeOuAjouterLeProfil.ajouterProfilAEnvoyer(this);
     }
 
     public void supprimerProfil()
     {
         this.listeDesProfilsDeLaMachine.enleverProfilAEnvoyer(this);
+        this.nomProfilAAfficher.setText("          ");
         System.err.println("ATTENTION: L'ACTION N'EST PAS ENCORE DEFINIE!");
+    }
+
+    public void rafraichirNomProfil()
+    {
+        this.nomProfilAAfficher.setText(this.profilPanneau.getNom());
+        this.nomProfilAAfficher.textProperty();
     }
 }

@@ -20,13 +20,14 @@ import javafx.stage.Stage;
  *
  * @author MOREL Charles
  */
-public class PanneauCreationProfil extends Stage
+public class StageCreationProfil extends Stage
 {
 
-    public PanneauCreationProfil(double i, Stage stageParent)
+    public StageCreationProfil(double i, Stage stageParent)
     {
         // configuration des dépendances
         this.setTitle("Création d'un profil");
+        this.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png")));
         this.initModality(Modality.APPLICATION_MODAL);
         this.initOwner(stageParent);
         this.setResizable(false);
@@ -106,7 +107,7 @@ public class PanneauCreationProfil extends Stage
 
             public void handle(ActionEvent event)
             {
-                PanneauCreationProfil.this.close();
+                StageCreationProfil.this.close();
                 System.err.println("FN NON IMPLEMENTE");
             }
         });
@@ -116,7 +117,7 @@ public class PanneauCreationProfil extends Stage
 
             public void handle(ActionEvent event)
             {
-                PanneauCreationProfil.this.close();
+                StageCreationProfil.this.close();
             }
         });
 
