@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Connexion {
-	private String DBPath = "Chemin aux base de donnée SQLite";
+	private String DBPath = "Chemin aux base de donnee SQLite";
 	private Connection connection = null;
 	private Statement statement = null;
 
@@ -21,7 +21,7 @@ public class Connexion {
 			Class.forName("org.sqlite.JDBC");
 			connection = DriverManager.getConnection("jdbc:sqlite:" + DBPath);
 			statement = connection.createStatement();
-			System.out.println("Connexion a " + DBPath + " avec succès");
+			System.out.println("Connexion a " + DBPath + " avec succï¿½s");
 		} catch (ClassNotFoundException notFoundException) {
 			notFoundException.printStackTrace();
 			System.out.println("Erreur de connecxion");
@@ -63,7 +63,7 @@ public class Connexion {
 			preparedStatement.setDate(5, book.getPublished());
 			preparedStatement.setString(6, book.getDescription());
 			preparedStatement.executeUpdate();
-			System.out.println("Insertion Avec Succées");
+			System.out.println("Insertion Avec Succï¿½es");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

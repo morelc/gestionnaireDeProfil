@@ -9,7 +9,7 @@ public class Main {
 		connexion.connect();
 		
 		Book book = new Book("9aa883e6-dfc0-4149-902a-4dbdfa22a408",
-				"Système D'Information", "", 450, Date.valueOf("2012-11-01"),
+				"Systeme D'Information", "", 450, Date.valueOf("2012-11-01"),
 				"");
 		System.out.println(book.getPublished());
 		connexion.addBook(book);

@@ -5,6 +5,7 @@
  */
 package gestionnairedeprofil.SQLite;
 
+import com.guendouz.tutdb.Connexion;
 import java.sql.SQLException;
 
 /**
