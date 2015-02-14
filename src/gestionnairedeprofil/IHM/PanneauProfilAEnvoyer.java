@@ -101,13 +101,14 @@ public class PanneauProfilAEnvoyer extends Pane
                 listeOuAjouterLePanneau.dessendreUnProfilDansLaListe(PanneauProfilAEnvoyer.this);
             }
         });
-                nomProfilAAfficher.textProperty().addListener(new ChangeListener<String>()
+        nomProfilAAfficher.textProperty().addListener(new ChangeListener<String>()
         {
             @Override
             public void changed(ObservableValue<? extends String> ov, String t, String t1)
             {
-                if("          ".equals(nomProfilAAfficher.getText()))
+                if ("          ".equals(nomProfilAAfficher.getText())) {
                     listeOuAjouterLePanneau.enleverProfilAEnvoyer(PanneauProfilAEnvoyer.this);
+                }
             }
         });
 

@@ -1,6 +1,6 @@
 package gestionnairedeprofil.IHM;
 
-import gestionnairedeprofil.donnees.structures.Association;
+import gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 import gestionnairedeprofil.donnees.structures.Machine;
 import gestionnairedeprofil.donnees.structures.Profil;
 import gestionnairedeprofil.donnees.structures.ToucheMachine;
@@ -39,7 +39,7 @@ public class StageEditionProfil extends Stage
 
     private ArrayList<ToucheMachine> touchesDisponibles;
 
-    private ArrayList<Association> associationsModifies[];
+    private AssociationsDansProfil associationsModifies[];
 
     private final TextField textFieldNomProfil;
 
@@ -58,9 +58,9 @@ public class StageEditionProfil extends Stage
         this.profilAModifier = profilAModifier;
         this.touchesDisponibles = machineDuProfil.getTouches();
         this.panneauProfilAModifier = panneauProfilConcerne;
-        this.associationsModifies = new ArrayList[12];
+        this.associationsModifies = new AssociationsDansProfil[12];
         for (int x = 0; x < 12; x++) {
-            this.associationsModifies[x] = new ArrayList();
+            this.associationsModifies[x] = new AssociationsDansProfil();
         }
 
         // Configuration des noeuds statiques

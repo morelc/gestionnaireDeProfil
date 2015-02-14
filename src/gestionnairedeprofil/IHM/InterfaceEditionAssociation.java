@@ -8,5 +8,10 @@ import gestionnairedeprofil.donnees.structures.Association;
  */
 interface InterfaceEditionAssociation
 {
+
     public Association getAssociation();
+    
+    public boolean associationValide();
+    
+    public String getMessageDInvalidite();
 }

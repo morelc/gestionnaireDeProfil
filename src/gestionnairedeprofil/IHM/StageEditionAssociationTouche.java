@@ -1,6 +1,7 @@
 package gestionnairedeprofil.IHM;
 
 import gestionnairedeprofil.donnees.structures.Association;
+import gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 import gestionnairedeprofil.donnees.structures.ToucheMachine;
 import java.util.ArrayList;
 import javafx.beans.value.ChangeListener;
@@ -31,12 +32,13 @@ public class StageEditionAssociationTouche extends Stage
 {
 
     private InterfaceEditionAssociation panneauEditionAssocCourrant;
-    private ArrayList<Association> associationsAuDepart;
+    private ScrollPane scrollPaneAssociation;
+    private AssociationsDansProfil associationsAuDepart;
     private final ComboBox cbTypeAssoc;
     private double dim;
 
 
-    public StageEditionAssociationTouche(final double i, final StageEditionProfil profilConcerne, final ArrayList<ToucheMachine> touchesDisponibles, ArrayList<Association> associationsDeBase, ArrayList<Association> associationsModifies)
+    public StageEditionAssociationTouche(final double i, final StageEditionProfil profilConcerne, final ArrayList<ToucheMachine> touchesDisponibles, AssociationsDansProfil associationsDeBase, AssociationsDansProfil associationsModifies)
     {
         // configuration des dépendances
         this.setTitle("Edition de l'association");
@@ -82,36 +84,19 @@ public class StageEditionAssociationTouche extends Stage
         this.cbTypeAssoc.setMaxSize(200 * i, 20 * i);
         this.cbTypeAssoc.setMinSize(200 * i, 20 * i);
         this.cbTypeAssoc.getItems().addAll("(aucune action)", "Appui simple", "Combinaison", "Autofire", "Macro");
-        if (associationsDeBase.get(0).getId() == Association.ID_TOUCHE_NON_ASSOCIEE
-                || associationsDeBase.get(0).getTouches().get(0).getId() == ToucheMachine.ID_TOUCHE_NON_ASSOCIEE) {
-            this.cbTypeAssoc.getSelectionModel().select(0);
-        }
-        else {
-            if (associationsDeBase.size() == 1) {
-                this.cbTypeAssoc.getSelectionModel().select(1);
-                if (associationsDeBase.get(0).getTouches().size() > 1) {
-                    this.cbTypeAssoc.getSelectionModel().select(2);
-                }
-                if (associationsDeBase.get(0).isEstAutofire()) {
-                    this.cbTypeAssoc.getSelectionModel().select(3);
-                }
-            }
-            else {
-                this.cbTypeAssoc.getSelectionModel().select(4);
-            }
-        }
+        this.cbTypeAssoc.getSelectionModel().select(associationsDeBase.getAssocType());
 
         // Configuration des sous-panneaux
 
-        final ScrollPane panneauAssociation = new ScrollPane();
-        panneauAssociation.setLayoutX(10 * i);
-        panneauAssociation.setLayoutY(50 * i);
-        panneauAssociation.setPrefSize(303 * i, 250 * i);
-        panneauAssociation.setMaxSize(303 * i, 250 * i);
-        panneauAssociation.setMinSize(303 * i, 250 * i);
-        panneauAssociation.setStyle("-fx-background-color: #D8D8D8; -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 1, 0.0 , 0 , 1 );");
+        this.scrollPaneAssociation = new ScrollPane();
+        this.scrollPaneAssociation.setLayoutX(10 * i);
+        this.scrollPaneAssociation.setLayoutY(50 * i);
+        this.scrollPaneAssociation.setPrefSize(303 * i, 250 * i);
+        this.scrollPaneAssociation.setMaxSize(303 * i, 250 * i);
+        this.scrollPaneAssociation.setMinSize(303 * i, 250 * i);
+        this.scrollPaneAssociation.setStyle("-fx-background-color: #D8D8D8; -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 1, 0.0 , 0 , 1 );");
 
-        changerPanneauEdition(panneauAssociation, touchesDisponibles, false);
+        changerPanneauEdition(touchesDisponibles, false);
 
         // Configuration du noeud racine Root et de Scene
         Group root = new Group();
@@ -119,7 +104,7 @@ public class StageEditionAssociationTouche extends Stage
         root.getChildren().add(cbTypeAssoc);
         root.getChildren().add(btnModifier);
         root.getChildren().add(btnAnnulerModifs);
-        root.getChildren().add(panneauAssociation);
+        root.getChildren().add(this.scrollPaneAssociation);
         this.setScene(new Scene(root, 320 * i, 340 * i, Color.gray(0.85)));
 
         cbTypeAssoc.valueProperty().addListener(new ChangeListener()
@@ -128,7 +113,7 @@ public class StageEditionAssociationTouche extends Stage
             @Override
             public void changed(ObservableValue ov, Object t, Object t1)
             {
-                changerPanneauEdition(panneauAssociation, touchesDisponibles, true);
+                changerPanneauEdition(touchesDisponibles, true);
             }
         });
 
@@ -155,21 +140,27 @@ public class StageEditionAssociationTouche extends Stage
 
             public void handle(ActionEvent event)
             {
-                StageEditionAssociationTouche.this.close();
+                if (!panneauEditionAssocCourrant.associationValide()) {
+                    new StageErreurAssociation(i, StageEditionAssociationTouche.this, panneauEditionAssocCourrant.getMessageDInvalidite());
+                    event.consume();
+                }
+                else {
+                    StageEditionAssociationTouche.this.close();
+                }
             }
         });
 
         this.show();
     }
 
-    private void changerPanneauEdition(ScrollPane panneauAssociation, ArrayList<ToucheMachine> touchesDisponibles, boolean associationModifiee)
+    private void changerPanneauEdition(ArrayList<ToucheMachine> touchesDisponibles, boolean associationModifiee)
     {
-        ArrayList<Association> associationsAModifier;
+        AssociationsDansProfil associationsAModifier;
         if (!associationModifiee) {
             associationsAModifier = this.associationsAuDepart;
         }
         else {
-            associationsAModifier = new ArrayList();
+            associationsAModifier = new AssociationsDansProfil();
             associationsAModifier.add(new Association());
         }
         switch (this.cbTypeAssoc.getSelectionModel().getSelectedIndex()) {
@@ -177,12 +168,12 @@ public class StageEditionAssociationTouche extends Stage
                 this.panneauEditionAssocCourrant = new PanneauEditionToucheSimple(dim, touchesDisponibles, associationsAModifier);
                 break;
             case 2:
-                this.panneauEditionAssocCourrant = new PanneauEditionCombinaison(dim);
+                this.panneauEditionAssocCourrant = new PanneauEditionCombinaison(dim, touchesDisponibles, associationsAModifier);
                 break;
             default:
                 this.panneauEditionAssocCourrant = new PanneauEditionVide(dim);
                 break;
         }
-        panneauAssociation.setContent((AnchorPane) this.panneauEditionAssocCourrant);
+        this.scrollPaneAssociation.setContent((AnchorPane) this.panneauEditionAssocCourrant);
     }
 }

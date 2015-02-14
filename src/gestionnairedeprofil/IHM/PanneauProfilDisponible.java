@@ -5,8 +5,6 @@ import gestionnairedeprofil.donnees.structures.Profil;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -136,7 +134,7 @@ public class PanneauProfilDisponible extends Pane
                 new PanneauProfilAEnvoyer(dim, listeDesProfilsAEnvoyer, PanneauProfilDisponible.this.nomProfilAAfficher.textProperty(), profilConcernee.getId());
             }
         });
-        
+
         listeOuAjouterLeProfil.ajouterProfilAEnvoyer(this);
     }
 

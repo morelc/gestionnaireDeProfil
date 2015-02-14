@@ -31,8 +31,8 @@ public class PanneauEditionVide extends AnchorPane implements InterfaceEditionAs
         fondRegarderIci.setLayoutX(195 * i);
         fondRegarderIci.setLayoutY(5 * i);
         this.getChildren().add(fondRegarderIci);
-        
-        
+
+
         Text texteAppuiSimple = new Text();
         texteAppuiSimple.setLayoutX(15 * i);
         texteAppuiSimple.setLayoutY(95 * i);
@@ -49,7 +49,19 @@ public class PanneauEditionVide extends AnchorPane implements InterfaceEditionAs
     @Override
     public Association getAssociation()
     {
-        return new Association(1, false, 1);
+        return new Association();
+    }
+
+    @Override
+    public boolean associationValide()
+    {
+        return true;
+    }
+
+    @Override
+    public String getMessageDInvalidite()
+    {
+        return "";
     }
 
 

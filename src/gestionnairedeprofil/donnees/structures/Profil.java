@@ -1,7 +1,5 @@
 package gestionnairedeprofil.donnees.structures;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author MOREL Charles
@@ -11,15 +9,15 @@ public class Profil
 
     private final int id;
     private String nom;
-    private ArrayList<Association> associations[];
+    private AssociationsDansProfil associations[];
 
     public Profil(int idProfil, String nomProfil)
     {
         this.id = idProfil;
         this.nom = nomProfil;
-        this.associations = new ArrayList[12];
+        this.associations = new AssociationsDansProfil[12];
         for (int i = 0; i < 12; i++) {
-            this.associations[i] = new ArrayList();
+            this.associations[i] = new AssociationsDansProfil();
         }
     }
 
@@ -50,14 +48,14 @@ public class Profil
     /**
      * @return the associations
      */
-    public ArrayList<Association> getAssociationsAt(int i)
+    public AssociationsDansProfil getAssociationsAt(int i)
     {
         if (i >= 0 && i <= 11) {
             return this.associations[i];
         }
         else {
-            ArrayList<Association> listeVide;
-            listeVide = new ArrayList();
+            AssociationsDansProfil listeVide;
+            listeVide = new AssociationsDansProfil();
             listeVide.add(new Association());
             return listeVide;
         }
@@ -66,7 +64,7 @@ public class Profil
     /**
      * @param association the associations to set
      */
-    public void setAssociationsAt(int i, ArrayList<Association> association)
+    public void setAssociationsAt(int i, AssociationsDansProfil association)
     {
         if (i >= 0 && i <= 11) {
             this.associations[i] = association;

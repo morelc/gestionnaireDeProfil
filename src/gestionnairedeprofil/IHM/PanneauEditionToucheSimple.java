@@ -6,6 +6,7 @@
 package gestionnairedeprofil.IHM;
 
 import gestionnairedeprofil.donnees.structures.Association;
+import gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 import gestionnairedeprofil.donnees.structures.ToucheMachine;
 import java.util.ArrayList;
 import javafx.scene.control.ComboBox;
@@ -22,9 +23,10 @@ import javafx.scene.text.TextAlignment;
 public class PanneauEditionToucheSimple extends AnchorPane implements InterfaceEditionAssociation
 {
 
+    public final static String MESSAGE_INVALIDITE = " au moins une touche doit être\nselectionnée dans la liste!";
     ComboBox cbTocuheSimpleAppuyee;
 
-    public PanneauEditionToucheSimple(double i, ArrayList<ToucheMachine> touchesDisponibles, ArrayList<Association> associationsDeBase)
+    public PanneauEditionToucheSimple(double i, ArrayList<ToucheMachine> touchesDisponibles, AssociationsDansProfil associationsDeBase)
     {
         // Configuration de l'apparence
         this.setStyle("-fx-background-color: #D8D8D8;");
@@ -59,7 +61,25 @@ public class PanneauEditionToucheSimple extends AnchorPane implements InterfaceE
     @Override
     public Association getAssociation()
     {
-        return (Association) this.cbTocuheSimpleAppuyee.getValue();
+        Association assocARetourner = new Association();
+        assocARetourner.ajouterTouche((ToucheMachine) this.cbTocuheSimpleAppuyee.getValue());
+        return assocARetourner;
+    }
+
+    @Override
+    public boolean associationValide()
+    {
+        ToucheMachine valeurDeLaTocue = (ToucheMachine) this.cbTocuheSimpleAppuyee.getValue();
+        if (valeurDeLaTocue.getId() == ToucheMachine.ID_TOUCHE_NON_ASSOCIEE) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String getMessageDInvalidite()
+    {
+        return PanneauEditionToucheSimple.MESSAGE_INVALIDITE;
     }
 
 
