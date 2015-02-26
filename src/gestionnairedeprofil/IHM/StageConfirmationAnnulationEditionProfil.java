@@ -80,6 +80,7 @@ public class StageConfirmationAnnulationEditionProfil extends Stage
         btnOk.setOnAction(new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent event)
             {
                 profilConcerne.close();
@@ -89,6 +90,7 @@ public class StageConfirmationAnnulationEditionProfil extends Stage
         btnNon.setOnAction(new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent event)
             {
                 StageConfirmationAnnulationEditionProfil.this.close();

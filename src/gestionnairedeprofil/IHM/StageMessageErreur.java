@@ -18,10 +18,10 @@ import javafx.stage.Stage;
  *
  * @author MOREL Charles
  */
-public class StageErreurAssociation extends Stage
+public class StageMessageErreur extends Stage
 {
 
-    public StageErreurAssociation(double i, StageEditionAssociationTouche stageParent, String messageComplementaireErreur)
+    public StageMessageErreur(double i, Stage stageParent, String messageComplementaireErreur)
     {
         // configuration des dépendances
         this.setTitle("Erreur dans l'assotiation");
@@ -38,8 +38,8 @@ public class StageErreurAssociation extends Stage
         texteErreur.setFont(new Font(15 * i));
         texteErreur.setFill(Color.web("#696969", 1.0));
         texteErreur.setTextAlignment(TextAlignment.CENTER);
-        texteErreur.setText("Erreur:"
-                + "\nVotre association est impossible car\n" + messageComplementaireErreur);
+        texteErreur.setText("Erreur:\n"
+                + messageComplementaireErreur);
 
         ImageView fondErreur = new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/info.png")));
         fondErreur.setFitHeight(150 * i);
@@ -68,9 +68,10 @@ public class StageErreurAssociation extends Stage
         btnOk.setOnAction(new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent event)
             {
-                StageErreurAssociation.this.close();
+                StageMessageErreur.this.close();
             }
         });
 

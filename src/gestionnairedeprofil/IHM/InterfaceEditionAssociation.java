@@ -1,6 +1,6 @@
 package gestionnairedeprofil.IHM;
 
-import gestionnairedeprofil.donnees.structures.Association;
+import gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 
 /**
  *
@@ -9,9 +9,10 @@ import gestionnairedeprofil.donnees.structures.Association;
 interface InterfaceEditionAssociation
 {
 
-    public Association getAssociation();
-    
+    public AssociationsDansProfil getAssociations();
+
     public boolean associationValide();
-    
+
     public String getMessageDInvalidite();
+
 }

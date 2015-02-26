@@ -30,9 +30,9 @@ public class PanneauEditionToucheSimple extends AnchorPane implements InterfaceE
     {
         // Configuration de l'apparence
         this.setStyle("-fx-background-color: #D8D8D8;");
-        this.setPrefSize(303 * i - 2, 250 * i - 2);
-        this.setMinSize(303 * i - 2, 250 * i - 2);
-        this.setMaxSize(303 * i - 2, 250 * i - 2);
+        this.setPrefSize(301.5 * i, 248.5 * i);
+        this.setMinSize(301.5 * i, 248.5 * i);
+        this.setMaxSize(301.5 * i, 248.5 * i);
 
         // Configuration des noeuds statiques
         Text texteAppuiSimple = new Text();
@@ -59,21 +59,20 @@ public class PanneauEditionToucheSimple extends AnchorPane implements InterfaceE
     }
 
     @Override
-    public Association getAssociation()
+    public AssociationsDansProfil getAssociations()
     {
-        Association assocARetourner = new Association();
-        assocARetourner.ajouterTouche((ToucheMachine) this.cbTocuheSimpleAppuyee.getValue());
-        return assocARetourner;
+        Association assocAAjouterDansLeRetour = new Association(Association.ID_NON_ENREGISTREE_DANS_BD, false, 0);
+        AssociationsDansProfil associationsARetourner = new AssociationsDansProfil();
+        assocAAjouterDansLeRetour.ajouterTouche((ToucheMachine) this.cbTocuheSimpleAppuyee.getValue());
+        associationsARetourner.add(assocAAjouterDansLeRetour);
+        return associationsARetourner;
     }
 
     @Override
     public boolean associationValide()
     {
         ToucheMachine valeurDeLaTocue = (ToucheMachine) this.cbTocuheSimpleAppuyee.getValue();
-        if (valeurDeLaTocue.getId() == ToucheMachine.ID_TOUCHE_NON_ASSOCIEE) {
-            return false;
-        }
-        return true;
+        return valeurDeLaTocue.getId() != ToucheMachine.ID_TOUCHE_NON_ASSOCIEE;
     }
 
     @Override
@@ -81,6 +80,5 @@ public class PanneauEditionToucheSimple extends AnchorPane implements InterfaceE
     {
         return PanneauEditionToucheSimple.MESSAGE_INVALIDITE;
     }
-
 
 }

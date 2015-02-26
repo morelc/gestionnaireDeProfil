@@ -1,10 +1,16 @@
 package gestionnairedeprofil.IHM;
 
+import gestionnairedeprofil.donnees.structures.Machine;
+import gestionnairedeprofil.donnees.structures.Profil;
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,7 +28,7 @@ import javafx.stage.Stage;
 public class StageCreationProfil extends Stage
 {
 
-    public StageCreationProfil(double i, Stage stageParent)
+    public StageCreationProfil(final double i, Stage stageParent, ArrayList<Machine> machinesDisponibles, final Accordion panneauxDesProfils)
     {
         // configuration des dépendances
         this.setTitle("Création d'un profil");
@@ -34,7 +40,7 @@ public class StageCreationProfil extends Stage
         // Configuration des noeuds statiques
 
         Text texteNomProfil = new Text();
-        texteNomProfil.setLayoutX(100 * i);
+        texteNomProfil.setLayoutX(110 * i);
         texteNomProfil.setLayoutY(50 * i);
         texteNomProfil.setFont(new Font(15 * i));
         texteNomProfil.setFill(Color.web("#696969", 1.0));
@@ -73,21 +79,25 @@ public class StageCreationProfil extends Stage
         btnCreer.setMinSize(50 * i, 25 * i);
         btnCreer.setFont(new Font(7 * i));
 
-        TextField textAreaNomProfil = new TextField();
-        textAreaNomProfil.setLayoutX(205 * i);
+        final TextField textAreaNomProfil = new TextField();
+        textAreaNomProfil.setLayoutX(235 * i);
         textAreaNomProfil.setLayoutY(32 * i);
-        textAreaNomProfil.setPrefSize(170 * i, 25 * i);
-        textAreaNomProfil.setMaxSize(170 * i, 25 * i);
-        textAreaNomProfil.setMinSize(170 * i, 25 * i);
+        textAreaNomProfil.setPrefSize(110 * i, 25 * i);
+        textAreaNomProfil.setMaxSize(110 * i, 25 * i);
+        textAreaNomProfil.setMinSize(110 * i, 25 * i);
         textAreaNomProfil.setStyle("-fx-font-size: " + Double.toString(11 * i));
 
-//        ComboBox cbSelectionMachine = new ComboBox();
-//        cbSelectionMachine.setLayoutX(225 * i);
-//        cbSelectionMachine.setLayoutY(72 * i);
-//        cbSelectionMachine.setPrefSize(100 * i, 25 * i);
-//        cbSelectionMachine.setMaxSize(100 * i, 25 * i);
-//        cbSelectionMachine.setMinSize(100 * i, 25 * i);
-//        cbSelectionMachine.setStyle("-fx-font-size: " + Double.toString(11 * i));
+        final ComboBox cbSelectionMachine = new ComboBox();
+        cbSelectionMachine.setLayoutX(235 * i);
+        cbSelectionMachine.setLayoutY(72 * i);
+        cbSelectionMachine.setPrefSize(110 * i, 25 * i);
+        cbSelectionMachine.setMaxSize(110 * i, 25 * i);
+        cbSelectionMachine.setMinSize(110 * i, 25 * i);
+        cbSelectionMachine.setStyle("-fx-font-size: " + Double.toString(11 * i));
+        for (Machine machineATraiter : machinesDisponibles) {
+            cbSelectionMachine.getItems().add(machineATraiter);
+        }
+        cbSelectionMachine.setValue(cbSelectionMachine.getItems().get(0));
 
         // Configuration du noeud racine Root et de Scene
         Group root = new Group();
@@ -95,7 +105,7 @@ public class StageCreationProfil extends Stage
         root.getChildren().add(texteNomProfil);
         root.getChildren().add(texteNomMachine);
         root.getChildren().add(textAreaNomProfil);
-//        root.getChildren().add(cbSelectionMachine);
+        root.getChildren().add(cbSelectionMachine);
         root.getChildren().add(btnCreer);
         root.getChildren().add(btnNon);
         this.setScene(new Scene(root, 400 * i, 150 * i, Color.gray(0.85)));
@@ -104,16 +114,32 @@ public class StageCreationProfil extends Stage
         btnCreer.setOnAction(new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent event)
             {
-                StageCreationProfil.this.close();
-                System.err.println("FN NON IMPLEMENTE");
+                if (textAreaNomProfil.getText().length() == 0 || textAreaNomProfil.getText().length() >= 50) {
+                    new StageMessageErreur(i, StageCreationProfil.this, "Veuillez entrer un nom\nde profil valide.");
+                    event.consume();
+                }
+                else {
+                    ListeProfilsDisponiblesMachine panneauDeLaMachine = (ListeProfilsDisponiblesMachine) panneauxDesProfils.getChildrenUnmodifiable().get(0);
+                    Machine machineSelectionnee = (Machine) cbSelectionMachine.getValue();
+                    for (Node panneauAScanner : panneauxDesProfils.getChildrenUnmodifiable()) {
+                        ListeProfilsDisponiblesMachine panneauAScannerCaste = (ListeProfilsDisponiblesMachine) panneauAScanner;
+                        if (panneauAScannerCaste.getText() == machineSelectionnee.getNom()) {
+                            panneauDeLaMachine = panneauAScannerCaste;
+                        }
+                    }
+                    lancerAjoutSurBD(machineSelectionnee, textAreaNomProfil.getText(), panneauDeLaMachine);
+                    StageCreationProfil.this.close();
+                }
             }
         });
 
         btnNon.setOnAction(new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent event)
             {
                 StageCreationProfil.this.close();
@@ -121,6 +147,18 @@ public class StageCreationProfil extends Stage
         });
 
         this.show();
+    }
+
+    private void lancerAjoutSurBD(Machine machineSelectionee, String nomProfil, ListeProfilsDisponiblesMachine panneauMachine)
+    {
+        System.err.println("FN lancerAjoutSurBD() NON IMPLEMENTEE");
+
+        // ici la fonction de création 
+        Profil nvProfil = new Profil(-1, nomProfil);
+
+        machineSelectionee.ajouterProfil(nvProfil);
+        panneauMachine.ajouterProfil(nvProfil);
+        panneauMachine.expandedProperty().setValue(true);
     }
 
 }

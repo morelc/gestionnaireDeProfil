@@ -24,8 +24,8 @@ import javafx.util.Duration;
 public class PanneauProfilDisponible extends Pane
 {
 
-    private ListeProfilsDisponiblesMachine listeDesProfilsDeLaMachine;
-    private Profil profilPanneau;
+    private final ListeProfilsDisponiblesMachine listeDesProfilsDeLaMachine;
+    private final Profil profilPanneau;
     private Label nomProfilAAfficher;
 
     public PanneauProfilDisponible(final double dim, final ListeProfilsDisponiblesMachine listeOuAjouterLeProfil, final ListeProfilsAEnvoyer listeDesProfilsAEnvoyer, final Profil profilConcernee, final Machine machineConcernee)
@@ -81,6 +81,7 @@ public class PanneauProfilDisponible extends Pane
         this.setOnMouseEntered(new EventHandler<MouseEvent>()
         {
 
+            @Override
             public void handle(MouseEvent t)
             {
                 Timeline timeline = new Timeline();
@@ -96,6 +97,7 @@ public class PanneauProfilDisponible extends Pane
         this.setOnMouseExited(new EventHandler<MouseEvent>()
         {
 
+            @Override
             public void handle(MouseEvent t)
             {
                 Timeline timeline = new Timeline();
@@ -111,16 +113,17 @@ public class PanneauProfilDisponible extends Pane
         btnEditer.setOnAction(new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent event)
             {
                 new StageEditionProfil(dim, PanneauProfilDisponible.this, listeOuAjouterLeProfil.getStageDeLApplication(), profilConcernee, machineConcernee);
-                System.err.println("ATTENTION: L'ACTION N'EST PAS ENCORE DEFINIE!");
             }
         });
 
         btnSupprimer.setOnAction(new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent event)
             {
                 new StageConfirmationSuppression(dim, PanneauProfilDisponible.this, listeOuAjouterLeProfil.getStageDeLApplication(), profilConcernee.getNom(), listeOuAjouterLeProfil.getText());
@@ -129,9 +132,10 @@ public class PanneauProfilDisponible extends Pane
         btnAjouterALaListeDEnvoi.setOnAction(new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent event)
             {
-                new PanneauProfilAEnvoyer(dim, listeDesProfilsAEnvoyer, PanneauProfilDisponible.this.nomProfilAAfficher.textProperty(), profilConcernee.getId());
+                new PanneauProfilAEnvoyer(dim, listeDesProfilsAEnvoyer, PanneauProfilDisponible.this.nomProfilAAfficher.textProperty(), profilConcernee);
             }
         });
 
@@ -148,6 +152,5 @@ public class PanneauProfilDisponible extends Pane
     public void rafraichirNomProfil()
     {
         this.nomProfilAAfficher.setText(this.profilPanneau.getNom());
-        this.nomProfilAAfficher.textProperty();
     }
 }

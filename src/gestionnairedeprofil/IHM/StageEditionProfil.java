@@ -35,15 +35,15 @@ public class StageEditionProfil extends Stage
 
     public boolean profilModifie;
 
-    private Profil profilAModifier;
+    private final Profil profilAModifier;
 
-    private ArrayList<ToucheMachine> touchesDisponibles;
+    private final ArrayList<ToucheMachine> touchesDisponibles;
 
-    private AssociationsDansProfil associationsModifies[];
+    private final AssociationsDansProfil associationsModifies[];
 
     private final TextField textFieldNomProfil;
 
-    private PanneauProfilDisponible panneauProfilAModifier;
+    private final PanneauProfilDisponible panneauProfilAModifier;
 
     public StageEditionProfil(double i, final PanneauProfilDisponible panneauProfilConcerne, Stage stageParent, Profil profilAModifier, Machine machineDuProfil)
     {
@@ -372,6 +372,7 @@ public class StageEditionProfil extends Stage
         this.textFieldNomProfil.setOnKeyPressed(new EventHandler<KeyEvent>()
         {
 
+            @Override
             public void handle(KeyEvent event)
             {
                 StageEditionProfil.this.profilModifie = true;
@@ -381,6 +382,7 @@ public class StageEditionProfil extends Stage
         this.setOnCloseRequest(new EventHandler<WindowEvent>()
         {
 
+            @Override
             public void handle(WindowEvent event)
             {
                 fermerFenetre();
@@ -391,6 +393,7 @@ public class StageEditionProfil extends Stage
         btnAnnulerModifs.setOnAction(new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent event)
             {
                 fermerFenetre();
@@ -400,18 +403,24 @@ public class StageEditionProfil extends Stage
         btnModifier.setOnAction(new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent event)
             {
-                StageEditionProfil.this.sauvgarderProfilCourrant();
-                StageEditionProfil.this.close();
+                if (StageEditionProfil.this.sauvgarderProfilCourrant()) {
+                    StageEditionProfil.this.close();
+                }
             }
         });
 
         this.show();
     }
 
-    public void sauvgarderProfilCourrant()
+    public boolean sauvgarderProfilCourrant()
     {
+        if (this.textFieldNomProfil.getText().length() == 0) {
+            new StageMessageErreur(this.dim, this, "Veuillez entrer un nom de profil valide");
+            return false;
+        }
         this.profilAModifier.setNom(this.textFieldNomProfil.getText());
         for (int x = 0; x < this.associationsModifies.length; x++) {
             if (this.associationsModifies[x].size() != 0) {
@@ -419,14 +428,15 @@ public class StageEditionProfil extends Stage
             }
         }
         this.panneauProfilAModifier.rafraichirNomProfil();
-        System.err.println("ERR. Action pas encore supportée");
+        // placer ici la fn pour metre à jour le profil dans la BD
+        System.err.println("ERR. Action sauvgarderProfilCourrant() pas encore supportée");
+        return true;
     }
 
     public void modifierUneAssocDeTouches(int numDuBtn)
     {
         this.profilModifie = true;
-        new StageEditionAssociationTouche(dim, this, this.touchesDisponibles, this.profilAModifier.getAssociationsAt(numDuBtn), this.associationsModifies[numDuBtn]);
-        System.err.println("ERR. Action pas encore supportée");
+        new StageEditionAssociationTouche(dim, this, numDuBtn);
     }
 
     private void fermerFenetre()
@@ -447,5 +457,37 @@ public class StageEditionProfil extends Stage
         return dim;
     }
 
+    /**
+     * @param associationsModifies the associationsModifies to set
+     * @param i
+     */
+    public void setAssociationsModifiesAt(AssociationsDansProfil associationsModifies, int i)
+    {
+        this.associationsModifies[i] = associationsModifies;
+    }
 
+    /**
+     * @return the profilAModifier
+     */
+    public Profil getProfilAModifier()
+    {
+        return profilAModifier;
+    }
+
+    /**
+     * @return the touchesDisponibles
+     */
+    public ArrayList<ToucheMachine> getTouchesDisponibles()
+    {
+        return touchesDisponibles;
+    }
+
+    /**
+     * @param i
+     * @return the associationsModifies
+     */
+    public AssociationsDansProfil getAssociationsModifiesAt(int i)
+    {
+        return associationsModifies[i];
+    }
 }

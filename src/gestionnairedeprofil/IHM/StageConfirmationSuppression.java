@@ -93,6 +93,7 @@ public class StageConfirmationSuppression extends Stage
         btnOk.setOnAction(new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent event)
             {
                 profilConcerne.supprimerProfil();
@@ -103,6 +104,7 @@ public class StageConfirmationSuppression extends Stage
         btnNon.setOnAction(new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent event)
             {
                 StageConfirmationSuppression.this.close();

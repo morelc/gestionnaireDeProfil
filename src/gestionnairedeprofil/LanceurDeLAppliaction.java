@@ -1,3 +1,5 @@
+package gestionnairedeprofil;
+
 
 import static javafx.application.Application.launch;
 

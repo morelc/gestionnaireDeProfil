@@ -9,7 +9,7 @@ public class Profil
 
     private final int id;
     private String nom;
-    private AssociationsDansProfil associations[];
+    private final AssociationsDansProfil associations[];
 
     public Profil(int idProfil, String nomProfil)
     {
@@ -46,6 +46,7 @@ public class Profil
     }
 
     /**
+     * @param i
      * @return the associations
      */
     public AssociationsDansProfil getAssociationsAt(int i)
@@ -62,6 +63,7 @@ public class Profil
     }
 
     /**
+     * @param i
      * @param association the associations to set
      */
     public void setAssociationsAt(int i, AssociationsDansProfil association)

@@ -11,8 +11,8 @@ public class Machine
 
     private final int id;
     private final String nom;
-    private ArrayList<Profil> profils;
-    private ArrayList<ToucheMachine> touches;
+    private final ArrayList<Profil> profils;
+    private final ArrayList<ToucheMachine> touches;
 
     public Machine(int idMachine, String nomMachine)
     {
@@ -77,6 +77,12 @@ public class Machine
     public void ajouterTouche(ToucheMachine nouvelleTouche)
     {
         this.touches.add(nouvelleTouche);
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.nom;
     }
 
 

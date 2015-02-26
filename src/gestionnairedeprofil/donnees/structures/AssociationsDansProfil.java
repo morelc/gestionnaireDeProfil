@@ -28,11 +28,11 @@ public class AssociationsDansProfil extends ArrayList<Association>
         }
         else {
             if (this.size() == 1) {
-                if (this.get(0).getTouches().size() > 1) {
-                    return AssociationsDansProfil.TYPE_COMBINAISON;
-                }
                 if (this.get(0).isEstAutofire()) {
                     return AssociationsDansProfil.TYPE_AUTOFIRE;
+                }
+                if (this.get(0).getTouches().size() > 1) {
+                    return AssociationsDansProfil.TYPE_COMBINAISON;
                 }
                 return AssociationsDansProfil.TYPE_TOUCHE_SIMPLE;
             }

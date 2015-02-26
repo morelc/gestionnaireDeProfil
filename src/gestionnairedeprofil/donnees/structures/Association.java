@@ -10,13 +10,14 @@ public class Association
 {
 
     public final static int ID_TOUCHE_NON_ASSOCIEE = -1;
+    public final static int ID_NON_ENREGISTREE_DANS_BD = -2;
     public final static boolean EST_AUTOFIRE_TOUCHE_NON_ASSOCIEE = false;
     public final static int TIMER_TOUCHE_NON_ASSOCIEE = 0;
 
     private final int id;
     private boolean estAutofire;
     private int timer;
-    private ArrayList<ToucheMachine> touches;
+    private final ArrayList<ToucheMachine> touches;
 
     public Association(int idAssoc, boolean assocEstAutofire, int timerAssoc)
     {
@@ -84,7 +85,7 @@ public class Association
     }
 
     /**
-     * @param touches the touches to set
+     * @param touche
      */
     public void ajouterTouche(ToucheMachine touche)
     {

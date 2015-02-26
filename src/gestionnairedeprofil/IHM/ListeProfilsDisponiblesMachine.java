@@ -26,10 +26,19 @@ class ListeProfilsDisponiblesMachine extends TitledPane
     private final double espacementEntreProfils;
     private final Stage stageDeLApplication;
 
+    private final double dim;
+    private final Machine machineLieeAuProfil;
+    private final ListeProfilsAEnvoyer listeDesProfils;
+
     public ListeProfilsDisponiblesMachine(double i, Machine machineConcernee, Stage stagePrincipal, ListeProfilsAEnvoyer listeDesProfilsAEnvoyer)
     {
+        // Configuration des dépendances
         this.setText(machineConcernee.getNom());
         this.setStyle("-fx-background-color: #E9E9E9; -fx-font-size:" + Double.toString(7 * i) + "; -fx-text-fill: black;");
+
+        this.dim = i;
+        this.machineLieeAuProfil = machineConcernee;
+        this.listeDesProfils = listeDesProfilsAEnvoyer;
 
         this.stageDeLApplication = stagePrincipal;
         this.profilsDisponibles = new ArrayList();
@@ -41,8 +50,14 @@ class ListeProfilsDisponiblesMachine extends TitledPane
         this.setContent(panneauAScrolling);
 
         for (Profil profilAAjouter : machineConcernee.getProfils()) {
-            new PanneauProfilDisponible(i, this, listeDesProfilsAEnvoyer, profilAAjouter, machineConcernee);
+            ajouterProfil(profilAAjouter);
+            //new PanneauProfilDisponible(i, this, listeDesProfilsAEnvoyer, profilAAjouter, machineConcernee);
         }
+    }
+
+    public final void ajouterProfil(Profil profilAAjouter)
+    {
+        new PanneauProfilDisponible(this.dim, this, this.listeDesProfils, profilAAjouter, this.machineLieeAuProfil);
     }
 
     public void ajouterProfilAEnvoyer(PanneauProfilDisponible panneauAAjouter)
@@ -63,6 +78,7 @@ class ListeProfilsDisponiblesMachine extends TitledPane
         EventHandler<ActionEvent> enleverLeProfilDeLaListe = new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent arg0)
             {
                 ListeProfilsDisponiblesMachine.this.panneauDesProfilsDisponibles.getChildren().remove(panneauAEnlever);

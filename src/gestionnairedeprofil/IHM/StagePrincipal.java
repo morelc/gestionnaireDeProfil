@@ -36,6 +36,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -53,7 +54,7 @@ public class StagePrincipal extends Application
     {
         // Configuration des paramètres d'écran
 
-        final double dim = (java.awt.Toolkit.getDefaultToolkit().getScreenSize().width - 200.0) / 720.0;
+        final double dim = (Screen.getPrimary().getBounds().getWidth() - 200) / 720;
         System.out.println(dim);
 
         // Configuration des séparations
@@ -160,7 +161,7 @@ public class StagePrincipal extends Application
 
         // Configuration des contrôles
 
-        Accordion panneauProfilsDuPc = new Accordion();
+        final Accordion panneauProfilsDuPc = new Accordion();
         panneauProfilsDuPc.setLayoutX(20 * dim);
         panneauProfilsDuPc.setLayoutY(70 * dim);
         panneauProfilsDuPc.setPrefSize(200 * dim, 270 * dim);
@@ -215,7 +216,7 @@ public class StagePrincipal extends Application
 
         // Pour l'exemple
 
-        ArrayList<Machine> toutesLesMachines = new ArrayList();
+        final ArrayList<Machine> toutesLesMachines = new ArrayList();
 
 
         Machine machine1 = new Machine(1, "Machine 1");
@@ -243,14 +244,15 @@ public class StagePrincipal extends Application
         Association assoc4A = new Association(4, false, 0);
         assoc4A.getTouches().add(machine1.getTouches().get(1));
         profil1.getAssociationsAt(3).add(assoc4A);
-        Association assoc4B = new Association(4, false, 0);
+        Association assoc4B = new Association(4, false, 10);
         assoc4B.getTouches().add(machine1.getTouches().get(2));
         profil1.getAssociationsAt(3).add(assoc4B);
-        Association assoc5 = new Association(5, false, 0);
+        Association assoc5 = new Association(5, true, 50);
         assoc5.getTouches().add(machine1.getTouches().get(1));
         profil1.getAssociationsAt(4).add(assoc5);
-        Association assoc6 = new Association(6, false, 0);
-        assoc6.getTouches().add(machine1.getTouches().get(0));
+        Association assoc6 = new Association(6, true, 20);
+        assoc6.getTouches().add(machine1.getTouches().get(2));
+        assoc6.getTouches().add(machine1.getTouches().get(1));
         profil1.getAssociationsAt(5).add(assoc6);
         Association assoc7 = new Association(7, false, 0);
         assoc7.getTouches().add(machine1.getTouches().get(0));
@@ -333,10 +335,10 @@ public class StagePrincipal extends Application
         btnCreationProfil.setOnAction(new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent event)
             {
-//                new PanneauProfilDisponible(dim, panneau, panneauProfilsVersPad, "Profil 1", 1);
-//                new PanneauCreationProfil(dim, Stage);
+                new StageCreationProfil(dim, Stage, toutesLesMachines, panneauProfilsDuPc);
             }
         });
 

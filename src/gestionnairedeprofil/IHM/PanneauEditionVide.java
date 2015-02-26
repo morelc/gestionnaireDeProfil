@@ -1,6 +1,6 @@
 package gestionnairedeprofil.IHM;
 
-import gestionnairedeprofil.donnees.structures.Association;
+import gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -20,9 +20,9 @@ public class PanneauEditionVide extends AnchorPane implements InterfaceEditionAs
     {
         // Configuration de l'apparence
         this.setStyle("-fx-background-color: #D8D8D8;");
-        this.setPrefSize(303 * i - 2, 250 * i - 2);
-        this.setMinSize(303 * i - 2, 250 * i - 2);
-        this.setMaxSize(303 * i - 2, 250 * i - 2);
+        this.setPrefSize(301.5 * i, 248.5 * i);
+        this.setMinSize(301.5 * i, 248.5 * i);
+        this.setMaxSize(301.5 * i, 248.5 * i);
 
         // Configuration des noeuds statiques
         ImageView fondRegarderIci = new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/lookHere.png")));
@@ -47,9 +47,9 @@ public class PanneauEditionVide extends AnchorPane implements InterfaceEditionAs
     }
 
     @Override
-    public Association getAssociation()
+    public AssociationsDansProfil getAssociations()
     {
-        return new Association();
+        return new AssociationsDansProfil();
     }
 
     @Override

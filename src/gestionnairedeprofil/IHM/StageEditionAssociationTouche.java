@@ -4,6 +4,9 @@ import gestionnairedeprofil.donnees.structures.Association;
 import gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 import gestionnairedeprofil.donnees.structures.ToucheMachine;
 import java.util.ArrayList;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -17,12 +20,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 
 /**
  *
@@ -32,13 +37,13 @@ public class StageEditionAssociationTouche extends Stage
 {
 
     private InterfaceEditionAssociation panneauEditionAssocCourrant;
-    private ScrollPane scrollPaneAssociation;
-    private AssociationsDansProfil associationsAuDepart;
+    private final ScrollPane scrollPaneAssociation;
+    private final AssociationsDansProfil associationsAuDepart;
     private final ComboBox cbTypeAssoc;
-    private double dim;
+    private final double dim;
 
 
-    public StageEditionAssociationTouche(final double i, final StageEditionProfil profilConcerne, final ArrayList<ToucheMachine> touchesDisponibles, AssociationsDansProfil associationsDeBase, AssociationsDansProfil associationsModifies)
+    public StageEditionAssociationTouche(final double i, final StageEditionProfil profilConcerne, final int numDuBtnAModifier)
     {
         // configuration des dépendances
         this.setTitle("Edition de l'association");
@@ -46,7 +51,12 @@ public class StageEditionAssociationTouche extends Stage
         this.initModality(Modality.APPLICATION_MODAL);
         this.initOwner(profilConcerne);
         this.setResizable(false);
-        this.associationsAuDepart = associationsDeBase;
+        if (profilConcerne.getAssociationsModifiesAt(numDuBtnAModifier).size() == 0) {
+            this.associationsAuDepart = profilConcerne.getProfilAModifier().getAssociationsAt(numDuBtnAModifier);
+        }
+        else {
+            this.associationsAuDepart = profilConcerne.getAssociationsModifiesAt(numDuBtnAModifier);
+        }
         this.dim = i;
 
         // Configuration des noeuds statiques
@@ -84,7 +94,7 @@ public class StageEditionAssociationTouche extends Stage
         this.cbTypeAssoc.setMaxSize(200 * i, 20 * i);
         this.cbTypeAssoc.setMinSize(200 * i, 20 * i);
         this.cbTypeAssoc.getItems().addAll("(aucune action)", "Appui simple", "Combinaison", "Autofire", "Macro");
-        this.cbTypeAssoc.getSelectionModel().select(associationsDeBase.getAssocType());
+        this.cbTypeAssoc.getSelectionModel().select(this.associationsAuDepart.getAssocType());
 
         // Configuration des sous-panneaux
 
@@ -96,7 +106,7 @@ public class StageEditionAssociationTouche extends Stage
         this.scrollPaneAssociation.setMinSize(303 * i, 250 * i);
         this.scrollPaneAssociation.setStyle("-fx-background-color: #D8D8D8; -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 1, 0.0 , 0 , 1 );");
 
-        changerPanneauEdition(touchesDisponibles, false);
+        changerPanneauEdition(profilConcerne.getTouchesDisponibles(), false, true);
 
         // Configuration du noeud racine Root et de Scene
         Group root = new Group();
@@ -113,13 +123,14 @@ public class StageEditionAssociationTouche extends Stage
             @Override
             public void changed(ObservableValue ov, Object t, Object t1)
             {
-                changerPanneauEdition(touchesDisponibles, true);
+                changerPanneauEdition(profilConcerne.getTouchesDisponibles(), true, false);
             }
         });
 
         this.setOnCloseRequest(new EventHandler<WindowEvent>()
         {
 
+            @Override
             public void handle(WindowEvent event)
             {
                 event.consume();
@@ -129,6 +140,7 @@ public class StageEditionAssociationTouche extends Stage
         btnAnnulerModifs.setOnAction(new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent event)
             {
                 StageEditionAssociationTouche.this.close();
@@ -137,14 +149,23 @@ public class StageEditionAssociationTouche extends Stage
 
         btnModifier.setOnAction(new EventHandler<ActionEvent>()
         {
-
+            @Override
             public void handle(ActionEvent event)
             {
                 if (!panneauEditionAssocCourrant.associationValide()) {
-                    new StageErreurAssociation(i, StageEditionAssociationTouche.this, panneauEditionAssocCourrant.getMessageDInvalidite());
-                    event.consume();
+                    new StageMessageErreur(i, StageEditionAssociationTouche.this, "Votre association est impossible car\n" + panneauEditionAssocCourrant.getMessageDInvalidite());
                 }
                 else {
+                    profilConcerne.setAssociationsModifiesAt(panneauEditionAssocCourrant.getAssociations(), numDuBtnAModifier);
+//                    for (Association assocAAficher : panneauEditionAssocCourrant.getAssociations()) {
+//                        System.out.println("Association à enrrgistrer:\nid : " + assocAAficher.getId()
+//                                + "\ntimer : " + assocAAficher.getTimer()
+//                                + "\nest autofire : " + assocAAficher.isEstAutofire()
+//                                + "\ntouches : ");
+//                        for (ToucheMachine toucheAAfficher : assocAAficher.getTouches()) {
+//                            System.out.println("  - id: " + toucheAAfficher.getId() + " - nom : " + toucheAAfficher.getNom() + " - signal : " + toucheAAfficher.getSignal());
+//                        }
+//                    }
                     StageEditionAssociationTouche.this.close();
                 }
             }
@@ -153,27 +174,85 @@ public class StageEditionAssociationTouche extends Stage
         this.show();
     }
 
-    private void changerPanneauEdition(ArrayList<ToucheMachine> touchesDisponibles, boolean associationModifiee)
+    private void changerPanneauEdition(final ArrayList<ToucheMachine> touchesDisponibles, final boolean associationModifiee, boolean affichagePremierPanneau)
     {
-        AssociationsDansProfil associationsAModifier;
-        if (!associationModifiee) {
-            associationsAModifier = this.associationsAuDepart;
+        EventHandler<ActionEvent> ajouterNouveauPanneau = new EventHandler<ActionEvent>()
+        {
+
+            @Override
+            public void handle(ActionEvent arg0)
+            {
+
+                AssociationsDansProfil associationsAModifier;
+                if (!associationModifiee) {
+                    associationsAModifier = StageEditionAssociationTouche.this.associationsAuDepart;
+                }
+                else {
+                    associationsAModifier = new AssociationsDansProfil();
+                    associationsAModifier.add(new Association());
+                }
+
+                final AnchorPane panneauAAjouter;
+                switch (StageEditionAssociationTouche.this.cbTypeAssoc.getSelectionModel().getSelectedIndex()) {
+                    case 1:
+                        panneauAAjouter = new PanneauEditionToucheSimple(dim, touchesDisponibles, associationsAModifier);
+                        break;
+                    case 2:
+                        panneauAAjouter = new PanneauEditionCombinaison(dim, touchesDisponibles, associationsAModifier);
+                        break;
+                    case 3:
+                        panneauAAjouter = new PanneauEditionAutofire(dim, touchesDisponibles, associationsAModifier);
+                        break;
+                    case 4:
+                        panneauAAjouter = new PanneauEditionMacro(dim, touchesDisponibles, associationsAModifier);
+                        break;
+                    default:
+                        panneauAAjouter = new PanneauEditionVide(dim);
+                        break;
+                }
+                StageEditionAssociationTouche.this.panneauEditionAssocCourrant = (InterfaceEditionAssociation) panneauAAjouter;
+                StageEditionAssociationTouche.this.scrollPaneAssociation.setContent((AnchorPane) StageEditionAssociationTouche.this.panneauEditionAssocCourrant);
+
+                final Rectangle rectaglePourMasquer = new Rectangle(303 * StageEditionAssociationTouche.this.dim - (1.5 * StageEditionAssociationTouche.this.dim), 250 * StageEditionAssociationTouche.this.dim - (1.5 * StageEditionAssociationTouche.this.dim));
+                rectaglePourMasquer.setFill(Color.web("#D8D8D8", 1.0));
+                rectaglePourMasquer.setOpacity(1);
+                panneauAAjouter.getChildren().add(rectaglePourMasquer);
+
+                EventHandler<ActionEvent> enleverRectangle = new EventHandler<ActionEvent>()
+                {
+
+                    @Override
+                    public void handle(ActionEvent arg0)
+                    {
+                        panneauAAjouter.getChildren().remove(rectaglePourMasquer);
+                    }
+
+                };
+
+                Timeline timelinePanneauAAjouter = new Timeline();
+                timelinePanneauAAjouter.setAutoReverse(false);
+                timelinePanneauAAjouter.getKeyFrames().addAll(new KeyFrame(Duration.millis(400), new KeyValue(rectaglePourMasquer.opacityProperty(), 0)),
+                        new KeyFrame(Duration.millis(400), enleverRectangle));
+                timelinePanneauAAjouter.play();
+            }
+        };
+
+        AnchorPane panneauAEnlever = (AnchorPane) this.panneauEditionAssocCourrant;
+        Timeline timelinePanneauAEnlever = new Timeline();
+        timelinePanneauAEnlever.setAutoReverse(false);
+        if (!affichagePremierPanneau) {
+            Rectangle rectaglePourMasquer = new Rectangle(panneauAEnlever.getWidth(), panneauAEnlever.getHeight());
+            rectaglePourMasquer.setFill(Color.web("#D8D8D8", 1.0));
+            rectaglePourMasquer.setOpacity(0);
+            panneauAEnlever.getChildren().add(rectaglePourMasquer);
+            timelinePanneauAEnlever.getKeyFrames().addAll(new KeyFrame(Duration.millis(400), new KeyValue(rectaglePourMasquer.opacityProperty(), 1)),
+                    new KeyFrame(Duration.millis(400), ajouterNouveauPanneau));
         }
         else {
-            associationsAModifier = new AssociationsDansProfil();
-            associationsAModifier.add(new Association());
+            timelinePanneauAEnlever.getKeyFrames().add(new KeyFrame(Duration.millis(1), ajouterNouveauPanneau));
         }
-        switch (this.cbTypeAssoc.getSelectionModel().getSelectedIndex()) {
-            case 1:
-                this.panneauEditionAssocCourrant = new PanneauEditionToucheSimple(dim, touchesDisponibles, associationsAModifier);
-                break;
-            case 2:
-                this.panneauEditionAssocCourrant = new PanneauEditionCombinaison(dim, touchesDisponibles, associationsAModifier);
-                break;
-            default:
-                this.panneauEditionAssocCourrant = new PanneauEditionVide(dim);
-                break;
-        }
-        this.scrollPaneAssociation.setContent((AnchorPane) this.panneauEditionAssocCourrant);
+        timelinePanneauAEnlever.play();
+
+
     }
 }

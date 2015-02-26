@@ -58,6 +58,7 @@ public class ListeProfilsAEnvoyer extends ScrollPane
         EventHandler<ActionEvent> enleverLeProfilDeLaListe = new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent arg0)
             {
                 ListeProfilsAEnvoyer.this.panneauDesProfilsAEncoyer.getChildren().remove(panneauAEnlever);

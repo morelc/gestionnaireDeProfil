@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gestionnairedeprofil.IHM;
 
 import gestionnairedeprofil.donnees.structures.Association;
@@ -15,6 +10,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -29,17 +25,18 @@ import javafx.util.Duration;
  *
  * @author MOREL Charles
  */
-public class PanneauEditionCombinaison extends AnchorPane implements InterfaceEditionAssociation, InterfacePanneauTypeCombinaison
+public class PanneauEditionAutofire extends AnchorPane implements InterfaceEditionAssociation, InterfacePanneauTypeCombinaison
 {
 
-    public final static String MESSAGE_INVALIDITE = "au moins deux touches différentes\ndoivent être selectionnées!";
+    public final static String MESSAGE_INVALIDITE = "au moins une touche doit être\nselectionnée et le laps de répétition\nsuperieur ou égal\nà 10 ms";
     private final ArrayList<PanneauToucheMachinePourCombinaison> combinaison;
     private final ArrayList<ToucheMachine> touchesDisponiblesAffichables;
     private final Button btnAjouterCmb;
     private final double dim;
+    private final TextField textFieldTimer;
 
 
-    public PanneauEditionCombinaison(double i, ArrayList<ToucheMachine> touchesDisponibles, AssociationsDansProfil associationsDeBase)
+    public PanneauEditionAutofire(double i, ArrayList<ToucheMachine> touchesDisponibles, AssociationsDansProfil associationsDeBase)
     {
         // Configuration de l'apparence
         this.setStyle("-fx-background-color: #D8D8D8;");
@@ -48,31 +45,58 @@ public class PanneauEditionCombinaison extends AnchorPane implements InterfaceEd
         this.dim = i;
 
         // Configuration des noeuds statiques
+        Text texeTimer = new Text();
+        texeTimer.setLayoutX(77 * i);
+        texeTimer.setLayoutY(50 * i);
+        texeTimer.setFont(new Font(15 * i));
+        texeTimer.setFill(Color.web("#696969", 1.0));
+        texeTimer.setTextAlignment(TextAlignment.CENTER);
+        texeTimer.setText("Répéter toutes les :");
+        this.getChildren().add(texeTimer);
+
+        Text texeTimerBis = new Text();
+        texeTimerBis.setLayoutX(160 * i);
+        texeTimerBis.setLayoutY(75 * i);
+        texeTimerBis.setFont(new Font(15 * i));
+        texeTimerBis.setFill(Color.web("#696969", 1.0));
+        texeTimerBis.setTextAlignment(TextAlignment.CENTER);
+        texeTimerBis.setText("ms");
+        this.getChildren().add(texeTimerBis);
+
         Text texteCombinaison = new Text();
-        texteCombinaison.setLayoutX(75 * i);
-        texteCombinaison.setLayoutY(75 * i);
+        texteCombinaison.setLayoutX(85 * i);
+        texteCombinaison.setLayoutY(105 * i);
         texteCombinaison.setFont(new Font(15 * i));
         texteCombinaison.setFill(Color.web("#696969", 1.0));
         texteCombinaison.setTextAlignment(TextAlignment.CENTER);
-        texteCombinaison.setText("Appui simultané sur\nles touches:");
+        texteCombinaison.setText("L'appui sur la\nou les touches:");
         this.getChildren().add(texteCombinaison);
 
         // Configuration des contrôles
+        this.textFieldTimer = new TextField();
+        this.textFieldTimer.setLayoutX(100 * i);
+        this.textFieldTimer.setLayoutY(60 * i);
+        this.textFieldTimer.setPrefSize(50 * i, 20 * i);
+        this.textFieldTimer.setMaxSize(50 * i, 20 * i);
+        this.textFieldTimer.setMinSize(50 * i, 20 * i);
+        this.textFieldTimer.setStyle("-fx-font-size: " + Double.toString(9 * i));
+        this.textFieldTimer.setText(Integer.toString(associationsDeBase.get(0).getTimer()));
+        this.getChildren().add(this.textFieldTimer);
+
         this.combinaison = new ArrayList();
 
         this.btnAjouterCmb = new Button("Ajouter...", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png"))));
         this.btnAjouterCmb.setLayoutX(90 * i);
-        this.btnAjouterCmb.setLayoutY(155 * i);
+        this.btnAjouterCmb.setLayoutY(164 * i);
         this.btnAjouterCmb.setMaxSize(105 * i, 20 * i);
         this.btnAjouterCmb.setMinSize(105 * i, 20 * i);
         this.btnAjouterCmb.setPrefSize(105 * i, 20 * i);
         Tooltip infobulleBtnAjouterCmb = new Tooltip();
-        infobulleBtnAjouterCmb.setText("Ajouter une nouvelle touche à la combinaison");
+        infobulleBtnAjouterCmb.setText("Ajouter une nouvelle touche à l'autofie");
         this.btnAjouterCmb.setTooltip(infobulleBtnAjouterCmb);
         this.getChildren().add(this.btnAjouterCmb);
 
         if (associationsDeBase.getAssocType() == AssociationsDansProfil.TYPE_VIDE) {
-            ajouterUnPanneauDeCombinaison(new ToucheMachine());
             ajouterUnPanneauDeCombinaison(new ToucheMachine());
         }
         else {
@@ -98,14 +122,14 @@ public class PanneauEditionCombinaison extends AnchorPane implements InterfaceEd
     {
         PanneauToucheMachinePourCombinaison nouvelleCombinaisonTocuhe = new PanneauToucheMachinePourCombinaison(dim, this, toucheAAjouter);
         nouvelleCombinaisonTocuhe.setLayoutX(90 * dim);
-        nouvelleCombinaisonTocuhe.setLayoutY(111 * dim + (23 * dim * this.combinaison.size()));
+        nouvelleCombinaisonTocuhe.setLayoutY(141 * dim + (23 * dim * this.combinaison.size()));
         nouvelleCombinaisonTocuhe.setOpacity(0);
         combinaison.add(nouvelleCombinaisonTocuhe);
         reorganiserListeAssociations();
-        Timeline timelinePanneauAAjouter = new Timeline();
-        timelinePanneauAAjouter.setAutoReverse(false);
-        timelinePanneauAAjouter.getKeyFrames().add(new KeyFrame(Duration.millis(300), new KeyValue(nouvelleCombinaisonTocuhe.opacityProperty(), 1)));
-        timelinePanneauAAjouter.play();
+        Timeline timelinePanneauAAjoyter = new Timeline();
+        timelinePanneauAAjoyter.setAutoReverse(false);
+        timelinePanneauAAjoyter.getKeyFrames().add(new KeyFrame(Duration.millis(300), new KeyValue(nouvelleCombinaisonTocuhe.opacityProperty(), 1)));
+        timelinePanneauAAjoyter.play();
         this.getChildren().add(nouvelleCombinaisonTocuhe);
     }
 
@@ -118,8 +142,8 @@ public class PanneauEditionCombinaison extends AnchorPane implements InterfaceEd
             @Override
             public void handle(ActionEvent arg0)
             {
-                PanneauEditionCombinaison.this.getChildren().remove(assocAEnlever);
-                PanneauEditionCombinaison.this.combinaison.remove(assocAEnlever);
+                PanneauEditionAutofire.this.getChildren().remove(assocAEnlever);
+                PanneauEditionAutofire.this.combinaison.remove(assocAEnlever);
                 reorganiserListeAssociations();
             }
         };
@@ -137,17 +161,17 @@ public class PanneauEditionCombinaison extends AnchorPane implements InterfaceEd
         }
         Timeline timelineBtnAjouter = new Timeline();
         timelineBtnAjouter.setAutoReverse(false);
-        timelineBtnAjouter.getKeyFrames().add(new KeyFrame(Duration.millis(200), new KeyValue(this.btnAjouterCmb.layoutYProperty(), 111 * dim + (23 * dim * this.combinaison.size()))));
+        timelineBtnAjouter.getKeyFrames().add(new KeyFrame(Duration.millis(200), new KeyValue(this.btnAjouterCmb.layoutYProperty(), 141 * dim + (23 * dim * this.combinaison.size()))));
         timelineBtnAjouter.play();
-        if (this.combinaison.size() >= 6) {
+        if (this.combinaison.size() >= 4) {
             this.setMinWidth(293.5 * this.dim);
             this.setMaxWidth(293.5 * this.dim);
             this.setPrefWidth(293.5 * this.dim);
             Timeline timelineForcerHauteur = new Timeline();
             timelineForcerHauteur.setAutoReverse(false);
-            timelineForcerHauteur.getKeyFrames().add(new KeyFrame(Duration.millis(180), new KeyValue(this.minHeightProperty(), 141 * this.dim + (23 * this.dim * this.combinaison.size()))));
-            timelineForcerHauteur.getKeyFrames().add(new KeyFrame(Duration.millis(180), new KeyValue(this.minHeightProperty(), 141 * this.dim + (23 * this.dim * this.combinaison.size()))));
-            timelineForcerHauteur.getKeyFrames().add(new KeyFrame(Duration.millis(180), new KeyValue(this.maxHeightProperty(), 141 * this.dim + (23 * this.dim * this.combinaison.size()))));
+            timelineForcerHauteur.getKeyFrames().add(new KeyFrame(Duration.millis(180), new KeyValue(this.minHeightProperty(), 171 * this.dim + (23 * this.dim * this.combinaison.size()))));
+            timelineForcerHauteur.getKeyFrames().add(new KeyFrame(Duration.millis(180), new KeyValue(this.minHeightProperty(), 171 * this.dim + (23 * this.dim * this.combinaison.size()))));
+            timelineForcerHauteur.getKeyFrames().add(new KeyFrame(Duration.millis(180), new KeyValue(this.maxHeightProperty(), 171 * this.dim + (23 * this.dim * this.combinaison.size()))));
             timelineForcerHauteur.play();
         }
         else {
@@ -156,12 +180,11 @@ public class PanneauEditionCombinaison extends AnchorPane implements InterfaceEd
             this.setMaxSize(301.5 * this.dim, 248.5 * this.dim);
 
         }
-
     }
 
     private void replacerElement(PanneauToucheMachinePourCombinaison panneauAReplacer, int idEmplacementDansCollection)
     {
-        double emplacementYLogique = 111 * dim + (23 * dim * idEmplacementDansCollection);
+        double emplacementYLogique = 141 * dim + (23 * dim * idEmplacementDansCollection);
         double emplacementYActuel = panneauAReplacer.getLayoutY();
         if (emplacementYLogique != emplacementYActuel) {
             Timeline timeline = new Timeline();
@@ -179,12 +202,13 @@ public class PanneauEditionCombinaison extends AnchorPane implements InterfaceEd
 
     private boolean uneAssociationPeutEtreEnlevee()
     {
-        return (this.combinaison.size() > 2);
+        return (this.combinaison.size() > 1);
     }
 
     /**
      * @return the touchesDisponiblesAffichables
      */
+    @Override
     public ArrayList<ToucheMachine> getTouchesDisponiblesAffichables()
     {
         return touchesDisponiblesAffichables;
@@ -194,7 +218,7 @@ public class PanneauEditionCombinaison extends AnchorPane implements InterfaceEd
     public AssociationsDansProfil getAssociations()
     {
         AssociationsDansProfil associationsARetourner = new AssociationsDansProfil();
-        Association associationARajouter = new Association(Association.ID_NON_ENREGISTREE_DANS_BD, false, 0);
+        Association associationARajouter = new Association(Association.ID_NON_ENREGISTREE_DANS_BD, true, Integer.parseInt(this.textFieldTimer.getText()));
         for (PanneauToucheMachinePourCombinaison toucheSelectionnee : this.combinaison) {
             if (!associationARajouter.getTouches().contains(toucheSelectionnee.getToucheCourrante()) && toucheSelectionnee.getToucheCourrante().getId() != ToucheMachine.ID_TOUCHE_NON_ASSOCIEE) {
                 associationARajouter.ajouterTouche(toucheSelectionnee.getToucheCourrante());
@@ -213,16 +237,26 @@ public class PanneauEditionCombinaison extends AnchorPane implements InterfaceEd
                 idTouchesAppuyees.add(toucheSelectionnee.getToucheCourrante().getId());
             }
         }
-        if (idTouchesAppuyees.size() < 2) {
+        if (idTouchesAppuyees.size() < 1
+                || this.textFieldTimer.getText().length() == 0) {
+            return false;
+        }
+        try {
+            if (Integer.parseInt(this.textFieldTimer.getText()) < 10) {
+                return false;
+            }
+        }
+        catch (NumberFormatException erreur) {
             return false;
         }
         return true;
     }
 
+
     @Override
     public String getMessageDInvalidite()
     {
-        return PanneauEditionCombinaison.MESSAGE_INVALIDITE;
+        return PanneauEditionAutofire.MESSAGE_INVALIDITE;
     }
 
 }

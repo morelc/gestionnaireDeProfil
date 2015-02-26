@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gestionnairedeprofil.IHM;
 
 import gestionnairedeprofil.donnees.structures.ToucheMachine;
@@ -25,7 +20,7 @@ public class PanneauToucheMachinePourCombinaison extends AnchorPane
     private final ComboBox bouttonAAppuyer;
     private final Button btnEnlever;
 
-    public PanneauToucheMachinePourCombinaison(double dim, final PanneauEditionCombinaison panneauParent, ToucheMachine ToucheDeBase)
+    public PanneauToucheMachinePourCombinaison(double dim, final InterfacePanneauTypeCombinaison panneauParent, ToucheMachine ToucheDeBase)
     {
         this.bouttonAAppuyer = new ComboBox();
         this.bouttonAAppuyer.setMaxSize(80 * dim, 20 * dim);
@@ -51,6 +46,7 @@ public class PanneauToucheMachinePourCombinaison extends AnchorPane
         this.btnEnlever.setOnAction(new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent event)
             {
                 panneauParent.enleverUneAssociation(PanneauToucheMachinePourCombinaison.this);
@@ -67,7 +63,7 @@ public class PanneauToucheMachinePourCombinaison extends AnchorPane
     {
         this.btnEnlever.setDisable(true);
     }
-    
+
     public ToucheMachine getToucheCourrante()
     {
         return (ToucheMachine) this.bouttonAAppuyer.getValue();

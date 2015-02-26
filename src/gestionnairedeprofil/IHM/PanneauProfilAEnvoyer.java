@@ -5,6 +5,7 @@
  */
 package gestionnairedeprofil.IHM;
 
+import gestionnairedeprofil.donnees.structures.Profil;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -25,11 +26,11 @@ import javafx.scene.text.Font;
 public class PanneauProfilAEnvoyer extends Pane
 {
 
-    private final int numProfil;
+    private final Profil numProfil;
     private final Button btnLever;
     private final Button btnDessendre;
 
-    public PanneauProfilAEnvoyer(double dim, final ListeProfilsAEnvoyer listeOuAjouterLePanneau, StringProperty nomProfil, int numDuProfil)
+    public PanneauProfilAEnvoyer(double dim, final ListeProfilsAEnvoyer listeOuAjouterLePanneau, StringProperty nomProfil, Profil numDuProfil)
     {
         this.numProfil = numDuProfil;
 
@@ -79,6 +80,7 @@ public class PanneauProfilAEnvoyer extends Pane
         btnEnleverDeLaListe.setOnAction(new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent event)
             {
                 listeOuAjouterLePanneau.enleverProfilAEnvoyer(PanneauProfilAEnvoyer.this);
@@ -88,6 +90,7 @@ public class PanneauProfilAEnvoyer extends Pane
         this.btnLever.setOnAction(new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent event)
             {
                 listeOuAjouterLePanneau.leverUnProfilDansLaListe(PanneauProfilAEnvoyer.this);
@@ -96,6 +99,7 @@ public class PanneauProfilAEnvoyer extends Pane
         this.btnDessendre.setOnAction(new EventHandler<ActionEvent>()
         {
 
+            @Override
             public void handle(ActionEvent event)
             {
                 listeOuAjouterLePanneau.dessendreUnProfilDansLaListe(PanneauProfilAEnvoyer.this);
@@ -118,7 +122,7 @@ public class PanneauProfilAEnvoyer extends Pane
     /**
      * @return the numProfil
      */
-    public int getNumProfil()
+    public Profil getNumProfil()
     {
         return this.numProfil;
     }
