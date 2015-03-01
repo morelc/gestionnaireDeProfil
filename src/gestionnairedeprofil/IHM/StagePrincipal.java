@@ -48,6 +48,7 @@ public class StagePrincipal extends Application
 {
 
     int i = 0;
+    private ComboBox cbSelectionLecteur;
 
     @Override
     public void start(final Stage Stage)
@@ -179,19 +180,19 @@ public class StagePrincipal extends Application
         infobulleBtnAjouter.setText("Créer un nouveau profil sur le PC");
         btnCreationProfil.setTooltip(infobulleBtnAjouter);
 
-        final ListeProfilsAEnvoyer panneauProfilsVersPad = new ListeProfilsAEnvoyer(dim);
+        final ListeProfilsAEnvoyer panneauProfilsVersPad = new ListeProfilsAEnvoyer(dim, panneauProfilsDuPc);
         panneauProfilsVersPad.setLayoutX(260 * dim);
         panneauProfilsVersPad.setLayoutY(70 * dim);
         panneauProfilsVersPad.setPrefHeight(270 * dim);
         panneauProfilsVersPad.setMinHeight(270 * dim);
         panneauProfilsVersPad.setMaxHeight(270 * dim);
 
-        ComboBox cbSelectionLecteur = new ComboBox();
-        cbSelectionLecteur.setLayoutX(575 * dim);
-        cbSelectionLecteur.setLayoutY(175 * dim);
-        cbSelectionLecteur.setPrefSize(40 * dim, 20 * dim);
-        cbSelectionLecteur.setMaxSize(40 * dim, 20 * dim);
-        cbSelectionLecteur.setMinSize(40 * dim, 20 * dim);
+        this.cbSelectionLecteur = new ComboBox();
+        this.cbSelectionLecteur.setLayoutX(575 * dim);
+        this.cbSelectionLecteur.setLayoutY(175 * dim);
+        this.cbSelectionLecteur.setPrefSize(40 * dim, 20 * dim);
+        this.cbSelectionLecteur.setMaxSize(40 * dim, 20 * dim);
+        this.cbSelectionLecteur.setMinSize(40 * dim, 20 * dim);
 
         Button btnafraichirListeLecteurs = new Button("", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/refresh.png"))));
         btnafraichirListeLecteurs.setLayoutX(620 * dim);
@@ -326,11 +327,7 @@ public class StagePrincipal extends Application
 
         toutesLesMachines.add(machine2);
 
-        for (Machine machineAAjouter : toutesLesMachines) {
-            panneauProfilsDuPc.getPanes().add(new ListeProfilsDisponiblesMachine(dim, machineAAjouter, Stage, panneauProfilsVersPad));
-        }
-        //final ListeProfilsDisponiblesMachine panneau = new ListeProfilsDisponiblesMachine(dim, machine1, Stage);
-        //panneauProfilsDuPc.getPanes().add(panneau);
+
 
         btnCreationProfil.setOnAction(new EventHandler<ActionEvent>()
         {
@@ -342,16 +339,28 @@ public class StagePrincipal extends Application
             }
         });
 
-        List<File> files = Arrays.asList(File.listRoots());
-        for (File f : files) {
-            String s = f.getAbsolutePath().toString();
-            cbSelectionLecteur.getItems().add(s);
-        }
-        cbSelectionLecteur.setValue(files.get(0).getAbsolutePath().toString());
+        btnafraichirListeLecteurs.setOnAction(new EventHandler<ActionEvent>()
+        {
+
+            @Override
+            public void handle(ActionEvent event)
+            {
+                StagePrincipal.this.rafarichirListeLEcteurs();
+            }
+        });
+
+
+
+
+        // Chargement de la liste des lecteurs
+        this.rafarichirListeLEcteurs();
 
         // Chargement des éléments dynamiques de l'IHM
 
         /* Charger ici la liste des profils et des machines */
+        for (Machine machineAAjouter : toutesLesMachines) {
+            panneauProfilsDuPc.getPanes().add(new ListeProfilsDisponiblesMachine(dim, machineAAjouter, Stage, panneauProfilsVersPad));
+        }
 
         // Ouverture automatique du premier panneau des profils de machine
 
@@ -379,7 +388,7 @@ public class StagePrincipal extends Application
         root.getChildren().add(panneauProfilsDuPc);
         root.getChildren().add(btnCreationProfil);
         root.getChildren().add(panneauProfilsVersPad);
-        root.getChildren().add(cbSelectionLecteur);
+        root.getChildren().add(this.cbSelectionLecteur);
         root.getChildren().add(btnafraichirListeLecteurs);
         root.getChildren().add(btnEnvoiVersCarteSD);
 
@@ -390,8 +399,20 @@ public class StagePrincipal extends Application
         // Configuration de Stage
 
         Stage.setTitle("Gestionnaire de profil");
+        Stage.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/icone.png")));
         Stage.setScene(scene);
         Stage.setResizable(false);
         Stage.show();
+    }
+
+    private void rafarichirListeLEcteurs()
+    {
+        this.cbSelectionLecteur.getItems().clear();
+        List<File> files = Arrays.asList(File.listRoots());
+        for (File f : files) {
+            String s = f.getAbsolutePath().toString();
+            this.cbSelectionLecteur.getItems().add(s);
+        }
+        this.cbSelectionLecteur.setValue(files.get(0).getAbsolutePath().toString());
     }
 }

@@ -127,16 +127,6 @@ public class StageEditionAssociationTouche extends Stage
             }
         });
 
-        this.setOnCloseRequest(new EventHandler<WindowEvent>()
-        {
-
-            @Override
-            public void handle(WindowEvent event)
-            {
-                event.consume();
-            }
-        });
-
         btnAnnulerModifs.setOnAction(new EventHandler<ActionEvent>()
         {
 
@@ -157,15 +147,6 @@ public class StageEditionAssociationTouche extends Stage
                 }
                 else {
                     profilConcerne.setAssociationsModifiesAt(panneauEditionAssocCourrant.getAssociations(), numDuBtnAModifier);
-//                    for (Association assocAAficher : panneauEditionAssocCourrant.getAssociations()) {
-//                        System.out.println("Association à enrrgistrer:\nid : " + assocAAficher.getId()
-//                                + "\ntimer : " + assocAAficher.getTimer()
-//                                + "\nest autofire : " + assocAAficher.isEstAutofire()
-//                                + "\ntouches : ");
-//                        for (ToucheMachine toucheAAfficher : assocAAficher.getTouches()) {
-//                            System.out.println("  - id: " + toucheAAfficher.getId() + " - nom : " + toucheAAfficher.getNom() + " - signal : " + toucheAAfficher.getSignal());
-//                        }
-//                    }
                     StageEditionAssociationTouche.this.close();
                 }
             }

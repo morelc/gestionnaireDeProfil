@@ -21,7 +21,7 @@ import javafx.util.Duration;
 class ListeProfilsDisponiblesMachine extends TitledPane
 {
 
-    ArrayList<PanneauProfilDisponible> profilsDisponibles;
+    private ArrayList<PanneauProfilDisponible> profilsDisponibles;
     private final AnchorPane panneauDesProfilsDisponibles;
     private final double espacementEntreProfils;
     private final Stage stageDeLApplication;
@@ -63,13 +63,13 @@ class ListeProfilsDisponiblesMachine extends TitledPane
     public void ajouterProfilAEnvoyer(PanneauProfilDisponible panneauAAjouter)
     {
         panneauAAjouter.setLayoutX(0);
-        panneauAAjouter.setLayoutY(this.profilsDisponibles.size() * this.espacementEntreProfils);
+        panneauAAjouter.setLayoutY(this.getProfilsDisponibles().size() * this.espacementEntreProfils);
         panneauAAjouter.setOpacity(0);
         Timeline timeline = new Timeline();
         timeline.setAutoReverse(false);
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(150), new KeyValue(panneauAAjouter.opacityProperty(), 1)));
         this.panneauDesProfilsDisponibles.getChildren().add(panneauAAjouter);
-        this.profilsDisponibles.add(panneauAAjouter);
+        this.getProfilsDisponibles().add(panneauAAjouter);
         timeline.play();
     }
 
@@ -82,7 +82,7 @@ class ListeProfilsDisponiblesMachine extends TitledPane
             public void handle(ActionEvent arg0)
             {
                 ListeProfilsDisponiblesMachine.this.panneauDesProfilsDisponibles.getChildren().remove(panneauAEnlever);
-                ListeProfilsDisponiblesMachine.this.profilsDisponibles.remove(panneauAEnlever);
+                ListeProfilsDisponiblesMachine.this.getProfilsDisponibles().remove(panneauAEnlever);
                 reorganiserListeProfils();
             }
         };
@@ -95,8 +95,8 @@ class ListeProfilsDisponiblesMachine extends TitledPane
 
     private void reorganiserListeProfils()
     {
-        for (int i = 0; i < this.profilsDisponibles.size(); i++) {
-            replacerElement(this.profilsDisponibles.get(i), i);
+        for (int i = 0; i < this.getProfilsDisponibles().size(); i++) {
+            replacerElement(this.getProfilsDisponibles().get(i), i);
         }
     }
 
@@ -118,5 +118,13 @@ class ListeProfilsDisponiblesMachine extends TitledPane
     public Stage getStageDeLApplication()
     {
         return stageDeLApplication;
+    }
+
+    /**
+     * @return the profilsDisponibles
+     */
+    public ArrayList<PanneauProfilDisponible> getProfilsDisponibles()
+    {
+        return profilsDisponibles;
     }
 }

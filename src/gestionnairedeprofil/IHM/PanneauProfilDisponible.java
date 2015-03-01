@@ -27,6 +27,7 @@ public class PanneauProfilDisponible extends Pane
     private final ListeProfilsDisponiblesMachine listeDesProfilsDeLaMachine;
     private final Profil profilPanneau;
     private Label nomProfilAAfficher;
+    private final Button btnAjouterALaListeDEnvoi;
 
     public PanneauProfilDisponible(final double dim, final ListeProfilsDisponiblesMachine listeOuAjouterLeProfil, final ListeProfilsAEnvoyer listeDesProfilsAEnvoyer, final Profil profilConcernee, final Machine machineConcernee)
     {
@@ -66,17 +67,17 @@ public class PanneauProfilDisponible extends Pane
         btnSupprimer.setTooltip(infobulleBtnSupprimer);
         this.getChildren().add(btnSupprimer);
 
-        final Button btnAjouterALaListeDEnvoi = new Button("", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/right.png"))));
-        btnAjouterALaListeDEnvoi.setLayoutX(165 * dim);
-        btnAjouterALaListeDEnvoi.setLayoutY(1 * dim);
-        btnAjouterALaListeDEnvoi.setMaxSize(25 * dim, 15 * dim);
-        btnAjouterALaListeDEnvoi.setMinSize(25 * dim, 15 * dim);
-        btnAjouterALaListeDEnvoi.setPrefSize(25 * dim, 15 * dim);
-        btnAjouterALaListeDEnvoi.setOpacity(0);
+        this.btnAjouterALaListeDEnvoi = new Button("", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/right.png"))));
+        this.btnAjouterALaListeDEnvoi.setLayoutX(165 * dim);
+        this.btnAjouterALaListeDEnvoi.setLayoutY(1 * dim);
+        this.btnAjouterALaListeDEnvoi.setMaxSize(25 * dim, 15 * dim);
+        this.btnAjouterALaListeDEnvoi.setMinSize(25 * dim, 15 * dim);
+        this.btnAjouterALaListeDEnvoi.setPrefSize(25 * dim, 15 * dim);
+        this.btnAjouterALaListeDEnvoi.setOpacity(0);
         Tooltip infobulleBtnAjouterALaListeDEnvoi = new Tooltip();
         infobulleBtnAjouterALaListeDEnvoi.setText("Ajouter le profil à la liste d'envoi");
-        btnAjouterALaListeDEnvoi.setTooltip(infobulleBtnAjouterALaListeDEnvoi);
-        this.getChildren().add(btnAjouterALaListeDEnvoi);
+        this.btnAjouterALaListeDEnvoi.setTooltip(infobulleBtnAjouterALaListeDEnvoi);
+        this.getChildren().add(this.btnAjouterALaListeDEnvoi);
 
         this.setOnMouseEntered(new EventHandler<MouseEvent>()
         {
@@ -89,7 +90,7 @@ public class PanneauProfilDisponible extends Pane
                 timeline.getKeyFrames().addAll(
                         new KeyFrame(Duration.millis(100), new KeyValue(btnEditer.opacityProperty(), 1)),
                         new KeyFrame(Duration.millis(100), new KeyValue(btnSupprimer.opacityProperty(), 1)),
-                        new KeyFrame(Duration.millis(100), new KeyValue(btnAjouterALaListeDEnvoi.opacityProperty(), 1))
+                        new KeyFrame(Duration.millis(100), new KeyValue(PanneauProfilDisponible.this.btnAjouterALaListeDEnvoi.opacityProperty(), 1))
                 );
                 timeline.play();
             }
@@ -105,7 +106,7 @@ public class PanneauProfilDisponible extends Pane
                 timeline.getKeyFrames().addAll(
                         new KeyFrame(Duration.millis(100), new KeyValue(btnEditer.opacityProperty(), 0)),
                         new KeyFrame(Duration.millis(100), new KeyValue(btnSupprimer.opacityProperty(), 0)),
-                        new KeyFrame(Duration.millis(100), new KeyValue(btnAjouterALaListeDEnvoi.opacityProperty(), 0))
+                        new KeyFrame(Duration.millis(100), new KeyValue(PanneauProfilDisponible.this.btnAjouterALaListeDEnvoi.opacityProperty(), 0))
                 );
                 timeline.play();
             }
@@ -129,13 +130,14 @@ public class PanneauProfilDisponible extends Pane
                 new StageConfirmationSuppression(dim, PanneauProfilDisponible.this, listeOuAjouterLeProfil.getStageDeLApplication(), profilConcernee.getNom(), listeOuAjouterLeProfil.getText());
             }
         });
-        btnAjouterALaListeDEnvoi.setOnAction(new EventHandler<ActionEvent>()
+        this.btnAjouterALaListeDEnvoi.setOnAction(new EventHandler<ActionEvent>()
         {
 
             @Override
             public void handle(ActionEvent event)
             {
                 new PanneauProfilAEnvoyer(dim, listeDesProfilsAEnvoyer, PanneauProfilDisponible.this.nomProfilAAfficher.textProperty(), profilConcernee);
+                PanneauProfilDisponible.this.btnAjouterALaListeDEnvoi.setDisable(true);
             }
         });
 
@@ -152,5 +154,18 @@ public class PanneauProfilDisponible extends Pane
     public void rafraichirNomProfil()
     {
         this.nomProfilAAfficher.setText(this.profilPanneau.getNom());
+    }
+
+    public void definirEnvoyable()
+    {
+        this.btnAjouterALaListeDEnvoi.setDisable(false);
+    }
+
+    /**
+     * @return the profilPanneau
+     */
+    public Profil getProfil()
+    {
+        return this.profilPanneau;
     }
 }

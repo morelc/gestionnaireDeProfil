@@ -36,16 +36,16 @@ public class PanneauCombinaisonPourMacro extends AnchorPane implements Interface
     private final Button btnAssocSuivante;
     private final Button btnDerniereAssoc;
     private final Button btnSupprimerAssoc;
-    private double dim;
+    private final double dim;
     private final TextField textFieldTimer;
 
     public PanneauCombinaisonPourMacro(double i, final PanneauEditionMacro panneauParent, ArrayList<ToucheMachine> touchesDisponibles, Association associationDeBase)
     {
         // Configuration de l'apparence
         this.setStyle("-fx-background-color: #D8D8D8;");
-        this.setMinWidth(293.5 * this.dim);
-        this.setMaxWidth(293.5 * this.dim);
-        this.setPrefWidth(293.5 * this.dim);
+        this.setMinWidth(293.5 * i);
+        this.setMaxWidth(293.5 * i);
+        this.setPrefWidth(293.5 * i);
         this.touchesDisponiblesAffichables = touchesDisponibles;
         this.dim = i;
         this.panneauMacroParent = panneauParent;
@@ -392,7 +392,7 @@ public class PanneauCombinaisonPourMacro extends AnchorPane implements Interface
     {
         return this.combinaison.size();
     }
-    
+
     public String getNumInstant()
     {
         return this.textFieldTimer.getText();

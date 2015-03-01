@@ -93,7 +93,6 @@ public class StageCreationProfil extends Stage
         cbSelectionMachine.setPrefSize(110 * i, 25 * i);
         cbSelectionMachine.setMaxSize(110 * i, 25 * i);
         cbSelectionMachine.setMinSize(110 * i, 25 * i);
-        cbSelectionMachine.setStyle("-fx-font-size: " + Double.toString(11 * i));
         for (Machine machineATraiter : machinesDisponibles) {
             cbSelectionMachine.getItems().add(machineATraiter);
         }

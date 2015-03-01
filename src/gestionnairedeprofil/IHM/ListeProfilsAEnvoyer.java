@@ -11,6 +11,8 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
@@ -25,9 +27,11 @@ public class ListeProfilsAEnvoyer extends ScrollPane
     private final AnchorPane panneauDesProfilsAEncoyer;
     private final ArrayList<PanneauProfilAEnvoyer> profilsAEnvoyer;
     private final double espacementEntreProfils;
+    private final Accordion listeDesProfilsDispo;
 
-    public ListeProfilsAEnvoyer(double i)
+    public ListeProfilsAEnvoyer(double i, Accordion listeDesProfilsDisponibles)
     {
+        this.listeDesProfilsDispo = listeDesProfilsDisponibles;
         this.profilsAEnvoyer = new ArrayList();
         this.espacementEntreProfils = i * 17;
         this.panneauDesProfilsAEncoyer = new AnchorPane();
@@ -64,6 +68,14 @@ public class ListeProfilsAEnvoyer extends ScrollPane
                 ListeProfilsAEnvoyer.this.panneauDesProfilsAEncoyer.getChildren().remove(panneauAEnlever);
                 ListeProfilsAEnvoyer.this.profilsAEnvoyer.remove(panneauAEnlever);
                 reorganiserListeProfils();
+                for (Node machineDisponibleATraiter : ListeProfilsAEnvoyer.this.listeDesProfilsDispo.getPanes()) {
+                    ListeProfilsDisponiblesMachine panneauAtraiter = (ListeProfilsDisponiblesMachine) machineDisponibleATraiter;
+                    for (PanneauProfilDisponible panneauProfilAtraiter : panneauAtraiter.getProfilsDisponibles()) {
+                        if (panneauProfilAtraiter.getProfil() == panneauAEnlever.getProfil()) {
+                            panneauProfilAtraiter.definirEnvoyable();
+                        }
+                    }
+                }
             }
         };
         Timeline timeline = new Timeline();
@@ -130,7 +142,7 @@ public class ListeProfilsAEnvoyer extends ScrollPane
     {
         ArrayList listeARetourner = new ArrayList();
         for (PanneauProfilAEnvoyer panneauCourrant : this.profilsAEnvoyer) {
-            listeARetourner.add(panneauCourrant.getNumProfil());
+            listeARetourner.add(panneauCourrant.getProfil());
         }
         return listeARetourner;
     }

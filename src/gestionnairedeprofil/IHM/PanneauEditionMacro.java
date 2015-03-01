@@ -80,7 +80,7 @@ public class PanneauEditionMacro extends AnchorPane implements InterfaceEditionA
             nouvelleCombinaisonTocuhe.setLayoutX(0);
         }
         else {
-            nouvelleCombinaisonTocuhe.setLayoutX(340 * this.dim);
+            nouvelleCombinaisonTocuhe.setLayoutX(300 * this.dim);
         }
         combinaisons.add(nouvelleCombinaisonTocuhe);
         this.getChildren().add(nouvelleCombinaisonTocuhe);
@@ -101,10 +101,10 @@ public class PanneauEditionMacro extends AnchorPane implements InterfaceEditionA
     {
         double emplacementXLogique = 0;
         if (idEmplacementDansCollection < this.panneauCourrant) {
-            emplacementXLogique = -500;
+            emplacementXLogique = -300 * this.dim;
         }
         if (idEmplacementDansCollection > this.panneauCourrant) {
-            emplacementXLogique = 500;
+            emplacementXLogique = 300 * this.dim;
         }
         double emplacementXActuel = panneauAReplacer.getLayoutX();
         if (emplacementXLogique != emplacementXActuel) {

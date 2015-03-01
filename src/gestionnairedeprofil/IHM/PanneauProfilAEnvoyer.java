@@ -30,9 +30,9 @@ public class PanneauProfilAEnvoyer extends Pane
     private final Button btnLever;
     private final Button btnDessendre;
 
-    public PanneauProfilAEnvoyer(double dim, final ListeProfilsAEnvoyer listeOuAjouterLePanneau, StringProperty nomProfil, Profil numDuProfil)
+    public PanneauProfilAEnvoyer(double dim, final ListeProfilsAEnvoyer listeOuAjouterLePanneau, StringProperty nomProfil, Profil profilRattache)
     {
-        this.numProfil = numDuProfil;
+        this.numProfil = profilRattache;
 
         final Label nomProfilAAfficher = new Label();
         nomProfilAAfficher.setLayoutX(5 * dim);
@@ -122,7 +122,7 @@ public class PanneauProfilAEnvoyer extends Pane
     /**
      * @return the numProfil
      */
-    public Profil getNumProfil()
+    public Profil getProfil()
     {
         return this.numProfil;
     }
