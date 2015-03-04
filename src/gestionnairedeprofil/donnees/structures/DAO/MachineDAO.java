@@ -27,7 +27,7 @@ public class MachineDAO {
             while (rs.next()) {
                 /*récuperation de l'id et du nom de la machine*/
                 int id = rs.getInt("id");
-                String name = rs.getString("name");
+                String name = rs.getString("nom");
                 Machine machine = new Machine(id, name);
                 
                 /*creation et association de l'ArrayListProfilAssocies à la machine*/

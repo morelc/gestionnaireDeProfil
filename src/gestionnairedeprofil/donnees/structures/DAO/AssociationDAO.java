@@ -5,27 +5,16 @@
  */
 package gestionnairedeprofil.donnees.structures.DAO;
 
+import gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
+import java.util.ArrayList;
+
 /**
  *
  * @author Fakri
  */
 public class AssociationDAO {
-
-    public static void getOne(){
-        
-    }
-    
-    public static void getAll(){
-        
-    }
-        
-    public static void delete(int id){
-        
-    }
-     public static void update(int id){
-        
-    }
-    public static void insert(){
+    static AssociationsDansProfil getAssociationByIdProfilAndIdAssociation(int idP, int i) {
+        return null;
         
     }
 }

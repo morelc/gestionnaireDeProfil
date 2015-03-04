@@ -20,7 +20,7 @@ public class ToucheMachineDAO{
         ArrayList<ToucheMachine> ArrayTouchesMachine = null;
         Connexion connexion = new Connexion("Database.db");
         Statement stmt = null;
-        String query = "SELECT * FROM touchesmachine WHERE idMachine = "+idMachine;
+        String query = "SELECT * FROM TouchesMachines WHERE idMachine = "+idMachine;
         connexion.connect();
         try {
             ResultSet rs = stmt.executeQuery(query);

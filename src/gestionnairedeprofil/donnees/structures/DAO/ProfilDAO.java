@@ -5,7 +5,9 @@
  */
 package gestionnairedeprofil.donnees.structures.DAO;
 
-import gestionnairedeprofil.donnees.structures.Profil;
+import gestionnairedeprofil.donnees.structures.*;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -13,10 +15,6 @@ import java.util.ArrayList;
  * @author Fakri
  */
 public class ProfilDAO{
-
-    public static void getOne(){
-        
-    }
     
     public static void getAll(){
         
@@ -33,6 +31,33 @@ public class ProfilDAO{
     }
 
     static ArrayList<Profil> getAllByMachineId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Profil> ArrayListProfils = null;
+        Connexion connexion = new Connexion("Database.db");
+        Statement stmt = null;
+        String query = "SELECT * FROM Profils WHERE id="+id+"";
+        connexion.connect();
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                /*récuperation de l'id et du nom de la machine*/
+                int idP = rs.getInt("id");
+                String name = rs.getString("nom");
+                Profil profil = new Profil(idP,name);
+                
+                /*creation et association de l'ArrayListAssociationDansProfil à l'objet Profil*/
+                for(int i=0;i<12;i++){
+                    AssociationsDansProfil associationDansProfil= new AssociationsDansProfil();
+                    associationDansProfil = AssociationDAO.getAssociationByIdProfilAndIdAssociation(idP,i);
+                    profil.setAssociationsAt(i,associationDansProfil);
+                }
+                /*ajout machine à ArrayListMachine*/
+                ArrayListProfils.add(profil);
+            }
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        connexion.close();
+        return ArrayListProfils;
     }
 }
