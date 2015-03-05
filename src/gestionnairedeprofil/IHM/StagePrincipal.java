@@ -241,19 +241,27 @@ public class StagePrincipal extends Application
         final ArrayList<Machine> toutesLesMachines = new ArrayList();
 
 
-        Machine machine1 = new Machine(1, "Machine 1");
+        Machine machine1 = new Machine(3, "Sega Master System");
 
-        ToucheMachine touche1 = new ToucheMachine(1, "A", 1);
-        ToucheMachine touche2 = new ToucheMachine(2, "B", 2);
-        ToucheMachine touche5 = new ToucheMachine(2, "MACHIN", 4);
-        ToucheMachine touche6 = new ToucheMachine(2, "TRUC", 8);
+        ToucheMachine touche1 = new ToucheMachine(1, "Signal 1", 1);
+        ToucheMachine touche2 = new ToucheMachine(2, "Signal 2", 2);
+        ToucheMachine touche5 = new ToucheMachine(2, "Signal 3", 4);
+        ToucheMachine touche6 = new ToucheMachine(2, "Signal 4", 8);
+        ToucheMachine touche7 = new ToucheMachine(2, "Signal 5", 16);
+        ToucheMachine touche8 = new ToucheMachine(2, "Signal 6", 32);
+        ToucheMachine touche9 = new ToucheMachine(2, "Signal 7", 64);
+        ToucheMachine touche10 = new ToucheMachine(2, "Signal 8", 128);
 
         machine1.ajouterTouche(touche1);
         machine1.ajouterTouche(touche2);
         machine1.ajouterTouche(touche5);
         machine1.ajouterTouche(touche6);
+        machine1.ajouterTouche(touche7);
+        machine1.ajouterTouche(touche8);
+        machine1.ajouterTouche(touche9);
+        machine1.ajouterTouche(touche10);
 
-        Profil profil1 = new Profil(1, "Profil 1");
+        Profil profil1 = new Profil(1, "Profil type");
         Association assoc1 = new Association();
         profil1.getAssociationsAt(0).add(assoc1);
         Association assoc2 = new Association(2, false, 0);
@@ -346,7 +354,7 @@ public class StagePrincipal extends Application
         profil2.getAssociationsAt(11).add(assocA12);
         machine2.ajouterProfil(profil2);
 
-        toutesLesMachines.add(machine2);
+        //toutesLesMachines.add(machine2);
 
 
 
