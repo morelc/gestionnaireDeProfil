@@ -27,16 +27,14 @@ import java.util.ArrayList;
  *
  * @author MOREL Charles
  */
-public class Machine
-{
+public class Machine {
 
     private final int id;
     private final String nom;
     private final ArrayList<Profil> profils;
     private final ArrayList<ToucheMachine> touches;
 
-    public Machine(int idMachine, String nomMachine)
-    {
+    public Machine(int idMachine, String nomMachine) {
         this.id = idMachine;
         this.nom = nomMachine;
         this.profils = new ArrayList();
@@ -47,56 +45,55 @@ public class Machine
     /**
      * @return the id
      */
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
     /**
      * @return the nom
      */
-    public String getNom()
-    {
+    public String getNom() {
         return nom;
     }
 
     /**
      * @return the profils
      */
-    public ArrayList<Profil> getProfils()
-    {
+    public ArrayList<Profil> getProfils() {
         return profils;
+    }
+
+    public void setProfils(ArrayList<Profil> ArrayListProfilsAssocies) {
+        this.profils = ArrayListProfilsAssocies;
     }
 
     /**
      * @return the touches
      */
-    public ArrayList<ToucheMachine> getTouches()
-    {
+    public ArrayList<ToucheMachine> getTouches() {
         return touches;
     }
-
+    public void setTouches(ArrayList<ToucheMachine> ArrayListTouchesAssocies) {
+           this.touches=ArrayListTouchesAssocies;
+    }
     /**
      * @param nouveauProfil
      */
-    public void ajouterProfil(Profil nouveauProfil)
-    {
+    public void ajouterProfil(Profil nouveauProfil) {
         this.profils.add(nouveauProfil);
     }
 
     /**
      * @param ancienProfil
      */
-    public void elneverProfil(Profil ancienProfil)
-    {
+    public void elneverProfil(Profil ancienProfil) {
         this.profils.remove(ancienProfil);
     }
 
     /**
      * @param nouvelleTouche
      */
-    public void ajouterTouche(ToucheMachine nouvelleTouche)
-    {
+    public void ajouterTouche(ToucheMachine nouvelleTouche) {
         this.touches.add(nouvelleTouche);
     }
 
@@ -105,6 +102,7 @@ public class Machine
     {
         return this.nom;
     }
+
 
 
 }
