@@ -12,7 +12,7 @@ public class Connexion {
 	private Connection connection = null;
 	private Statement statement = null;
 
-	public Connexion(String dBPath) {
+        public Connexion(String dBPath) {
 		DBPath = dBPath;
 	}
 

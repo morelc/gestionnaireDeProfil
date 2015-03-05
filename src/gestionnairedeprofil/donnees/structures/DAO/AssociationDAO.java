@@ -1,41 +1,46 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gestionnairedeprofil.donnees.structures.DAO;
 
-import gestionnairedeprofil.donnees.structures.*;
 import java.sql.*;
+import gestionnairedeprofil.donnees.structures.*;
 import java.util.ArrayList;
 
 /**
- *
  * @author Fakri
  */
 public class AssociationDAO {
-    static AssociationsDansProfil getAssociationByIdProfilAndIdAssociation(int idP, int i) {
+
+    // JDBC driver name and database URL
+    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+
+    public static AssociationsDansProfil getAssociationByIdProfilAndIdAssociation(int idP, int i) {
         AssociationsDansProfil adp = new AssociationsDansProfil();
-        Connexion connexion = new Connexion("Database.db");
+        String query = "SELECT DISTINCT id,estAutoFire,timer,idToucheMachine "
+                + "FROM Associations "
+                + "WHERE idProfil=" + idP
+                + " AND toucheNumIHM=" + i
+                + " GROUP BY timer";
+        Connection c = null;
         Statement stmt = null;
-        String query = "select distinct id,estAutoFire,timer,idToucheMachine from Associations where idProfil="+idP+" and toucheNumIHM="+i+" group by timer";
-        connexion.connect();
-        try{
+        try {
+            Class.forName(JDBC_DRIVER);
+            c = DriverManager.getConnection("jdbc:sqlite:dbsqlite");
+            stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 int id = rs.getInt("id");
                 Boolean estAutoFire = rs.getBoolean("estAutoFire");
                 int timer = rs.getInt("timer");
-                Association assoc = new Association(id,estAutoFire,timer);
-                ToucheMachineDAO.getToucheByAssociation(assoc,idP,i);
+                Association assoc = new Association(id, estAutoFire, timer);
+                ToucheMachineDAO.getToucheByAssociation(assoc, idP, i);
                 adp.add(assoc);
             }
-        }catch (Exception e) {
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        connexion.close();
+        System.out.println("Table created successfully");
         return adp;
-        
     }
 }

@@ -6,6 +6,8 @@
 package gestionnairedeprofil.SQLite;
 
 import com.guendouz.tutdb.Connexion;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
@@ -15,13 +17,15 @@ import java.sql.SQLException;
 public class NewMain {
     private static Object statement;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        Connexion connexion = new Connexion("Database.db");
-        connexion.connect();
-        connexion.close();
+public static void main(String args[]) {
+        Connection c = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        System.out.println("Opened database successfully");
     }
-    
 }
