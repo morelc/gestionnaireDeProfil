@@ -31,8 +31,8 @@ public class Machine {
 
     private final int id;
     private final String nom;
-    private final ArrayList<Profil> profils;
-    private final ArrayList<ToucheMachine> touches;
+    private ArrayList<Profil> profils;
+    private ArrayList<ToucheMachine> touches;
 
     public Machine(int idMachine, String nomMachine) {
         this.id = idMachine;
