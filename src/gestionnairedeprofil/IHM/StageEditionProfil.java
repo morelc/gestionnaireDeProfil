@@ -1,3 +1,24 @@
+/* Gestionnaire de profil
+ * Programme used to manage all profils from a database and send them
+ * to a SD Card
+ * Copyright (C) 2014-2015 MOREL Charles
+ * See COPYING for Details
+ * 
+ * This file is part of Gestionnaire de profil.
+ *
+ * Gestionnaire de profil is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Gestionnaire de profil is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package gestionnairedeprofil.IHM;
 
 import gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
@@ -50,7 +71,7 @@ public class StageEditionProfil extends Stage
         // configuration des dépendances
         this.setTitle("Edition du profil");
         this.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/edit.png")));
-        this.initModality(Modality.APPLICATION_MODAL);
+        this.initModality(Modality.WINDOW_MODAL);
         this.initOwner(stageParent);
         this.setResizable(false);
         this.profilModifie = false;

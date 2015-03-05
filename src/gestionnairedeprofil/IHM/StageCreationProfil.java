@@ -1,5 +1,27 @@
+/* Gestionnaire de profil
+ * Programme used to manage all profils from a database and send them
+ * to a SD Card
+ * Copyright (C) 2014-2015 MOREL Charles
+ * See COPYING for Details
+ * 
+ * This file is part of Gestionnaire de profil.
+ *
+ * Gestionnaire de profil is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Gestionnaire de profil is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package gestionnairedeprofil.IHM;
 
+import gestionnairedeprofil.donnees.structures.Association;
 import gestionnairedeprofil.donnees.structures.Machine;
 import gestionnairedeprofil.donnees.structures.Profil;
 import java.util.ArrayList;
@@ -33,7 +55,7 @@ public class StageCreationProfil extends Stage
         // configuration des dépendances
         this.setTitle("Création d'un profil");
         this.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png")));
-        this.initModality(Modality.APPLICATION_MODAL);
+        this.initModality(Modality.WINDOW_MODAL);
         this.initOwner(stageParent);
         this.setResizable(false);
 
@@ -154,6 +176,9 @@ public class StageCreationProfil extends Stage
 
         // ici la fonction de création 
         Profil nvProfil = new Profil(-1, nomProfil);
+        for (int x = 0; x < 12; x++) {
+            nvProfil.getAssociationsAt(x).add(new Association());
+        }
 
         machineSelectionee.ajouterProfil(nvProfil);
         panneauMachine.ajouterProfil(nvProfil);

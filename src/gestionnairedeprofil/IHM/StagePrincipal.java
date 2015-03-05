@@ -1,7 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* Gestionnaire de profil
+ * Programme used to manage all profils from a database and send them
+ * to a SD Card
+ * Copyright (C) 2014-2015 MOREL Charles
+ * See COPYING for Details
+ * 
+ * This file is part of Gestionnaire de profil.
+ *
+ * Gestionnaire de profil is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Gestionnaire de profil is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 package gestionnairedeprofil.IHM;
 
@@ -27,6 +43,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
@@ -51,7 +68,7 @@ public class StagePrincipal extends Application
     private ComboBox cbSelectionLecteur;
 
     @Override
-    public void start(final Stage Stage)
+    public void start(final Stage stage)
     {
         // Configuration des paramètres d'écran
 
@@ -160,6 +177,10 @@ public class StagePrincipal extends Application
         texteBoutonEnvoyer.setTextAlignment(TextAlignment.CENTER);
         texteBoutonEnvoyer.setText("... et envoyez!");
 
+        MenuDAideLogiciel menuDAide = new MenuDAideLogiciel(dim, stage, this);
+        menuDAide.setLayoutX(700 * dim);
+        menuDAide.setLayoutY(15 * dim);
+
         // Configuration des contrôles
 
         final Accordion panneauProfilsDuPc = new Accordion();
@@ -224,8 +245,8 @@ public class StagePrincipal extends Application
 
         ToucheMachine touche1 = new ToucheMachine(1, "A", 1);
         ToucheMachine touche2 = new ToucheMachine(2, "B", 2);
-        ToucheMachine touche5 = new ToucheMachine(2, "MACHIN", 2);
-        ToucheMachine touche6 = new ToucheMachine(2, "TRUC", 2);
+        ToucheMachine touche5 = new ToucheMachine(2, "MACHIN", 4);
+        ToucheMachine touche6 = new ToucheMachine(2, "TRUC", 8);
 
         machine1.ajouterTouche(touche1);
         machine1.ajouterTouche(touche2);
@@ -335,7 +356,7 @@ public class StagePrincipal extends Application
             @Override
             public void handle(ActionEvent event)
             {
-                new StageCreationProfil(dim, Stage, toutesLesMachines, panneauProfilsDuPc);
+                new StageCreationProfil(dim, stage, toutesLesMachines, panneauProfilsDuPc);
             }
         });
 
@@ -345,21 +366,29 @@ public class StagePrincipal extends Application
             @Override
             public void handle(ActionEvent event)
             {
-                StagePrincipal.this.rafarichirListeLEcteurs();
+                StagePrincipal.this.rafarichirListeLecteurs();
+            }
+        });
+
+        btnEnvoiVersCarteSD.setOnAction(new EventHandler<ActionEvent>()
+        {
+
+            @Override
+            public void handle(ActionEvent event)
+            {
+                new StageEnvoiProfilSurCarteSD(dim, stage, StagePrincipal.this.cbSelectionLecteur.getValue().toString(), panneauProfilsVersPad.obtenirListeDesProfilsAEnvoyer());
             }
         });
 
 
-
-
         // Chargement de la liste des lecteurs
-        this.rafarichirListeLEcteurs();
+        this.rafarichirListeLecteurs();
 
         // Chargement des éléments dynamiques de l'IHM
 
         /* Charger ici la liste des profils et des machines */
         for (Machine machineAAjouter : toutesLesMachines) {
-            panneauProfilsDuPc.getPanes().add(new ListeProfilsDisponiblesMachine(dim, machineAAjouter, Stage, panneauProfilsVersPad));
+            panneauProfilsDuPc.getPanes().add(new ListeProfilsDisponiblesMachine(dim, machineAAjouter, stage, panneauProfilsVersPad));
         }
 
         // Ouverture automatique du premier panneau des profils de machine
@@ -385,6 +414,7 @@ public class StagePrincipal extends Application
         root.getChildren().add(texteEtape3);
         root.getChildren().add(texteSelectionLecteur);
         root.getChildren().add(texteBoutonEnvoyer);
+        root.getChildren().add(menuDAide);
         root.getChildren().add(panneauProfilsDuPc);
         root.getChildren().add(btnCreationProfil);
         root.getChildren().add(panneauProfilsVersPad);
@@ -392,20 +422,20 @@ public class StagePrincipal extends Application
         root.getChildren().add(btnafraichirListeLecteurs);
         root.getChildren().add(btnEnvoiVersCarteSD);
 
+
         // Configuration de Scene
         panneauProfilsDuPc.getPanes().get(0).expandedProperty().set(true);
         Scene scene = new Scene(root, 720 * dim, 380 * dim, new LinearGradient(0, 1, 1, 0, true, CycleMethod.NO_CYCLE, new Stop[]{new Stop(0, Color.web("#FFFFFF", 1.0)), new Stop(1, Color.web("#B4B4B4", 1.0))}));
 
         // Configuration de Stage
-
-        Stage.setTitle("Gestionnaire de profil");
-        Stage.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/icone.png")));
-        Stage.setScene(scene);
-        Stage.setResizable(false);
-        Stage.show();
+        stage.setTitle("Gestionnaire de profil");
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/icone.png")));
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
     }
 
-    private void rafarichirListeLEcteurs()
+    private void rafarichirListeLecteurs()
     {
         this.cbSelectionLecteur.getItems().clear();
         List<File> files = Arrays.asList(File.listRoots());
