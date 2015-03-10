@@ -22,6 +22,8 @@
 package com.gestionnairedeprofil.donnees.structures;
 
 /**
+ * Classe de représentation des données liées à un profil. Class used to
+ * represent datas liked to a profil.
  *
  * @author MOREL Charles
  */

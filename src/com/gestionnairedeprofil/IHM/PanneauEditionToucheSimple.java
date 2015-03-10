@@ -33,6 +33,9 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 /**
+ * Panneau d'édition d'association touche simple (utilisé dans la fenêtre
+ * d'édition d'associations). Pane used for an simple association (used in the
+ * association edition window)
  *
  * @author MOREL Charles
  */

@@ -46,6 +46,9 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 /**
+ * Fenêtre de modification de profil.
+ *
+ * Window used to modify the profile
  *
  * @author MOREL Charles
  */

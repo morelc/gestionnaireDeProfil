@@ -44,6 +44,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
+ * Fenêtre de création de profil.
+ *
+ * Window of Profiles creation
  *
  * @author MOREL Charles
  */

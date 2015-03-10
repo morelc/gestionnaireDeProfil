@@ -32,6 +32,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 /**
+ * Panneau utilisé pour éditer une touche de machine, utilisé pour les
+ * combinaisons.
+ *
+ * Pane used to edit a machine button for combinaisons
  *
  * @author MOREL Charles
  */

@@ -21,6 +21,7 @@
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.donnees.structures.Association;
 import com.gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -31,6 +32,9 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 /**
+ * Panneau d'édition d'association vide (utilisé dans la fenêtre d'édition
+ * d'associations). Pane used for an empty association (used in the association
+ * edition window)
  *
  * @author MOREL Charles
  */
@@ -70,7 +74,9 @@ public class PanneauEditionVide extends AnchorPane implements InterfaceEditionAs
     @Override
     public AssociationsDansProfil getAssociations()
     {
-        return new AssociationsDansProfil();
+        AssociationsDansProfil assocARetourner = new AssociationsDansProfil();
+        assocARetourner.add(new Association());
+        return assocARetourner;
     }
 
     @Override

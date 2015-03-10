@@ -22,6 +22,8 @@
 package com.gestionnairedeprofil.donnees.structures;
 
 /**
+ * Classe de représentation des données liées à une touche à simuler. Class used
+ * to represent datas liked to a button to emulate.
  *
  * @author MOREL Charles
  */

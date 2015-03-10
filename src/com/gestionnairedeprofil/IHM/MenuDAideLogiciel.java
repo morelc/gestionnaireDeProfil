@@ -22,9 +22,7 @@
 package com.gestionnairedeprofil.IHM;
 
 import java.awt.Desktop;
-import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -44,6 +42,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 /**
+ * Menu d'aide du logiciel. Help menu
  *
  * @author MOREL Charles
  */

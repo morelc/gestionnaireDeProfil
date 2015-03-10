@@ -36,13 +36,15 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
+ * Panneau utilisé pour définir une machine disponible et ses profils. Pane used
+ * to define an availible machine and his profils.
  *
  * @author MOREL Charles
  */
 class ListeProfilsDisponiblesMachine extends TitledPane
 {
 
-    private ArrayList<PanneauProfilDisponible> profilsDisponibles;
+    private final ArrayList<PanneauProfilDisponible> profilsDisponibles;
     private final AnchorPane panneauDesProfilsDisponibles;
     private final double espacementEntreProfils;
     private final Stage stageDeLApplication;

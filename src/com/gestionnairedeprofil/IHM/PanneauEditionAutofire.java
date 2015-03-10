@@ -43,6 +43,9 @@ import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 
 /**
+ * Panneau d'édition d'association autofire (utilisé dans la fenêtre d'édition
+ * d'associations). Pane used for an autofire association (used in the
+ * association edition window)
  *
  * @author MOREL Charles
  */

@@ -36,6 +36,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
 /**
+ * Panneau d'un profil à envoyer (contenu dans la liste d'envoi de profils).
+ * Pane for a profil to send (used by the list of profiles to send)
  *
  * @author MOREL Charles
  */

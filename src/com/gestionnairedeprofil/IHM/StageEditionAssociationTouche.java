@@ -47,10 +47,12 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 /**
+ * Fenêtre d'édition d'une association de profil.
+ *
+ * Window used to modify an asociation of profile
  *
  * @author MOREL Charles
  */

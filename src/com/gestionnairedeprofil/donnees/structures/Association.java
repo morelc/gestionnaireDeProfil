@@ -24,6 +24,8 @@ package com.gestionnairedeprofil.donnees.structures;
 import java.util.ArrayList;
 
 /**
+ * Classe de représentation des données liées à une touche à une association.
+ * Class used to represent datas liked to an association.
  *
  * @author MOREL Charles
  */

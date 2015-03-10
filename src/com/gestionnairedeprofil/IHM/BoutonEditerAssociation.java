@@ -26,6 +26,9 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
 /**
+ * Bouton utilisé pour l'édition d'une association (dans la fenêtre d'édition de
+ * profil). Button used for the edition of an association in profile edition
+ * window.
  *
  * @author MOREL Charles
  */

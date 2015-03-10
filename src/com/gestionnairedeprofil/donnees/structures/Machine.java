@@ -24,6 +24,8 @@ package com.gestionnairedeprofil.donnees.structures;
 import java.util.ArrayList;
 
 /**
+ * Classe de représentation des données liées à une machine à simuler. Class
+ * used to represent datas liked to a machine to emulate.
  *
  * @author MOREL Charles
  */

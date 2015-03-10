@@ -23,8 +23,10 @@ package com.gestionnairedeprofil.donnees.BD;
 
 import com.gestionnairedeprofil.donnees.structures.Association;
 import com.gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
-import java.sql.*;
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  * @author Fakri

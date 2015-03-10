@@ -34,6 +34,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 /**
+ * Panneau pour la liste des profils à envoyer. Pane used for the profils to
+ * send
  *
  * @author MOREL Charles
  */

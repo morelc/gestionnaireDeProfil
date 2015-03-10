@@ -24,6 +24,9 @@ package com.gestionnairedeprofil.donnees.structures;
 import java.util.ArrayList;
 
 /**
+ * Classe de représentation des données liées à toutes les associations
+ * associées à une touche de la manette à simuler. Class used to represent datas
+ * liked to all associations of a button to emulate.
  *
  * @author MOREL Charles
  */

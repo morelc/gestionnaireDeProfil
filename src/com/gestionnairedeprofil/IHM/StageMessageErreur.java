@@ -36,6 +36,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
+ * Fenêtre permettant l'affichage d'un message d'erreur.
+ *
+ * Window to show error
  *
  * @author MOREL Charles
  */

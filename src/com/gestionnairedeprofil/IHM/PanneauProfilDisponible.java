@@ -39,6 +39,10 @@ import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 /**
+ * Panneau utilisé pour afficher un profil disponible (dans le panneau de
+ * machine)
+ *
+ * Pane used to display a availible profile (in the machine titled pane)
  *
  * @author MOREL Charles
  */

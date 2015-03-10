@@ -42,6 +42,9 @@ import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 
 /**
+ * Panneau d'édition d'association de combinaison (utilisé dans la fenêtre
+ * d'édition d'associations). Pane used for an combinaison association (used in
+ * the association edition window)
  *
  * @author MOREL Charles
  */

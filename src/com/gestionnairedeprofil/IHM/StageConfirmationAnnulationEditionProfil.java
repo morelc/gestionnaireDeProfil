@@ -36,6 +36,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
+ * Fenêtre de confirmation de l'annulation des modifications du profil.
+ *
+ * Window used to confirm cancel profile modifications
  *
  * @author MOREL Charles
  */

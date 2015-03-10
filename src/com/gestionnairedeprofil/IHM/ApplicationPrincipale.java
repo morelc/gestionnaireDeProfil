@@ -21,11 +21,11 @@
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.donnees.BD.MachineDAO;
+import com.gestionnairedeprofil.donnees.structures.Association;
 import com.gestionnairedeprofil.donnees.structures.Machine;
 import com.gestionnairedeprofil.donnees.structures.Profil;
 import com.gestionnairedeprofil.donnees.structures.ToucheMachine;
-import com.gestionnairedeprofil.donnees.structures.Association;
-import com.gestionnairedeprofil.donnees.BD.MachineDAO;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,18 +33,17 @@ import java.util.List;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
@@ -59,15 +58,31 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
+ * Classe implémentant Application, il contiens le stage principal de
+ * l'application ainsi que toutes les données des profils.
+ *
+ * Class implementing Application, it contain the main stage of the application
+ * and all the data of the profiles.
  *
  * @author MOREL Charles
  */
-public class StagePrincipal extends Application
+public class ApplicationPrincipale extends Application
 {
 
-    int i = 0;
+    /**
+     * combobox contenant la liste des lecteurs disponibles.
+     *
+     * Combobox who contains all devices
+     */
     private ComboBox cbSelectionLecteur;
 
+    /**
+     * Fonction de lancement de l'appliaction.
+     *
+     * Function who launch the application
+     *
+     * @param stage
+     */
     @Override
     public void start(final Stage stage)
     {
@@ -376,7 +391,7 @@ public class StagePrincipal extends Application
             @Override
             public void handle(ActionEvent event)
             {
-                StagePrincipal.this.rafarichirListeLecteurs();
+                ApplicationPrincipale.this.rafarichirListeLecteurs();
             }
         });
 
@@ -386,7 +401,7 @@ public class StagePrincipal extends Application
             @Override
             public void handle(ActionEvent event)
             {
-                new StageEnvoiProfilSurCarteSD(dim, stage, StagePrincipal.this.cbSelectionLecteur.getValue().toString(), panneauProfilsVersPad.obtenirListeDesProfilsAEnvoyer());
+                new StageEnvoiProfilSurCarteSD(dim, stage, ApplicationPrincipale.this.cbSelectionLecteur.getValue().toString(), panneauProfilsVersPad.obtenirListeDesProfilsAEnvoyer());
             }
         });
 
@@ -445,6 +460,11 @@ public class StagePrincipal extends Application
         stage.show();
     }
 
+    /**
+     * Fonction de rafraîchissement des lecteurs dans le combobox.
+     *
+     * Function who update tne combobox with actual devices
+     */
     private void rafarichirListeLecteurs()
     {
         this.cbSelectionLecteur.getItems().clear();

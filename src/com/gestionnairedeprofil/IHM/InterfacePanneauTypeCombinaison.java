@@ -25,6 +25,9 @@ import com.gestionnairedeprofil.donnees.structures.ToucheMachine;
 import java.util.ArrayList;
 
 /**
+ * Interface utilisée pour définir tous les panneaux de type combinaison
+ * (combinaison, autofire, combinaison dans macro). Interface used to define all
+ * pnanes of type combinaison (combinaison, autofire, combinaison in autofire)
  *
  * @author MOREL Charles
  */

@@ -53,6 +53,9 @@ import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 /**
+ * Fenêtre (et code métier) de création des fichiers de profil sur le lecteur.
+ *
+ * Window of Profiles file creation
  *
  * @author MOREL Charles
  */

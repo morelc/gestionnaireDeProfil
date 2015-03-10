@@ -36,6 +36,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
+ * Fenêtre de confirmation de suppression de profil.
+ *
+ * Window used to confirm profile deletion
  *
  * @author MOREL Charles
  */
