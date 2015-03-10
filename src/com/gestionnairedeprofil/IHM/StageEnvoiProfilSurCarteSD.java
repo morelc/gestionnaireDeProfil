@@ -43,7 +43,6 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -99,7 +98,6 @@ public class StageEnvoiProfilSurCarteSD extends Stage
 
         // Configuration des noeuds statiques
         this.panneauADeplacer = new AnchorPane();
-        this.panneauADeplacer.setBackground(Background.EMPTY);
         this.panneauADeplacer.setLayoutX(0);
         this.panneauADeplacer.setLayoutY(0);
         this.panneauADeplacer.setMinSize(1600 * i, 80 * i);
@@ -349,7 +347,7 @@ public class StageEnvoiProfilSurCarteSD extends Stage
         }
         teteDeLecture.close();
         teteDeLecture = new DataOutputStream(new FileOutputStream(this.fichierProfil.getParentFile().getAbsolutePath() + NOM_FICHIER_PROFIL_SELECTIONNE));
-        teteDeLecture.writeShort(1);
+        teteDeLecture.writeShort(0);
         teteDeLecture.close();
     }
 

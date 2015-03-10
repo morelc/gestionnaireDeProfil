@@ -242,16 +242,16 @@ public class StagePrincipal extends Application
         final ArrayList<Machine> toutesLesMachines = new ArrayList();
 
 
-        Machine machine1 = new Machine(3, "Sega Master System", "img1");
+        Machine machine1 = new Machine(2, "Sega Master System", "img1");
 
-        ToucheMachine touche1 = new ToucheMachine(1, "Signal 1", 1);
-        ToucheMachine touche2 = new ToucheMachine(2, "Signal 2", 2);
-        ToucheMachine touche5 = new ToucheMachine(2, "Signal 3", 4);
-        ToucheMachine touche6 = new ToucheMachine(2, "Signal 4", 8);
-        ToucheMachine touche7 = new ToucheMachine(2, "Signal 5", 16);
-        ToucheMachine touche8 = new ToucheMachine(2, "Signal 6", 32);
-        ToucheMachine touche9 = new ToucheMachine(2, "Signal 7", 64);
-        ToucheMachine touche10 = new ToucheMachine(2, "Signal 8", 128);
+        ToucheMachine touche1 = new ToucheMachine(1, "X1", 1);
+        ToucheMachine touche2 = new ToucheMachine(2, "Action", 2);
+        ToucheMachine touche5 = new ToucheMachine(2, "X2", 4);
+        ToucheMachine touche6 = new ToucheMachine(2, "Saut", 8);
+        ToucheMachine touche7 = new ToucheMachine(2, "Droite", 16);
+        ToucheMachine touche8 = new ToucheMachine(2, "Gauche", 32);
+        ToucheMachine touche9 = new ToucheMachine(2, "Bas", 64);
+        ToucheMachine touche10 = new ToucheMachine(2, "Haut", 128);
 
         machine1.ajouterTouche(touche1);
         machine1.ajouterTouche(touche2);
