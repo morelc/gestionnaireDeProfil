@@ -21,6 +21,7 @@
  */
 package com.gestionnairedeprofil.donnees.BD;
 
+import com.gestionnairedeprofil.donnees.structures.Association;
 import com.gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 import com.gestionnairedeprofil.donnees.structures.Profil;
 import java.sql.Connection;
@@ -32,14 +33,18 @@ import java.util.ArrayList;
 /**
  * @author Fakri
  */
-public class ProfilDAO
-{
+public class ProfilDAO {
 
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "org.sqlite.JDBC";
 
-    static ArrayList<Profil> getAllByMachineId(int id)
-    {
+    static void sauvegarder(Profil profil) {
+        supprimerProfil(profil.getId());
+        int max = creerProfilDansBDD(profil.getNom());
+        ajouterAssociationDansBDD(profil, max);
+    }
+
+    static ArrayList<Profil> getAllByMachineId(int id) {
         ArrayList<Profil> ArrayListProfils = new ArrayList();
         String query = "SELECT * "
                 + "FROM Profils "
@@ -68,12 +73,106 @@ public class ProfilDAO
             }
             stmt.close();
             c.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
         }
-        catch (Exception e) {
+        return ArrayListProfils;
+    }
+
+    private static void supprimerProfil(int id) {
+        String query = "DELETE FROM 'Profils' where 'id'=" + id;
+        Connection c = null;
+        Statement stmt = null;
+        try {
+            Class.forName(JDBC_DRIVER);
+            c = DriverManager.getConnection("jdbc:sqlite:dbsqlite");
+            c.setAutoCommit(false);
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            stmt.executeUpdate(query);
+            c.commit();
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
+
+    private static int getMaxProfil() {
+        int max = 0;
+        String query = "SELECT MAX(id) as max FROM Profils";
+        Connection c = null;
+        Statement stmt = null;
+        try {
+            Class.forName(JDBC_DRIVER);
+            c = DriverManager.getConnection("jdbc:sqlite:dbsqlite");
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            rs.next();
+            max = rs.getInt("max");
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
         System.out.println("Table created successfully");
-        return ArrayListProfils;
+        return max;
     }
+
+    private static int creerProfilDansBDD(String nomProfil) {
+        String query = "INSERT INTO Profils (nom) VALUES ('" + nomProfil + "')";
+        int profilTraite = getMaxProfil();
+        Connection c = null;
+        Statement stmt = null;
+        try {
+            Class.forName(JDBC_DRIVER);
+            c = DriverManager.getConnection("jdbc:sqlite:dbsqlite");
+            stmt = c.createStatement();
+            stmt.executeUpdate(query);
+            stmt.close();
+            c.commit();
+            c.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return profilTraite;
+    }
+
+    private static void ajouterAssociationDansBDD(Profil profil, int max) {
+        for (int numAssociationsDansProfil = 0; numAssociationsDansProfil < 12; numAssociationsDansProfil++) {
+            AssociationsDansProfil adpTraite = profil.getAssociationsAt(numAssociationsDansProfil);
+
+            for (int numAssociationTraite = 0; numAssociationTraite < adpTraite.size(); numAssociationTraite++) {
+                int nbrTouche = profil.getAssociationsAt(numAssociationsDansProfil).get(numAssociationTraite).getTouches().size();
+
+                for (int numToucheTraite = 0; numToucheTraite < nbrTouche; numToucheTraite++) {
+                    boolean estAutoFire = profil.getAssociationsAt(numAssociationsDansProfil).get(numAssociationTraite).isEstAutofire();
+                    int timer = profil.getAssociationsAt(numAssociationsDansProfil).get(numAssociationTraite).getTimer();
+                    int idTouche = profil.getAssociationsAt(numAssociationsDansProfil).get(numAssociationTraite).getTouches().get(numToucheTraite).getId();
+                    String query = "INSERT INTO Associations (estAutoFire,timer,toucheNumIHM,idProfil,idToucheMachine) "
+                            + "VALUES (" + estAutoFire + "," + timer + "," + numAssociationsDansProfil + "," + max + "," + idTouche + ")";
+                    Connection c = null;
+                    Statement stmt = null;
+                    try {
+                        Class.forName(JDBC_DRIVER);
+                        c = DriverManager.getConnection("jdbc:sqlite:dbsqlite");
+                        stmt = c.createStatement();
+                        stmt.executeUpdate(query);
+                        stmt.close();
+                        c.commit();
+                        c.close();
+                    } catch (Exception e) {
+                        System.err.println(e.getClass().getName() + ": " + e.getMessage());
+                        System.exit(0);
+                    }
+                }
+
+            }
+        }
+    }
+
 }
