@@ -21,6 +21,7 @@
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.donnees.BD.ProfilDAO;
 import com.gestionnairedeprofil.donnees.structures.Machine;
 import com.gestionnairedeprofil.donnees.structures.Profil;
 import javafx.animation.KeyFrame;
@@ -173,7 +174,8 @@ public class PanneauProfilDisponible extends Pane
     {
         this.listeDesProfilsDeLaMachine.enleverProfilAEnvoyer(this);
         this.nomProfilAAfficher.setText("          ");
-        System.err.println("ATTENTION: L'ACTION N'EST PAS ENCORE DEFINIE!");
+        ProfilDAO.deleteProfilById(this.profilPanneau.getId());
+        System.err.println("FN supprimerProfil() NON TERMINEE");
     }
 
     public void rafraichirNomProfil()

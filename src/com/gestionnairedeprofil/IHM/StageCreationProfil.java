@@ -21,6 +21,7 @@
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.donnees.BD.ProfilDAO;
 import com.gestionnairedeprofil.donnees.structures.Association;
 import com.gestionnairedeprofil.donnees.structures.Machine;
 import com.gestionnairedeprofil.donnees.structures.Profil;
@@ -175,13 +176,13 @@ public class StageCreationProfil extends Stage
 
     private void lancerAjoutSurBD(Machine machineSelectionee, String nomProfil, ListeProfilsDisponiblesMachine panneauMachine)
     {
-        System.err.println("FN lancerAjoutSurBD() NON IMPLEMENTEE");
+        System.err.println("FN lancerAjoutSurBD() NON TERMINEE");
 
-        // ici la fonction de création 
         Profil nvProfil = new Profil(-1, nomProfil);
         for (int x = 0; x < 12; x++) {
             nvProfil.getAssociationsAt(x).add(new Association());
         }
+        ProfilDAO.saveProfil(nvProfil, machineSelectionee.getId());
 
         machineSelectionee.ajouterProfil(nvProfil);
         panneauMachine.ajouterProfil(nvProfil);

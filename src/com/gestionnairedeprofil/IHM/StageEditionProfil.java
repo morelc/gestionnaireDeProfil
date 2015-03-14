@@ -21,6 +21,7 @@
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.donnees.BD.ProfilDAO;
 import com.gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 import com.gestionnairedeprofil.donnees.structures.Machine;
 import com.gestionnairedeprofil.donnees.structures.Profil;
@@ -61,7 +62,7 @@ public class StageEditionProfil extends Stage
 
     private final Profil profilAModifier;
 
-    private final ArrayList<ToucheMachine> touchesDisponibles;
+    private final Machine machineDuProfilAModifier;
 
     private final AssociationsDansProfil associationsModifies[];
 
@@ -79,8 +80,8 @@ public class StageEditionProfil extends Stage
         this.setResizable(false);
         this.profilModifie = false;
         this.dim = i;
+        this.machineDuProfilAModifier = machineDuProfil;
         this.profilAModifier = profilAModifier;
-        this.touchesDisponibles = machineDuProfil.getTouches();
         this.panneauProfilAModifier = panneauProfilConcerne;
         this.associationsModifies = new AssociationsDansProfil[12];
         for (int x = 0; x < 12; x++) {
@@ -452,8 +453,10 @@ public class StageEditionProfil extends Stage
             }
         }
         this.panneauProfilAModifier.rafraichirNomProfil();
-        // placer ici la fn pour metre à jour le profil dans la BD
-        System.err.println("ERR. Action sauvgarderProfilCourrant() pas encore supportée");
+        
+        ProfilDAO.saveProfil(profilAModifier, this.machineDuProfilAModifier.getId());
+        System.err.println("FN sauvgarderProfilCourrant() NON TERMINEE");
+        
         return true;
     }
 
@@ -503,7 +506,7 @@ public class StageEditionProfil extends Stage
      */
     public ArrayList<ToucheMachine> getTouchesDisponibles()
     {
-        return touchesDisponibles;
+        return machineDuProfilAModifier.getTouches();
     }
 
     /**

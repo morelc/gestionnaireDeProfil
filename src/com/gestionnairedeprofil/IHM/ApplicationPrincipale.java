@@ -254,9 +254,6 @@ public class ApplicationPrincipale extends Application
 
         // Pour l'exemple
 
-        final ArrayList<Machine> toutesLesMachines = new ArrayList();
-
-
         Machine machine1 = new Machine(2, "Sega Master System", "img1");
 
         ToucheMachine touche1 = new ToucheMachine(1, "X1", 1);
@@ -320,7 +317,7 @@ public class ApplicationPrincipale extends Application
         profil1.getAssociationsAt(11).add(assoc12);
         machine1.ajouterProfil(profil1);
 
-        toutesLesMachines.add(machine1);
+        //toutesLesMachines.add(machine1);
 
 
         Machine machine2 = new Machine(1, "Machine 2", "img2");
@@ -370,10 +367,29 @@ public class ApplicationPrincipale extends Application
         profil2.getAssociationsAt(11).add(assocA12);
         machine2.ajouterProfil(profil2);
 
-        ArrayList lol = MachineDAO.getAll();
         //toutesLesMachines.add(machine2);
 
 
+
+        // Chargement de la liste des lecteurs
+        this.rafarichirListeLecteurs();
+
+        // Chargement des éléments dynamiques de l'IHM
+
+        final ArrayList<Machine> toutesLesMachines = MachineDAO.getAll();
+
+        for (Machine machineAAjouter : toutesLesMachines) {
+            panneauProfilsDuPc.getPanes().add(new ListeProfilsDisponiblesMachine(dim, machineAAjouter, stage, panneauProfilsVersPad));
+        }
+
+        // Ouverture automatique du premier panneau des profils de machine
+
+        Timeline timelineOuvertureAutomatique = new Timeline();
+        timelineOuvertureAutomatique.setAutoReverse(false);
+        timelineOuvertureAutomatique.getKeyFrames().add(new KeyFrame(Duration.millis(10), new KeyValue(panneauProfilsDuPc.getPanes().get(0).expandedProperty(), true)));
+        timelineOuvertureAutomatique.play();
+
+        // Activation des boutons
 
         btnCreationProfil.setOnAction(new EventHandler<ActionEvent>()
         {
@@ -404,24 +420,6 @@ public class ApplicationPrincipale extends Application
                 new StageEnvoiProfilSurCarteSD(dim, stage, ApplicationPrincipale.this.cbSelectionLecteur.getValue().toString(), panneauProfilsVersPad.obtenirListeDesProfilsAEnvoyer());
             }
         });
-
-
-        // Chargement de la liste des lecteurs
-        this.rafarichirListeLecteurs();
-
-        // Chargement des éléments dynamiques de l'IHM
-
-        /* Charger ici la liste des profils et des machines */
-        for (Machine machineAAjouter : toutesLesMachines) {
-            panneauProfilsDuPc.getPanes().add(new ListeProfilsDisponiblesMachine(dim, machineAAjouter, stage, panneauProfilsVersPad));
-        }
-
-        // Ouverture automatique du premier panneau des profils de machine
-
-        Timeline timelineOuvertureAutomatique = new Timeline();
-        timelineOuvertureAutomatique.setAutoReverse(false);
-        timelineOuvertureAutomatique.getKeyFrames().add(new KeyFrame(Duration.millis(10), new KeyValue(panneauProfilsDuPc.getPanes().get(0).expandedProperty(), true)));
-        timelineOuvertureAutomatique.play();
 
         // Configuration du noeud racine Root
 
