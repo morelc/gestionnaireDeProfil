@@ -38,13 +38,13 @@ public class ProfilDAO {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "org.sqlite.JDBC";
 
-    static void sauvegarder(Profil profil) {
-        supprimerProfil(profil.getId());
-        int max = creerProfilDansBDD(profil.getNom());
+    public static void sauvegarderProfil(Profil profil,int idMachine) {
+        supprimerProfilParId(profil.getId());
+        int max = creerProfilDansBDD(profil.getNom(),idMachine);
         ajouterAssociationDansBDD(profil, max);
     }
 
-    static ArrayList<Profil> getAllByMachineId(int id) {
+    public static ArrayList<Profil> getAllByMachineId(int id) {
         ArrayList<Profil> ArrayListProfils = new ArrayList();
         String query = "SELECT * "
                 + "FROM Profils "
@@ -80,7 +80,7 @@ public class ProfilDAO {
         return ArrayListProfils;
     }
 
-    private static void supprimerProfil(int id) {
+    public static void supprimerProfilParId(int id) {
         String query = "DELETE FROM 'Profils' where 'id'=" + id;
         Connection c = null;
         Statement stmt = null;
@@ -122,8 +122,8 @@ public class ProfilDAO {
         return max;
     }
 
-    private static int creerProfilDansBDD(String nomProfil) {
-        String query = "INSERT INTO Profils (nom) VALUES ('" + nomProfil + "')";
+    private static int creerProfilDansBDD(String nomProfil,int idMachine) {
+        String query = "INSERT INTO Profils (nom,machineId) VALUES ('" + nomProfil + "',"+idMachine+")";
         int profilTraite = getMaxProfil();
         Connection c = null;
         Statement stmt = null;
