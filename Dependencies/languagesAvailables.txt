@@ -1,0 +1,4 @@
+English (US):en-US
+English (UK):en-UK
+Francais:fr-FR
+Italiano:it-IT

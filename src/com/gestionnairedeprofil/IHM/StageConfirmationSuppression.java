@@ -21,6 +21,7 @@
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.configuration.Langue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -48,7 +49,7 @@ public class StageConfirmationSuppression extends Stage
     public StageConfirmationSuppression(double i, final PanneauProfilDisponible profilConcerne, Stage stageParent, String nomProfilASupprimer, String nomMachineDuProfil)
     {
         // configuration des dépendances
-        this.setTitle("Suppression du profil");
+        this.setTitle(Langue.getLangue().getString("StageConfirmationSuppression_title"));
         this.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/del.png")));
         this.initModality(Modality.APPLICATION_MODAL);
         this.initOwner(stageParent);
@@ -78,8 +79,7 @@ public class StageConfirmationSuppression extends Stage
             nomMachineAAfiicher = nomMachineDuProfil;
         }
 
-        texteDanger.setText("Attention, la suppression d'un profil est définitif."
-                + "\nSouhaitez-vous vraiment supprimer le profil\n" + nomProfilAAfiicher + " (" + nomMachineAAfiicher + ") ?");
+        texteDanger.setText(Langue.getLangue().getString("StageConfirmationSuppression_texteDanger") + "\n" + nomProfilAAfiicher + " (" + nomMachineAAfiicher + ") ?");
 
         ImageView fondDanger = new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/warning.png")));
         fondDanger.setFitHeight(185 * i);
@@ -89,7 +89,7 @@ public class StageConfirmationSuppression extends Stage
 
         // Configuration des contrôles
 
-        Button btnOk = new Button("Oui", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
+        Button btnOk = new Button(Langue.getLangue().getString("StageConfirmationSuppression_btnOk"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
         btnOk.setLayoutX(170 * i);
         btnOk.setLayoutY(100 * i);
         btnOk.setPrefSize(50 * i, 25 * i);
@@ -97,7 +97,7 @@ public class StageConfirmationSuppression extends Stage
         btnOk.setMinSize(50 * i, 25 * i);
         btnOk.setFont(new Font(7 * i));
 
-        Button btnNon = new Button("Non", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/del.png"))));
+        Button btnNon = new Button(Langue.getLangue().getString("StageConfirmationSuppression_btnNon"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/del.png"))));
         btnNon.setLayoutX(250 * i);
         btnNon.setLayoutY(100 * i);
         btnNon.setPrefSize(50 * i, 25 * i);

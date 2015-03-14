@@ -21,6 +21,7 @@
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.configuration.Langue;
 import com.gestionnairedeprofil.donnees.structures.Association;
 import com.gestionnairedeprofil.donnees.structures.ToucheMachine;
 import java.util.ArrayList;
@@ -43,8 +44,10 @@ import javafx.util.Duration;
 
 /**
  * Panneau d'édition de combinaison pour macro (utilisé dans la fenêtre
- * d'édition d'associations). Pane used for an combinaison in macro association
- * (used in the association edition window)
+ * d'édition d'associations).
+ *
+ * Pane used for an combinaison in macro association (used in the association
+ * edition window)
  *
  * @author MOREL Charles
  */
@@ -81,7 +84,7 @@ public class PanneauCombinaisonPourMacro extends AnchorPane implements Interface
         texeTimer.setFont(new Font(15 * i));
         texeTimer.setFill(Color.web("#696969", 1.0));
         texeTimer.setTextAlignment(TextAlignment.CENTER);
-        texeTimer.setText("Action à effectuer à l'instant:");
+        texeTimer.setText(Langue.getLangue().getString("PanneauCombinaisonPourMacro_texeTimer"));
         this.getChildren().add(texeTimer);
 
         Text texeTimerBis = new Text();
@@ -90,7 +93,7 @@ public class PanneauCombinaisonPourMacro extends AnchorPane implements Interface
         texeTimerBis.setFont(new Font(15 * i));
         texeTimerBis.setFill(Color.web("#696969", 1.0));
         texeTimerBis.setTextAlignment(TextAlignment.CENTER);
-        texeTimerBis.setText("ms");
+        texeTimerBis.setText(Langue.getLangue().getString("PanneauCombinaisonPourMacro_texeTimerBis"));
         this.getChildren().add(texeTimerBis);
 
         Text texteCombinaison = new Text();
@@ -99,7 +102,7 @@ public class PanneauCombinaisonPourMacro extends AnchorPane implements Interface
         texteCombinaison.setFont(new Font(15 * i));
         texteCombinaison.setFill(Color.web("#696969", 1.0));
         texteCombinaison.setTextAlignment(TextAlignment.CENTER);
-        texteCombinaison.setText("L'appui sur la\nou les touches:");
+        texteCombinaison.setText(Langue.getLangue().getString("PanneauCombinaisonPourMacro_texteCombinaison"));
         this.getChildren().add(texteCombinaison);
 
         // Configuration des contrôles
@@ -115,80 +118,80 @@ public class PanneauCombinaisonPourMacro extends AnchorPane implements Interface
 
         this.combinaison = new ArrayList();
 
-        this.btnAjouterCmb = new Button("Ajouter...", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png"))));
+        this.btnAjouterCmb = new Button(Langue.getLangue().getString("PanneauCombinaisonPourMacro_btnAjouterCmb"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png"))));
         this.btnAjouterCmb.setLayoutX(90 * i);
         this.btnAjouterCmb.setLayoutY(164 * i);
         this.btnAjouterCmb.setMaxSize(105 * i, 20 * i);
         this.btnAjouterCmb.setMinSize(105 * i, 20 * i);
         this.btnAjouterCmb.setPrefSize(105 * i, 20 * i);
         Tooltip infobulleBtnAjouterCmb = new Tooltip();
-        infobulleBtnAjouterCmb.setText("Ajouter une nouvelle touche\nà cet instant de la macro");
+        infobulleBtnAjouterCmb.setText(Langue.getLangue().getString("PanneauCombinaisonPourMacro_infobulleBtnAjouterCmb"));
         this.btnAjouterCmb.setTooltip(infobulleBtnAjouterCmb);
         this.getChildren().add(this.btnAjouterCmb);
 
-        this.btnPremiereAssoc = new Button("Premier", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/dLeft.png"))));
+        this.btnPremiereAssoc = new Button(Langue.getLangue().getString("PanneauCombinaisonPourMacro_btnPremiereAssoc"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/dLeft.png"))));
         this.btnPremiereAssoc.setLayoutX(3 * i);
         this.btnPremiereAssoc.setLayoutY(5 * i);
         this.btnPremiereAssoc.setMaxSize(50 * i, 20 * i);
         this.btnPremiereAssoc.setMinSize(50 * i, 20 * i);
         this.btnPremiereAssoc.setPrefSize(50 * i, 20 * i);
         Tooltip infobulleBtnPremiereAssoc = new Tooltip();
-        infobulleBtnPremiereAssoc.setText("Aller au tout premier instant");
+        infobulleBtnPremiereAssoc.setText(Langue.getLangue().getString("PanneauCombinaisonPourMacro_infobulleBtnPremiereAssoc"));
         this.btnPremiereAssoc.setTooltip(infobulleBtnPremiereAssoc);
         this.getChildren().add(this.btnPremiereAssoc);
 
-        this.btnAssocPrecedente = new Button("Précéd.", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/left.png"))));
+        this.btnAssocPrecedente = new Button(Langue.getLangue().getString("PanneauCombinaisonPourMacro_btnAssocPrecedente"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/left.png"))));
         this.btnAssocPrecedente.setLayoutX(54 * i);
         this.btnAssocPrecedente.setLayoutY(5 * i);
         this.btnAssocPrecedente.setMaxSize(47 * i, 20 * i);
         this.btnAssocPrecedente.setMinSize(47 * i, 20 * i);
         this.btnAssocPrecedente.setPrefSize(47 * i, 20 * i);
         Tooltip infobulleBtnAssocPrecedente = new Tooltip();
-        infobulleBtnAssocPrecedente.setText("Aller à l'instant prédécent");
+        infobulleBtnAssocPrecedente.setText(Langue.getLangue().getString("PanneauCombinaisonPourMacro_infobulleBtnAssocPrecedente"));
         this.btnAssocPrecedente.setTooltip(infobulleBtnAssocPrecedente);
         this.getChildren().add(this.btnAssocPrecedente);
 
-        this.btnAssocSuivante = new Button("Suivant", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/right.png"))));
+        this.btnAssocSuivante = new Button(Langue.getLangue().getString("PanneauCombinaisonPourMacro_btnAssocSuivante"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/right.png"))));
         this.btnAssocSuivante.setLayoutX(195 * i);
         this.btnAssocSuivante.setLayoutY(5 * i);
         this.btnAssocSuivante.setMaxSize(47 * i, 20 * i);
         this.btnAssocSuivante.setMinSize(47 * i, 20 * i);
         this.btnAssocSuivante.setPrefSize(47 * i, 20 * i);
         Tooltip infobulleBtnAssocSuivante = new Tooltip();
-        infobulleBtnAssocSuivante.setText("Aller à l'instant suivant");
+        infobulleBtnAssocSuivante.setText(Langue.getLangue().getString("PanneauCombinaisonPourMacro_infobulleBtnAssocSuivante"));
         this.btnAssocSuivante.setTooltip(infobulleBtnAssocSuivante);
         this.getChildren().add(this.btnAssocSuivante);
 
-        this.btnDerniereAssoc = new Button("Dernier", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/dRight.png"))));
+        this.btnDerniereAssoc = new Button(Langue.getLangue().getString("PanneauCombinaisonPourMacro_btnDerniereAssoc"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/dRight.png"))));
         this.btnDerniereAssoc.setLayoutX(244 * i);
         this.btnDerniereAssoc.setLayoutY(5 * i);
         this.btnDerniereAssoc.setMaxSize(50 * i, 20 * i);
         this.btnDerniereAssoc.setMinSize(50 * i, 20 * i);
         this.btnDerniereAssoc.setPrefSize(50 * i, 20 * i);
         Tooltip infobulleBtnDerniereAssoc = new Tooltip();
-        infobulleBtnDerniereAssoc.setText("Aller au tout dernier instant");
+        infobulleBtnDerniereAssoc.setText(Langue.getLangue().getString("PanneauCombinaisonPourMacro_infobulleBtnDerniereAssoc"));
         this.btnDerniereAssoc.setTooltip(infobulleBtnDerniereAssoc);
         this.getChildren().add(this.btnDerniereAssoc);
 
-        Button btnCreerAssoc = new Button("Nouv.", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png"))));
+        Button btnCreerAssoc = new Button(Langue.getLangue().getString("PanneauCombinaisonPourMacro_btnCreerAssoc"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png"))));
         btnCreerAssoc.setLayoutX(103 * i);
         btnCreerAssoc.setLayoutY(5 * i);
         btnCreerAssoc.setMaxSize(44 * i, 20 * i);
         btnCreerAssoc.setMinSize(44 * i, 20 * i);
         btnCreerAssoc.setPrefSize(44 * i, 20 * i);
         Tooltip infobulleBtnCreerAssoc = new Tooltip();
-        infobulleBtnCreerAssoc.setText("Créer un nouvel instant");
+        infobulleBtnCreerAssoc.setText(Langue.getLangue().getString("PanneauCombinaisonPourMacro_infobulleBtnCreerAssoc"));
         btnCreerAssoc.setTooltip(infobulleBtnCreerAssoc);
         this.getChildren().add(btnCreerAssoc);
 
-        this.btnSupprimerAssoc = new Button("Suppr.", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/del.png"))));
+        this.btnSupprimerAssoc = new Button(Langue.getLangue().getString("PanneauCombinaisonPourMacro_btnSupprimerAssoc"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/del.png"))));
         this.btnSupprimerAssoc.setLayoutX(149 * i);
         this.btnSupprimerAssoc.setLayoutY(5 * i);
         this.btnSupprimerAssoc.setMaxSize(44 * i, 20 * i);
         this.btnSupprimerAssoc.setMinSize(44 * i, 20 * i);
         this.btnSupprimerAssoc.setPrefSize(44 * i, 20 * i);
         Tooltip infobulleBtnSupprimerAssoc = new Tooltip();
-        infobulleBtnSupprimerAssoc.setText("Supprimer cet instant");
+        infobulleBtnSupprimerAssoc.setText(Langue.getLangue().getString("PanneauCombinaisonPourMacro_infobulleBtnSupprimerAssoc"));
         this.btnSupprimerAssoc.setTooltip(infobulleBtnSupprimerAssoc);
         this.getChildren().add(this.btnSupprimerAssoc);
 

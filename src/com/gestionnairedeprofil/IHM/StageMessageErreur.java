@@ -21,6 +21,7 @@
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.configuration.Langue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -48,7 +49,7 @@ public class StageMessageErreur extends Stage
     public StageMessageErreur(double i, Stage stageParent, String messageComplementaireErreur)
     {
         // configuration des dépendances
-        this.setTitle("Erreur dans l'assotiation");
+        this.setTitle(Langue.getLangue().getString("StageMessageErreur_title"));
         this.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/cancel.png")));
         this.initModality(Modality.WINDOW_MODAL);
         this.initOwner(stageParent);
@@ -62,7 +63,7 @@ public class StageMessageErreur extends Stage
         texteErreur.setFont(new Font(15 * i));
         texteErreur.setFill(Color.web("#696969", 1.0));
         texteErreur.setTextAlignment(TextAlignment.CENTER);
-        texteErreur.setText("Erreur:\n"
+        texteErreur.setText(Langue.getLangue().getString("StageMessageErreur_texteErreur") + "\n"
                 + messageComplementaireErreur);
 
         ImageView fondErreur = new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/info.png")));
@@ -73,7 +74,7 @@ public class StageMessageErreur extends Stage
 
         // Configuration des contrôles
 
-        Button btnOk = new Button("Ok", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
+        Button btnOk = new Button(Langue.getLangue().getString("StageMessageErreur_btnOk"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
         btnOk.setLayoutX(325 * i);
         btnOk.setLayoutY(100 * i);
         btnOk.setPrefSize(50 * i, 25 * i);

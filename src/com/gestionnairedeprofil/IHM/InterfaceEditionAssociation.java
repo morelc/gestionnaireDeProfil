@@ -25,8 +25,9 @@ import com.gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 
 /**
  * Interface utilisée pour déinir tous les panneaux d'édition d'association dans
- * profil. Interface used to define all panes for editing all association in
- * profile.
+ * profil.
+ *
+ * Interface used to define all panes for editing all association in profile.
  *
  * @author MOREL Charles
  */

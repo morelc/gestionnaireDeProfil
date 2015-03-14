@@ -21,6 +21,8 @@
  */
 package com.gestionnairedeprofil.donnees.structures;
 
+import com.gestionnairedeprofil.configuration.Langue;
+
 /**
  * Classe de représentation des données liées à une touche à simuler. Class used
  * to represent datas liked to a button to emulate.
@@ -31,7 +33,7 @@ public class ToucheMachine
 {
 
     public final static int ID_TOUCHE_NON_ASSOCIEE = -1;
-    public final static String NON_TOUCHE_NON_ASSOCIEE = "(aucune touche)";
+    public final static String NON_TOUCHE_NON_ASSOCIEE = Langue.getLangue().getString("ToucheMachine_NON_TOUCHE_NON_ASSOCIEE");
     public final static int SIGNAL_TOUCHE_NON_ASSOCIEE = 0;
     private final int id;
     private final String nom;

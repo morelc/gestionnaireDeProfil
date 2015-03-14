@@ -36,8 +36,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
- * Panneau utilisé pour définir une machine disponible et ses profils. Pane used
- * to define an availible machine and his profils.
+ * Panneau utilisé pour définir une machine disponible et ses profils.
+ *
+ * Pane used to define an availible machine and his profils.
  *
  * @author MOREL Charles
  */

@@ -21,6 +21,7 @@
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.configuration.Langue;
 import com.gestionnairedeprofil.donnees.structures.Association;
 import com.gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 import com.gestionnairedeprofil.donnees.structures.ToucheMachine;
@@ -43,15 +44,17 @@ import javafx.util.Duration;
 
 /**
  * Panneau d'édition d'association de combinaison (utilisé dans la fenêtre
- * d'édition d'associations). Pane used for an combinaison association (used in
- * the association edition window)
+ * d'édition d'associations).
+ *
+ * Pane used for an combinaison association (used in the association edition
+ * window)
  *
  * @author MOREL Charles
  */
 public class PanneauEditionCombinaison extends AnchorPane implements InterfaceEditionAssociation, InterfacePanneauTypeCombinaison
 {
 
-    public final static String MESSAGE_INVALIDITE = "au moins deux touches différentes\ndoivent être selectionnées!";
+    public final static String MESSAGE_INVALIDITE = Langue.getLangue().getString("PanneauEditionCombinaison_MESSAGE_INVALIDITE");
     private final ArrayList<PanneauToucheMachinePourCombinaison> combinaison;
     private final ArrayList<ToucheMachine> touchesDisponiblesAffichables;
     private final Button btnAjouterCmb;
@@ -73,20 +76,20 @@ public class PanneauEditionCombinaison extends AnchorPane implements InterfaceEd
         texteCombinaison.setFont(new Font(15 * i));
         texteCombinaison.setFill(Color.web("#696969", 1.0));
         texteCombinaison.setTextAlignment(TextAlignment.CENTER);
-        texteCombinaison.setText("Appui simultané sur\nles touches:");
+        texteCombinaison.setText(Langue.getLangue().getString("PanneauEditionCombinaison_texteCombinaison"));
         this.getChildren().add(texteCombinaison);
 
         // Configuration des contrôles
         this.combinaison = new ArrayList();
 
-        this.btnAjouterCmb = new Button("Ajouter...", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png"))));
+        this.btnAjouterCmb = new Button(Langue.getLangue().getString("PanneauEditionCombinaison_btnAjouterCmb"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png"))));
         this.btnAjouterCmb.setLayoutX(90 * i);
         this.btnAjouterCmb.setLayoutY(155 * i);
         this.btnAjouterCmb.setMaxSize(105 * i, 20 * i);
         this.btnAjouterCmb.setMinSize(105 * i, 20 * i);
         this.btnAjouterCmb.setPrefSize(105 * i, 20 * i);
         Tooltip infobulleBtnAjouterCmb = new Tooltip();
-        infobulleBtnAjouterCmb.setText("Ajouter une nouvelle touche à la combinaison");
+        infobulleBtnAjouterCmb.setText(Langue.getLangue().getString("PanneauEditionCombinaison_infobulleBtnAjouterCmb"));
         this.btnAjouterCmb.setTooltip(infobulleBtnAjouterCmb);
         this.getChildren().add(this.btnAjouterCmb);
 

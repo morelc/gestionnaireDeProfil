@@ -21,6 +21,7 @@
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.configuration.Langue;
 import com.gestionnairedeprofil.donnees.structures.Machine;
 import com.gestionnairedeprofil.donnees.structures.Profil;
 import javafx.animation.KeyFrame;
@@ -76,7 +77,7 @@ public class PanneauProfilDisponible extends Pane
         btnEditer.setPrefSize(25 * dim, 15 * dim);
         btnEditer.setOpacity(0);
         Tooltip infobulleBtnEditer = new Tooltip();
-        infobulleBtnEditer.setText("Éditer le profil");
+        infobulleBtnEditer.setText(Langue.getLangue().getString("PanneauProfilDisponible_infobulleBtnEditer"));
         btnEditer.setTooltip(infobulleBtnEditer);
         this.getChildren().add(btnEditer);
 
@@ -88,7 +89,7 @@ public class PanneauProfilDisponible extends Pane
         btnSupprimer.setPrefSize(25 * dim, 15 * dim);
         btnSupprimer.setOpacity(0);
         Tooltip infobulleBtnSupprimer = new Tooltip();
-        infobulleBtnSupprimer.setText("Supprimer définitivement le profil du PC");
+        infobulleBtnSupprimer.setText(Langue.getLangue().getString("PanneauProfilDisponible_infobulleBtnSupprimer"));
         btnSupprimer.setTooltip(infobulleBtnSupprimer);
         this.getChildren().add(btnSupprimer);
 
@@ -100,7 +101,7 @@ public class PanneauProfilDisponible extends Pane
         this.btnAjouterALaListeDEnvoi.setPrefSize(25 * dim, 15 * dim);
         this.btnAjouterALaListeDEnvoi.setOpacity(0);
         Tooltip infobulleBtnAjouterALaListeDEnvoi = new Tooltip();
-        infobulleBtnAjouterALaListeDEnvoi.setText("Ajouter le profil à la liste d'envoi");
+        infobulleBtnAjouterALaListeDEnvoi.setText(Langue.getLangue().getString("PanneauProfilDisponible_infobulleBtnAjouterALaListeDEnvoi"));
         this.btnAjouterALaListeDEnvoi.setTooltip(infobulleBtnAjouterALaListeDEnvoi);
         this.getChildren().add(this.btnAjouterALaListeDEnvoi);
 

@@ -21,6 +21,8 @@
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.configuration.Langue;
+import com.gestionnairedeprofil.configuration.StageDeConfiguration;
 import com.gestionnairedeprofil.donnees.BD.MachineDAO;
 import com.gestionnairedeprofil.donnees.structures.Association;
 import com.gestionnairedeprofil.donnees.structures.Machine;
@@ -69,27 +71,14 @@ import javafx.util.Duration;
 public class ApplicationPrincipale extends Application
 {
 
-    /**
-     * combobox contenant la liste des lecteurs disponibles.
-     *
-     * Combobox who contains all devices
-     */
     private ComboBox cbSelectionLecteur;
 
-    /**
-     * Fonction de lancement de l'appliaction.
-     *
-     * Function who launch the application
-     *
-     * @param stage
-     */
     @Override
     public void start(final Stage stage)
     {
-        // Configuration des paramètres d'écran
+        // Configuration de l'application
 
         final double dim = (Screen.getPrimary().getBounds().getWidth() - 200) / 720;
-        System.out.println(dim);
 
         // Configuration des séparations
 
@@ -135,7 +124,7 @@ public class ApplicationPrincipale extends Application
         texteNumEtape1.setFont(new Font(20 * dim));
         texteNumEtape1.setFill(Color.WHITE);
         texteNumEtape1.setTextAlignment(TextAlignment.CENTER);
-        texteNumEtape1.setText("1");
+        texteNumEtape1.setText(Langue.getLangue().getString("ApplicationPrincipale_texteNumEtape1"));
 
         Text texteNumEtape2 = new Text();
         texteNumEtape2.setX(285 * dim);
@@ -143,7 +132,7 @@ public class ApplicationPrincipale extends Application
         texteNumEtape2.setFont(new Font(20 * dim));
         texteNumEtape2.setFill(Color.WHITE);
         texteNumEtape2.setTextAlignment(TextAlignment.CENTER);
-        texteNumEtape2.setText("2");
+        texteNumEtape2.setText(Langue.getLangue().getString("ApplicationPrincipale_texteNumEtape2"));
 
         Text texteNumEtape3 = new Text();
         texteNumEtape3.setX(525 * dim);
@@ -151,7 +140,7 @@ public class ApplicationPrincipale extends Application
         texteNumEtape3.setFont(new Font(20 * dim));
         texteNumEtape3.setFill(Color.WHITE);
         texteNumEtape3.setTextAlignment(TextAlignment.CENTER);
-        texteNumEtape3.setText("3");
+        texteNumEtape3.setText(Langue.getLangue().getString("ApplicationPrincipale_texteNumEtape3"));
 
         Text texteEtape1 = new Text();
         texteEtape1.setX(80 * dim);
@@ -159,7 +148,7 @@ public class ApplicationPrincipale extends Application
         texteEtape1.setFont(new Font(20 * dim));
         texteEtape1.setFill(Color.web("#696969", 1.0));
         texteEtape1.setTextAlignment(TextAlignment.CENTER);
-        texteEtape1.setText("Gestion des\nprofils sur PC");
+        texteEtape1.setText(Langue.getLangue().getString("ApplicationPrincipale_texteEtape1"));
 
         Text texteEtape2 = new Text();
         texteEtape2.setX(320 * dim);
@@ -167,7 +156,7 @@ public class ApplicationPrincipale extends Application
         texteEtape2.setFont(new Font(20 * dim));
         texteEtape2.setFill(Color.web("#696969", 1.0));
         texteEtape2.setTextAlignment(TextAlignment.CENTER);
-        texteEtape2.setText("Profils à envoyer\nsur le JoyPad");
+        texteEtape2.setText(Langue.getLangue().getString("ApplicationPrincipale_texteEtape2"));
 
         Text texteEtape3 = new Text();
         texteEtape3.setX(575 * dim);
@@ -175,7 +164,7 @@ public class ApplicationPrincipale extends Application
         texteEtape3.setFont(new Font(20 * dim));
         texteEtape3.setFill(Color.web("#696969", 1.0));
         texteEtape3.setTextAlignment(TextAlignment.CENTER);
-        texteEtape3.setText("Envoi");
+        texteEtape3.setText(Langue.getLangue().getString("ApplicationPrincipale_texteEtape3"));
 
         Text texteSelectionLecteur = new Text();
         texteSelectionLecteur.setX(515 * dim);
@@ -183,7 +172,7 @@ public class ApplicationPrincipale extends Application
         texteSelectionLecteur.setFont(new Font(15 * dim));
         texteSelectionLecteur.setFill(Color.web("#696969", 1.0));
         texteSelectionLecteur.setTextAlignment(TextAlignment.CENTER);
-        texteSelectionLecteur.setText("Selectionnez le lecteur de\nla carte SD...");
+        texteSelectionLecteur.setText(Langue.getLangue().getString("ApplicationPrincipale_texteSelectionLecteur"));
 
         Text texteBoutonEnvoyer = new Text();
         texteBoutonEnvoyer.setX(550 * dim);
@@ -191,7 +180,7 @@ public class ApplicationPrincipale extends Application
         texteBoutonEnvoyer.setFont(new Font(15 * dim));
         texteBoutonEnvoyer.setFill(Color.web("#696969", 1.0));
         texteBoutonEnvoyer.setTextAlignment(TextAlignment.CENTER);
-        texteBoutonEnvoyer.setText("... et envoyez!");
+        texteBoutonEnvoyer.setText(Langue.getLangue().getString("ApplicationPrincipale_texteBoutonEnvoyer"));
 
         MenuDAideLogiciel menuDAide = new MenuDAideLogiciel(dim, stage, this);
         menuDAide.setLayoutX(700 * dim);
@@ -206,7 +195,7 @@ public class ApplicationPrincipale extends Application
         panneauProfilsDuPc.setMaxSize(200 * dim, 270 * dim);
         panneauProfilsDuPc.setMinSize(200 * dim, 270 * dim);
 
-        Button btnCreationProfil = new Button("Ajouter", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png"))));
+        Button btnCreationProfil = new Button(Langue.getLangue().getString("ApplicationPrincipale_btnCreationProfil"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png"))));
         btnCreationProfil.setLayoutX(20 * dim);
         btnCreationProfil.setLayoutY(345 * dim);
         btnCreationProfil.setPrefSize(200 * dim, 20 * dim);
@@ -214,7 +203,7 @@ public class ApplicationPrincipale extends Application
         btnCreationProfil.setMinSize(200 * dim, 20 * dim);
         btnCreationProfil.setFont(new Font(7 * dim));
         Tooltip infobulleBtnAjouter = new Tooltip();
-        infobulleBtnAjouter.setText("Créer un nouveau profil sur le PC");
+        infobulleBtnAjouter.setText(Langue.getLangue().getString("ApplicationPrincipale_infobulleBtnAjouter"));
         btnCreationProfil.setTooltip(infobulleBtnAjouter);
 
         final ListeProfilsAEnvoyer panneauProfilsVersPad = new ListeProfilsAEnvoyer(dim, panneauProfilsDuPc);
@@ -238,10 +227,10 @@ public class ApplicationPrincipale extends Application
         btnafraichirListeLecteurs.setMaxSize(20 * dim, 20 * dim);
         btnafraichirListeLecteurs.setMinSize(20 * dim, 20 * dim);
         Tooltip infobulleBtnRafraichir = new Tooltip();
-        infobulleBtnRafraichir.setText("Rafraîchir la liste des lecteurs");
+        infobulleBtnRafraichir.setText(Langue.getLangue().getString("ApplicationPrincipale_btnafraichirListeLecteurs"));
         btnafraichirListeLecteurs.setTooltip(infobulleBtnRafraichir);
 
-        Button btnEnvoiVersCarteSD = new Button("Démarrer l'envoi", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
+        Button btnEnvoiVersCarteSD = new Button(Langue.getLangue().getString("ApplicationPrincipale_btnEnvoiVersCarteSD"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
         btnEnvoiVersCarteSD.setLayoutX(550 * dim);
         btnEnvoiVersCarteSD.setLayoutY(280 * dim);
         btnEnvoiVersCarteSD.setPrefSize(100 * dim, 20 * dim);
@@ -249,7 +238,7 @@ public class ApplicationPrincipale extends Application
         btnEnvoiVersCarteSD.setMinSize(100 * dim, 20 * dim);
         btnEnvoiVersCarteSD.setFont(new Font(7 * dim));
         Tooltip infobulleBtnEnvoi = new Tooltip();
-        infobulleBtnEnvoi.setText("Envoyer les profils vers la carte SD");
+        infobulleBtnEnvoi.setText(Langue.getLangue().getString("ApplicationPrincipale_infobulleBtnEnvoi"));
         btnEnvoiVersCarteSD.setTooltip(infobulleBtnEnvoi);
 
         // Pour l'exemple
@@ -259,18 +248,14 @@ public class ApplicationPrincipale extends Application
 
         Machine machine1 = new Machine(2, "Sega Master System", "img1");
 
-        ToucheMachine touche1 = new ToucheMachine(1, "X1", 1);
         ToucheMachine touche2 = new ToucheMachine(2, "Action", 2);
-        ToucheMachine touche5 = new ToucheMachine(2, "X2", 4);
         ToucheMachine touche6 = new ToucheMachine(2, "Saut", 8);
         ToucheMachine touche7 = new ToucheMachine(2, "Droite", 16);
         ToucheMachine touche8 = new ToucheMachine(2, "Gauche", 32);
         ToucheMachine touche9 = new ToucheMachine(2, "Bas", 64);
         ToucheMachine touche10 = new ToucheMachine(2, "Haut", 128);
 
-        machine1.ajouterTouche(touche1);
         machine1.ajouterTouche(touche2);
-        machine1.ajouterTouche(touche5);
         machine1.ajouterTouche(touche6);
         machine1.ajouterTouche(touche7);
         machine1.ajouterTouche(touche8);
@@ -323,29 +308,41 @@ public class ApplicationPrincipale extends Application
         toutesLesMachines.add(machine1);
 
 
-        Machine machine2 = new Machine(1, "Machine 2", "img2");
+        Machine machine2 = new Machine(1, "Test", "img2");
 
-        ToucheMachine touche3 = new ToucheMachine(3, "START", 1);
-        ToucheMachine touche4 = new ToucheMachine(4, "SELECT", 2);
+        ToucheMachine toucheA1 = new ToucheMachine(3, "Signal 1", 1);
+        ToucheMachine toucheA2 = new ToucheMachine(4, "Signal 2", 2);
+        ToucheMachine toucheA3 = new ToucheMachine(4, "Signal 3", 4);
+        ToucheMachine toucheA4 = new ToucheMachine(4, "Signal 4", 8);
+        ToucheMachine toucheA5 = new ToucheMachine(4, "Signal 5", 16);
+        ToucheMachine toucheA6 = new ToucheMachine(4, "Signal 6", 32);
+        ToucheMachine toucheA7 = new ToucheMachine(4, "Signal 7", 64);
+        ToucheMachine toucheA8 = new ToucheMachine(4, "Signal 8", 128);
 
-        machine2.ajouterTouche(touche3);
-        machine2.ajouterTouche(touche4);
+        machine2.ajouterTouche(toucheA1);
+        machine2.ajouterTouche(toucheA2);
+        machine2.ajouterTouche(toucheA3);
+        machine2.ajouterTouche(toucheA4);
+        machine2.ajouterTouche(toucheA5);
+        machine2.ajouterTouche(toucheA6);
+        machine2.ajouterTouche(toucheA7);
+        machine2.ajouterTouche(toucheA8);
 
         Profil profil2 = new Profil(1, "Profil 2");
         Association assocA1 = new Association(21, false, 0);
-        assocA1.getTouches().add(machine1.getTouches().get(1));
+        assocA1.getTouches().add(machine1.getTouches().get(0));
         profil2.getAssociationsAt(0).add(assocA1);
         Association assocA2 = new Association(22, false, 0);
-        assocA2.getTouches().add(machine1.getTouches().get(1));
+        assocA2.getTouches().add(machine1.getTouches().get(0));
         profil2.getAssociationsAt(1).add(assocA2);
         Association assocA3 = new Association(23, false, 0);
-        assocA3.getTouches().add(machine1.getTouches().get(1));
+        assocA3.getTouches().add(machine1.getTouches().get(0));
         profil2.getAssociationsAt(2).add(assocA3);
         Association assocA4 = new Association(24, false, 0);
-        assocA4.getTouches().add(machine1.getTouches().get(1));
+        assocA4.getTouches().add(machine1.getTouches().get(0));
         profil2.getAssociationsAt(3).add(assocA4);
         Association assocA5 = new Association(25, false, 0);
-        assocA5.getTouches().add(machine1.getTouches().get(1));
+        assocA5.getTouches().add(machine1.getTouches().get(0));
         profil2.getAssociationsAt(4).add(assocA5);
         Association assocA6 = new Association(26, false, 0);
         assocA6.getTouches().add(machine1.getTouches().get(0));
@@ -370,8 +367,7 @@ public class ApplicationPrincipale extends Application
         profil2.getAssociationsAt(11).add(assocA12);
         machine2.ajouterProfil(profil2);
 
-        ArrayList lol = MachineDAO.getAll();
-        //toutesLesMachines.add(machine2);
+        toutesLesMachines.add(machine2);
 
 
 
@@ -453,11 +449,11 @@ public class ApplicationPrincipale extends Application
         Scene scene = new Scene(root, 720 * dim, 380 * dim, new LinearGradient(0, 1, 1, 0, true, CycleMethod.NO_CYCLE, new Stop[]{new Stop(0, Color.web("#FFFFFF", 1.0)), new Stop(1, Color.web("#B4B4B4", 1.0))}));
 
         // Configuration de Stage
-        stage.setTitle("Gestionnaire de profil");
+        stage.setTitle(Langue.getLangue().getString("ApplicationPrincipale_titreStage"));
         stage.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/icone.png")));
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.show();
+        StageDeConfiguration.lancerConfiguration(dim, stage);
     }
 
     /**

@@ -21,6 +21,7 @@
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.configuration.Langue;
 import com.gestionnairedeprofil.donnees.structures.Profil;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -37,6 +38,7 @@ import javafx.scene.text.Font;
 
 /**
  * Panneau d'un profil à envoyer (contenu dans la liste d'envoi de profils).
+ *
  * Pane for a profil to send (used by the list of profiles to send)
  *
  * @author MOREL Charles
@@ -69,7 +71,7 @@ public class PanneauProfilAEnvoyer extends Pane
         this.btnLever.setMinSize(25 * dim, 15 * dim);
         this.btnLever.setPrefSize(25 * dim, 15 * dim);
         Tooltip infobulleBtnLever = new Tooltip();
-        infobulleBtnLever.setText("Lever le profil dans la liste");
+        infobulleBtnLever.setText(Langue.getLangue().getString("PanneauProfilAEnvoyer_infobulleBtnLever"));
         this.btnLever.setTooltip(infobulleBtnLever);
         this.getChildren().add(this.btnLever);
 
@@ -80,7 +82,7 @@ public class PanneauProfilAEnvoyer extends Pane
         this.btnDessendre.setMinSize(25 * dim, 15 * dim);
         this.btnDessendre.setPrefSize(25 * dim, 15 * dim);
         Tooltip infobulleBtnDessendre = new Tooltip();
-        infobulleBtnDessendre.setText("Dessendre le profil dans la liste");
+        infobulleBtnDessendre.setText(Langue.getLangue().getString("PanneauProfilAEnvoyer_infobulleBtnDessendre"));
         this.btnDessendre.setTooltip(infobulleBtnDessendre);
         this.getChildren().add(this.btnDessendre);
 
@@ -91,7 +93,7 @@ public class PanneauProfilAEnvoyer extends Pane
         btnEnleverDeLaListe.setMinSize(25 * dim, 15 * dim);
         btnEnleverDeLaListe.setPrefSize(25 * dim, 15 * dim);
         Tooltip infobulleBtnEnlever = new Tooltip();
-        infobulleBtnEnlever.setText("Enlever le profil de la liste");
+        infobulleBtnEnlever.setText(Langue.getLangue().getString("PanneauProfilAEnvoyer_infobulleBtnEnlever"));
         btnEnleverDeLaListe.setTooltip(infobulleBtnEnlever);
         this.getChildren().add(btnEnleverDeLaListe);
 

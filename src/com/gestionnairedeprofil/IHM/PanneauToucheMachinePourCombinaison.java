@@ -21,6 +21,7 @@
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.configuration.Langue;
 import com.gestionnairedeprofil.donnees.structures.ToucheMachine;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -64,7 +65,7 @@ public class PanneauToucheMachinePourCombinaison extends AnchorPane
         this.btnEnlever.setMinSize(20 * dim, 20 * dim);
         this.btnEnlever.setPrefSize(20 * dim, 20 * dim);
         Tooltip infobulleEnlever = new Tooltip();
-        infobulleEnlever.setText("Enlever cette touche de la combinaison");
+        infobulleEnlever.setText(Langue.getLangue().getString("PanneauToucheMachinePourCombinaison_infobulleEnlever"));
         this.btnEnlever.setTooltip(infobulleEnlever);
         this.getChildren().add(this.btnEnlever);
 

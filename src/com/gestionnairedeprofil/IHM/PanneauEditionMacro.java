@@ -21,6 +21,7 @@
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.configuration.Langue;
 import com.gestionnairedeprofil.donnees.structures.Association;
 import com.gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 import com.gestionnairedeprofil.donnees.structures.ToucheMachine;
@@ -41,8 +42,9 @@ import javafx.util.Duration;
 
 /**
  * Panneau d'édition de macro (utilisé dans la fenêtre d'édition
- * d'associations). Pane used for an macro association (used in the association
- * edition window)
+ * d'associations).
+ *
+ * Pane used for an macro association (used in the association edition window)
  *
  * @author MOREL Charles
  */
@@ -118,7 +120,7 @@ public class PanneauEditionMacro extends AnchorPane implements InterfaceEditionA
             replacerElement(this.combinaisons.get(i), i);
         }
         redimensionnerPourNAssociations(this.combinaisons.get(panneauCourrant).getTailleDeLaCombinaison());
-        this.texteEditionMacro.setText("Veuillez entrer votre macro (" + (this.panneauCourrant + 1) + "/" + this.combinaisons.size() + ")");
+        this.texteEditionMacro.setText(Langue.getLangue().getString("PanneauEditionMacro_texteEditionMacro") + " (" + (this.panneauCourrant + 1) + "/" + this.combinaisons.size() + ")");
     }
 
     private void replacerElement(PanneauCombinaisonPourMacro panneauAReplacer, int idEmplacementDansCollection)
@@ -273,16 +275,16 @@ public class PanneauEditionMacro extends AnchorPane implements InterfaceEditionA
         for (int x = 0; x < this.combinaisons.size(); x++) {
             PanneauCombinaisonPourMacro assocATester = this.combinaisons.get(x);
             if (!assocATester.associationValide()) {
-                return "au moins une touche doit être\nselectionnée sur le panneau " + (x + 1);
+                return Langue.getLangue().getString("PanneauEditionMacro_messageDInvalidite1") + " " + (x + 1);
             }
             if (instants.contains(assocATester.getNumInstant())) {
-                return "le timer du panneau " + (x + 1) + "\nest identique à celui du\npanneau " + (instants.indexOf(assocATester.getNumInstant()) + 1);
+                return Langue.getLangue().getString("PanneauEditionMacro_messageDInvalidite2A") + " " + (x + 1) + Langue.getLangue().getString("PanneauEditionMacro_messageDInvalidite2B") + " " + (instants.indexOf(assocATester.getNumInstant()) + 1);
             }
             else {
                 instants.add(assocATester.getNumInstant());
             }
         }
-        return "/** erreur inconnue **/";
+        return Langue.getLangue().getString("PanneauEditionMacro_messageDInvalidite3");
     }
 
 }

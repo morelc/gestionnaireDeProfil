@@ -21,6 +21,7 @@
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.configuration.Langue;
 import com.gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 import com.gestionnairedeprofil.donnees.structures.Machine;
 import com.gestionnairedeprofil.donnees.structures.Profil;
@@ -72,7 +73,7 @@ public class StageEditionProfil extends Stage
     public StageEditionProfil(double i, final PanneauProfilDisponible panneauProfilConcerne, Stage stageParent, Profil profilAModifier, Machine machineDuProfil)
     {
         // configuration des dépendances
-        this.setTitle("Edition du profil");
+        this.setTitle(Langue.getLangue().getString("StageEditionProfil_title"));
         this.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/edit.png")));
         this.initModality(Modality.WINDOW_MODAL);
         this.initOwner(stageParent);
@@ -95,7 +96,7 @@ public class StageEditionProfil extends Stage
         texteNomProfil.setFont(new Font(12 * i));
         texteNomProfil.setFill(Color.web("#696969", 1.0));
         texteNomProfil.setTextAlignment(TextAlignment.RIGHT);
-        texteNomProfil.setText("Nom du profil:");
+        texteNomProfil.setText(Langue.getLangue().getString("StageEditionProfil_texteNomProfil"));
 
         Text texteNomMachine = new Text();
         texteNomMachine.setLayoutX(10 * i);
@@ -103,7 +104,7 @@ public class StageEditionProfil extends Stage
         texteNomMachine.setFont(new Font(12 * i));
         texteNomMachine.setFill(Color.web("#696969", 1.0));
         texteNomMachine.setTextAlignment(TextAlignment.RIGHT);
-        texteNomMachine.setText("Machine associée:");
+        texteNomMachine.setText(Langue.getLangue().getString("StageEditionProfil_texteNomMachine"));
 
         Text texteManette = new Text();
         texteManette.setLayoutX(10 * i);
@@ -111,7 +112,7 @@ public class StageEditionProfil extends Stage
         texteManette.setFont(new Font(12 * i));
         texteManette.setFill(Color.web("#696969", 1.0));
         texteManette.setTextAlignment(TextAlignment.LEFT);
-        texteManette.setText("Manette simulée:");
+        texteManette.setText(Langue.getLangue().getString("StageEditionProfil_texteManette"));
 
         Rectangle zoneImgManette = new Rectangle(335 * i, 150 * i);
         zoneImgManette.setLayoutX(10 * i);
@@ -126,7 +127,7 @@ public class StageEditionProfil extends Stage
         textePad.setFont(new Font(12 * i));
         textePad.setFill(Color.web("#696969", 1.0));
         textePad.setTextAlignment(TextAlignment.LEFT);
-        textePad.setText("Touches du joypad:");
+        textePad.setText(Langue.getLangue().getString("StageEditionProfil_textePad"));
 
         Rectangle zoneImgPad = new Rectangle(335 * i, 130 * i);
         zoneImgPad.setLayoutX(10 * i);
@@ -199,7 +200,7 @@ public class StageEditionProfil extends Stage
         btnStickHaut.setMinSize(15 * i, 15 * i);
         btnStickHaut.setFont(new Font(7 * i));
         Tooltip infobulleBtnStickHaut = new Tooltip();
-        infobulleBtnStickHaut.setText("Définir l'association liée au mouvement 'haut' du stick");
+        infobulleBtnStickHaut.setText(Langue.getLangue().getString("StageEditionProfil_infobulleBtnStickHaut"));
         btnStickHaut.setTooltip(infobulleBtnStickHaut);
 
         BoutonEditerAssociation btnStickBas = new BoutonEditerAssociation("...", this, 10);
@@ -210,7 +211,7 @@ public class StageEditionProfil extends Stage
         btnStickBas.setMinSize(15 * i, 15 * i);
         btnStickBas.setFont(new Font(7 * i));
         Tooltip infobulleBtnStickBas = new Tooltip();
-        infobulleBtnStickBas.setText("Définir l'association liée au mouvement 'bas' du stick");
+        infobulleBtnStickBas.setText(Langue.getLangue().getString("StageEditionProfil_infobulleBtnStickBas"));
         btnStickBas.setTooltip(infobulleBtnStickBas);
 
         BoutonEditerAssociation btnStickGauche = new BoutonEditerAssociation("...", this, 11);
@@ -221,7 +222,7 @@ public class StageEditionProfil extends Stage
         btnStickGauche.setMinSize(15 * i, 15 * i);
         btnStickGauche.setFont(new Font(7 * i));
         Tooltip infobulleBtnStickGauche = new Tooltip();
-        infobulleBtnStickGauche.setText("Définir l'association liée au mouvement 'gauche' du stick");
+        infobulleBtnStickGauche.setText(Langue.getLangue().getString("StageEditionProfil_infobulleBtnStickGauche"));
         btnStickGauche.setTooltip(infobulleBtnStickGauche);
 
         BoutonEditerAssociation btnStickDroite = new BoutonEditerAssociation("...", this, 9);
@@ -232,7 +233,7 @@ public class StageEditionProfil extends Stage
         btnStickDroite.setMinSize(15 * i, 15 * i);
         btnStickDroite.setFont(new Font(7 * i));
         Tooltip infobulleBtnStickDroite = new Tooltip();
-        infobulleBtnStickDroite.setText("Définir l'association liée au mouvement 'droite' du stick");
+        infobulleBtnStickDroite.setText(Langue.getLangue().getString("StageEditionProfil_infobulleBtnStickDroite"));
         btnStickDroite.setTooltip(infobulleBtnStickDroite);
 
         BoutonEditerAssociation btnStart = new BoutonEditerAssociation("...", this, 0);
@@ -243,7 +244,7 @@ public class StageEditionProfil extends Stage
         btnStart.setMinSize(15 * i, 15 * i);
         btnStart.setFont(new Font(7 * i));
         Tooltip infobulleBtnStart = new Tooltip();
-        infobulleBtnStart.setText("Définir l'association liée au bouton START du Pad");
+        infobulleBtnStart.setText(Langue.getLangue().getString("StageEditionProfil_infobulleBtnStart"));
         btnStart.setTooltip(infobulleBtnStart);
 
         BoutonEditerAssociation btnSelect = new BoutonEditerAssociation("...", this, 1);
@@ -254,7 +255,7 @@ public class StageEditionProfil extends Stage
         btnSelect.setMinSize(15 * i, 15 * i);
         btnSelect.setFont(new Font(7 * i));
         Tooltip infobulleBtnSelect = new Tooltip();
-        infobulleBtnSelect.setText("Définir l'association liée au bouton SELECT du Pad");
+        infobulleBtnSelect.setText(Langue.getLangue().getString("StageEditionProfil_infobulleBtnSelect"));
         btnSelect.setTooltip(infobulleBtnSelect);
 
         BoutonEditerAssociation btnA = new BoutonEditerAssociation("...", this, 2);
@@ -265,7 +266,7 @@ public class StageEditionProfil extends Stage
         btnA.setMinSize(15 * i, 15 * i);
         btnA.setFont(new Font(7 * i));
         Tooltip infobulleBtnA = new Tooltip();
-        infobulleBtnA.setText("Définir l'association liée au bouton d'action 1 du Pad");
+        infobulleBtnA.setText(Langue.getLangue().getString("StageEditionProfil_infobulleBtnA"));
         btnA.setTooltip(infobulleBtnA);
 
         BoutonEditerAssociation btnB = new BoutonEditerAssociation("...", this, 3);
@@ -276,7 +277,7 @@ public class StageEditionProfil extends Stage
         btnB.setMinSize(15 * i, 15 * i);
         btnB.setFont(new Font(7 * i));
         Tooltip infobulleBtnB = new Tooltip();
-        infobulleBtnB.setText("Définir l'association liée au bouton d'action 2 du Pad");
+        infobulleBtnB.setText(Langue.getLangue().getString("StageEditionProfil_infobulleBtnB"));
         btnB.setTooltip(infobulleBtnB);
 
         BoutonEditerAssociation btnC = new BoutonEditerAssociation("...", this, 4);
@@ -287,7 +288,7 @@ public class StageEditionProfil extends Stage
         btnC.setMinSize(15 * i, 15 * i);
         btnC.setFont(new Font(7 * i));
         Tooltip infobulleBtnC = new Tooltip();
-        infobulleBtnC.setText("Définir l'association liée au bouton d'action 3 du Pad");
+        infobulleBtnC.setText(Langue.getLangue().getString("StageEditionProfil_infobulleBtnC"));
         btnC.setTooltip(infobulleBtnC);
 
         BoutonEditerAssociation btnD = new BoutonEditerAssociation("...", this, 5);
@@ -298,7 +299,7 @@ public class StageEditionProfil extends Stage
         btnD.setMinSize(15 * i, 15 * i);
         btnD.setFont(new Font(7 * i));
         Tooltip infobulleBtnD = new Tooltip();
-        infobulleBtnD.setText("Définir l'association liée au bouton d'action 4 du Pad");
+        infobulleBtnD.setText(Langue.getLangue().getString("StageEditionProfil_infobulleBtnD"));
         btnD.setTooltip(infobulleBtnD);
 
         BoutonEditerAssociation btnE = new BoutonEditerAssociation("...", this, 6);
@@ -309,7 +310,7 @@ public class StageEditionProfil extends Stage
         btnE.setMinSize(15 * i, 15 * i);
         btnE.setFont(new Font(7 * i));
         Tooltip infobulleBtnE = new Tooltip();
-        infobulleBtnE.setText("Définir l'association liée au bouton d'action 5 du Pad");
+        infobulleBtnE.setText(Langue.getLangue().getString("StageEditionProfil_infobulleBtnE"));
         btnE.setTooltip(infobulleBtnE);
 
         BoutonEditerAssociation btnF = new BoutonEditerAssociation("...", this, 7);
@@ -320,10 +321,10 @@ public class StageEditionProfil extends Stage
         btnF.setMinSize(15 * i, 15 * i);
         btnF.setFont(new Font(7 * i));
         Tooltip infobulleBtnF = new Tooltip();
-        infobulleBtnF.setText("Définir l'association liée au bouton d'action 6 du Pad");
+        infobulleBtnF.setText(Langue.getLangue().getString("StageEditionProfil_infobulleBtnF"));
         btnF.setTooltip(infobulleBtnF);
 
-        Button btnAnnulerModifs = new Button("Annuler", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/cancel.png"))));
+        Button btnAnnulerModifs = new Button(Langue.getLangue().getString("StageEditionProfil_btnAnnulerModifs"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/cancel.png"))));
         btnAnnulerModifs.setLayoutX(220 * i);
         btnAnnulerModifs.setLayoutY(385 * i);
         btnAnnulerModifs.setPrefSize(50 * i, 25 * i);
@@ -331,7 +332,7 @@ public class StageEditionProfil extends Stage
         btnAnnulerModifs.setMinSize(50 * i, 25 * i);
         btnAnnulerModifs.setFont(new Font(7 * i));
 
-        Button btnModifier = new Button("Enregistrer", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
+        Button btnModifier = new Button(Langue.getLangue().getString("StageEditionProfil_btnModifier"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
         btnModifier.setLayoutX(280 * i);
         btnModifier.setLayoutY(385 * i);
         btnModifier.setPrefSize(70 * i, 25 * i);
@@ -442,7 +443,7 @@ public class StageEditionProfil extends Stage
     public boolean sauvgarderProfilCourrant()
     {
         if (this.textFieldNomProfil.getText().length() == 0) {
-            new StageMessageErreur(this.dim, this, "Veuillez entrer un nom de profil valide");
+            new StageMessageErreur(this.dim, this, Langue.getLangue().getString("StageEditionProfil_erreur"));
             return false;
         }
         this.profilAModifier.setNom(this.textFieldNomProfil.getText());
