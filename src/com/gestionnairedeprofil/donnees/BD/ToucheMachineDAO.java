@@ -67,7 +67,6 @@ public class ToucheMachineDAO
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        System.out.println("Table created successfullyTMBMI");
         return ArrayTouchesMachine;
     }
 
@@ -103,6 +102,5 @@ public class ToucheMachineDAO
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        System.out.println("Table created successfullyBA");
     }
 }

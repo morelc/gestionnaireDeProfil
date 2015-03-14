@@ -38,10 +38,10 @@ public class ProfilDAO {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "org.sqlite.JDBC";
 
-    public static void sauvegarderProfil(Profil profil,int idMachine) {
-        supprimerProfilParId(profil.getId());
-        int max = creerProfilDansBDD(profil.getNom(),idMachine);
-        ajouterAssociationDansBDD(profil, max);
+    public static void saveProfil(Profil profil,int idMachine) {
+        deleteProfilById(profil.getId());
+        int max = addProfilInDatabase(profil.getNom(),idMachine);
+        AddAssociationInDatabase(profil, max);
     }
 
     public static ArrayList<Profil> getAllByMachineId(int id) {
@@ -80,7 +80,7 @@ public class ProfilDAO {
         return ArrayListProfils;
     }
 
-    public static void supprimerProfilParId(int id) {
+    public static void deleteProfilById(int id) {
         String query = "DELETE FROM 'Profils' where 'id'=" + id;
         Connection c = null;
         Statement stmt = null;
@@ -118,11 +118,10 @@ public class ProfilDAO {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        System.out.println("Table created successfully");
         return max;
     }
 
-    private static int creerProfilDansBDD(String nomProfil,int idMachine) {
+    private static int addProfilInDatabase(String nomProfil,int idMachine) {
         String query = "INSERT INTO Profils (nom,machineId) VALUES ('" + nomProfil + "',"+idMachine+")";
         int profilTraite = getMaxProfil();
         Connection c = null;
@@ -142,7 +141,7 @@ public class ProfilDAO {
         return profilTraite;
     }
 
-    private static void ajouterAssociationDansBDD(Profil profil, int max) {
+    private static void AddAssociationInDatabase(Profil profil, int max) {
         for (int numAssociationsDansProfil = 0; numAssociationsDansProfil < 12; numAssociationsDansProfil++) {
             AssociationsDansProfil adpTraite = profil.getAssociationsAt(numAssociationsDansProfil);
 
