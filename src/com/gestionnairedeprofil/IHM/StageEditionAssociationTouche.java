@@ -171,7 +171,7 @@ public class StageEditionAssociationTouche extends Stage
             public void handle(ActionEvent event)
             {
                 if (!panneauEditionAssocCourrant.associationValide()) {
-                    new StageMessageErreur(i, StageEditionAssociationTouche.this, "Votre association est impossible car\n" + panneauEditionAssocCourrant.getMessageDInvalidite());
+                    new StageMessageErreur(i, StageEditionAssociationTouche.this, Langue.getLangue().getString("StageEditionAssociationTouche_erreur") + "\n" + panneauEditionAssocCourrant.getMessageDInvalidite());
                 }
                 else {
                     profilConcerne.setAssociationsModifiesAt(panneauEditionAssocCourrant.getAssociations(), numDuBtnAModifier);

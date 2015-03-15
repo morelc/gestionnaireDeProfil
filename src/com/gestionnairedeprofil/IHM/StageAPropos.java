@@ -86,7 +86,7 @@ class StageAPropos extends Stage
         texteNoms.setFont(new Font(14 * i));
         texteNoms.setFill(Color.web("#696969", 1.0));
         texteNoms.setTextAlignment(TextAlignment.CENTER);
-        texteNoms.setText(Langue.getLangue().getString("StageAPropos_texteNoms"));
+        texteNoms.setText("MOREL Charles\n" + Langue.getLangue().getString("StageAPropos_texteNomsA") +  "\n\nTis Fakri\n" + Langue.getLangue().getString("StageAPropos_texteNomsB"));
 
         Text texteLicense = new Text();
         texteLicense.setX(15 * i);
