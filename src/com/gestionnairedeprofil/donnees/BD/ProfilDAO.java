@@ -38,17 +38,18 @@ public class ProfilDAO {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "org.sqlite.JDBC";
 
-    public static void saveProfil(Profil profil,int idMachine) {
+    public static void saveProfil(Profil profil, int idMachine) {
         deleteProfilById(profil.getId());
-        int max = addProfilInDatabase(profil.getNom(),idMachine);
+        int max = addProfilInDatabase(profil.getNom(), idMachine);
+        profil.setId(max);
         AddAssociationInDatabase(profil, max);
     }
 
-    public static ArrayList<Profil> getAllByMachineId(int id) {
+    public static ArrayList<Profil> getAllProfilByMachineId(int id) {
         ArrayList<Profil> ArrayListProfils = new ArrayList();
         String query = "SELECT * "
                 + "FROM Profils "
-                + "WHERE id=" + id;
+                + "WHERE machineId=" + id;
         Connection c = null;
         Statement stmt = null;
         try {
@@ -81,7 +82,7 @@ public class ProfilDAO {
     }
 
     public static void deleteProfilById(int id) {
-        String query = "DELETE FROM 'Profils' where 'id'=" + id;
+        String query = "DELETE FROM 'Profils' WHERE id=" + id;
         Connection c = null;
         Statement stmt = null;
         try {
@@ -89,7 +90,6 @@ public class ProfilDAO {
             c = DriverManager.getConnection("jdbc:sqlite:dbsqlite");
             c.setAutoCommit(false);
             stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
             stmt.executeUpdate(query);
             c.commit();
             stmt.close();
@@ -121,14 +121,15 @@ public class ProfilDAO {
         return max;
     }
 
-    private static int addProfilInDatabase(String nomProfil,int idMachine) {
-        String query = "INSERT INTO Profils (nom,machineId) VALUES ('" + nomProfil + "',"+idMachine+")";
-        int profilTraite = getMaxProfil();
+    private static int addProfilInDatabase(String nomProfil, int idMachine) {
+        String query = "INSERT INTO Profils (nom,machineId) VALUES ('" + nomProfil + "'," + idMachine + ")";
+        
         Connection c = null;
         Statement stmt = null;
         try {
             Class.forName(JDBC_DRIVER);
             c = DriverManager.getConnection("jdbc:sqlite:dbsqlite");
+            c.setAutoCommit(false);
             stmt = c.createStatement();
             stmt.executeUpdate(query);
             stmt.close();
@@ -138,7 +139,7 @@ public class ProfilDAO {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        return profilTraite;
+        return getMaxProfil();
     }
 
     private static void AddAssociationInDatabase(Profil profil, int max) {
@@ -153,19 +154,20 @@ public class ProfilDAO {
                     int timer = profil.getAssociationsAt(numAssociationsDansProfil).get(numAssociationTraite).getTimer();
                     int idTouche = profil.getAssociationsAt(numAssociationsDansProfil).get(numAssociationTraite).getTouches().get(numToucheTraite).getId();
                     String query = "INSERT INTO Associations (estAutoFire,timer,toucheNumIHM,idProfil,idToucheMachine) "
-                            + "VALUES (" + estAutoFire + "," + timer + "," + numAssociationsDansProfil + "," + max + "," + idTouche + ")";
+                            + "VALUES ('" + estAutoFire + "'," + timer + "," + numAssociationsDansProfil + "," + max + "," + idTouche + ")";
                     Connection c = null;
                     Statement stmt = null;
                     try {
                         Class.forName(JDBC_DRIVER);
                         c = DriverManager.getConnection("jdbc:sqlite:dbsqlite");
+                        c.setAutoCommit(false);
                         stmt = c.createStatement();
                         stmt.executeUpdate(query);
                         stmt.close();
                         c.commit();
                         c.close();
                     } catch (Exception e) {
-                        System.err.println(e.getClass().getName() + ": " + e.getMessage());
+                        System.err.println(e.getClass().getName() + ": AddAssociationInDatabase " + e.getMessage());
                         System.exit(0);
                     }
                 }

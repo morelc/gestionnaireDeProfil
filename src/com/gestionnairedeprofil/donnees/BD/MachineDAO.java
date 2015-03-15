@@ -60,7 +60,7 @@ public class MachineDAO
 
                 /*creation et association de l'ArrayListProfilAssocies à la machine*/
                 ArrayList<Profil> ArrayListProfilsAssocies = null;
-                ArrayListProfilsAssocies = ProfilDAO.getAllByMachineId(id);
+                ArrayListProfilsAssocies = ProfilDAO.getAllProfilByMachineId(id);
                 machine.setProfils(ArrayListProfilsAssocies);
 
                 /*creation et association de l'ArrayListToucheMachineAssocies à la machine*/

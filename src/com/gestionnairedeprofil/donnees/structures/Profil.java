@@ -27,15 +27,13 @@ package com.gestionnairedeprofil.donnees.structures;
  *
  * @author MOREL Charles
  */
-public class Profil
-{
+public class Profil {
 
-    private final int id;
+    private int id;
     private String nom;
     private final AssociationsDansProfil associations[];
 
-    public Profil(int idProfil, String nomProfil)
-    {
+    public Profil(int idProfil, String nomProfil) {
         this.id = idProfil;
         this.nom = nomProfil;
         this.associations = new AssociationsDansProfil[12];
@@ -47,24 +45,25 @@ public class Profil
     /**
      * @return the id
      */
-    public int getId()
-    {
+    public int getId() {
         return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
      * @return the nom
      */
-    public String getNom()
-    {
+    public String getNom() {
         return this.nom;
     }
 
     /**
      * @param nom the nom to set
      */
-    public void setNom(String nom)
-    {
+    public void setNom(String nom) {
         this.nom = nom;
     }
 
@@ -72,12 +71,10 @@ public class Profil
      * @param i
      * @return the associations
      */
-    public AssociationsDansProfil getAssociationsAt(int i)
-    {
+    public AssociationsDansProfil getAssociationsAt(int i) {
         if (i >= 0 && i <= 11) {
             return this.associations[i];
-        }
-        else {
+        } else {
             AssociationsDansProfil listeVide;
             listeVide = new AssociationsDansProfil();
             listeVide.add(new Association());
@@ -89,10 +86,10 @@ public class Profil
      * @param i
      * @param association the associations to set
      */
-    public void setAssociationsAt(int i, AssociationsDansProfil association)
-    {
+    public void setAssociationsAt(int i, AssociationsDansProfil association) {
         if (i >= 0 && i <= 11) {
             this.associations[i] = association;
         }
     }
+
 }

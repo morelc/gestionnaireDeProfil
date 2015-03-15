@@ -6,7 +6,9 @@
 package com.gestionnairedeprofil.donnees.Tests;
 
 import com.gestionnairedeprofil.donnees.BD.AssociationDAO;
+import com.gestionnairedeprofil.donnees.BD.MachineDAO;
 import com.gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
+import com.gestionnairedeprofil.donnees.structures.Machine;
 import com.gestionnairedeprofil.donnees.structures.Profil;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,8 +27,10 @@ public class MainTest {
     /**
      * @param args the command line arguments
      */
+    @SuppressWarnings("empty-statement")
     public static void main(String[] args) {
-       System.out.println(true);
+       ArrayList<Machine> test = MachineDAO.getAll();
+       while(true);
     }
 
     static void Type(int id) {
