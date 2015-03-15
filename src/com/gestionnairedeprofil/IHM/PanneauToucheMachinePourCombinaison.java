@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
@@ -65,7 +65,7 @@ public class PanneauToucheMachinePourCombinaison extends AnchorPane
         this.btnEnlever.setMinSize(20 * dim, 20 * dim);
         this.btnEnlever.setPrefSize(20 * dim, 20 * dim);
         Tooltip infobulleEnlever = new Tooltip();
-        infobulleEnlever.setText(Langue.getLangue().getString("PanneauToucheMachinePourCombinaison_infobulleEnlever"));
+        infobulleEnlever.setText(Langue.getLangue().getString("PaneButtonForCombinaison_infobulleRemove"));
         this.btnEnlever.setTooltip(infobulleEnlever);
         this.getChildren().add(this.btnEnlever);
 

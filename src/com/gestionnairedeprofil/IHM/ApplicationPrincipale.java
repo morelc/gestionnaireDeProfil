@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
@@ -124,7 +124,7 @@ public class ApplicationPrincipale extends Application
         texteNumEtape1.setFont(new Font(20 * dim));
         texteNumEtape1.setFill(Color.WHITE);
         texteNumEtape1.setTextAlignment(TextAlignment.CENTER);
-        texteNumEtape1.setText(Langue.getLangue().getString("ApplicationPrincipale_texteNumEtape1"));
+        texteNumEtape1.setText(Langue.getLangue().getString("MainApp_stepNum1"));
 
         Text texteNumEtape2 = new Text();
         texteNumEtape2.setX(285 * dim);
@@ -132,7 +132,7 @@ public class ApplicationPrincipale extends Application
         texteNumEtape2.setFont(new Font(20 * dim));
         texteNumEtape2.setFill(Color.WHITE);
         texteNumEtape2.setTextAlignment(TextAlignment.CENTER);
-        texteNumEtape2.setText(Langue.getLangue().getString("ApplicationPrincipale_texteNumEtape2"));
+        texteNumEtape2.setText(Langue.getLangue().getString("MainApp_stepNum2"));
 
         Text texteNumEtape3 = new Text();
         texteNumEtape3.setX(525 * dim);
@@ -140,7 +140,7 @@ public class ApplicationPrincipale extends Application
         texteNumEtape3.setFont(new Font(20 * dim));
         texteNumEtape3.setFill(Color.WHITE);
         texteNumEtape3.setTextAlignment(TextAlignment.CENTER);
-        texteNumEtape3.setText(Langue.getLangue().getString("ApplicationPrincipale_texteNumEtape3"));
+        texteNumEtape3.setText(Langue.getLangue().getString("MainApp_stepNum3"));
 
         Text texteEtape1 = new Text();
         texteEtape1.setX(80 * dim);
@@ -148,7 +148,7 @@ public class ApplicationPrincipale extends Application
         texteEtape1.setFont(new Font(20 * dim));
         texteEtape1.setFill(Color.web("#696969", 1.0));
         texteEtape1.setTextAlignment(TextAlignment.CENTER);
-        texteEtape1.setText(Langue.getLangue().getString("ApplicationPrincipale_texteEtape1"));
+        texteEtape1.setText(Langue.getLangue().getString("MainApp_textStep1"));
 
         Text texteEtape2 = new Text();
         texteEtape2.setX(320 * dim);
@@ -156,7 +156,7 @@ public class ApplicationPrincipale extends Application
         texteEtape2.setFont(new Font(20 * dim));
         texteEtape2.setFill(Color.web("#696969", 1.0));
         texteEtape2.setTextAlignment(TextAlignment.CENTER);
-        texteEtape2.setText(Langue.getLangue().getString("ApplicationPrincipale_texteEtape2"));
+        texteEtape2.setText(Langue.getLangue().getString("MainApp_textStep2"));
 
         Text texteEtape3 = new Text();
         texteEtape3.setX(575 * dim);
@@ -164,7 +164,7 @@ public class ApplicationPrincipale extends Application
         texteEtape3.setFont(new Font(20 * dim));
         texteEtape3.setFill(Color.web("#696969", 1.0));
         texteEtape3.setTextAlignment(TextAlignment.CENTER);
-        texteEtape3.setText(Langue.getLangue().getString("ApplicationPrincipale_texteEtape3"));
+        texteEtape3.setText(Langue.getLangue().getString("MainApp_textStep3"));
 
         Text texteSelectionLecteur = new Text();
         texteSelectionLecteur.setX(515 * dim);
@@ -172,7 +172,7 @@ public class ApplicationPrincipale extends Application
         texteSelectionLecteur.setFont(new Font(15 * dim));
         texteSelectionLecteur.setFill(Color.web("#696969", 1.0));
         texteSelectionLecteur.setTextAlignment(TextAlignment.CENTER);
-        texteSelectionLecteur.setText(Langue.getLangue().getString("ApplicationPrincipale_texteSelectionLecteur"));
+        texteSelectionLecteur.setText(Langue.getLangue().getString("MainApp_textDeviceSelection"));
 
         Text texteBoutonEnvoyer = new Text();
         texteBoutonEnvoyer.setX(550 * dim);
@@ -180,7 +180,7 @@ public class ApplicationPrincipale extends Application
         texteBoutonEnvoyer.setFont(new Font(15 * dim));
         texteBoutonEnvoyer.setFill(Color.web("#696969", 1.0));
         texteBoutonEnvoyer.setTextAlignment(TextAlignment.CENTER);
-        texteBoutonEnvoyer.setText(Langue.getLangue().getString("ApplicationPrincipale_texteBoutonEnvoyer"));
+        texteBoutonEnvoyer.setText(Langue.getLangue().getString("MainApp_textBtnSend"));
 
         MenuDAideLogiciel menuDAide = new MenuDAideLogiciel(dim, stage, this);
         menuDAide.setLayoutX(700 * dim);
@@ -195,7 +195,7 @@ public class ApplicationPrincipale extends Application
         panneauProfilsDuPc.setMaxSize(200 * dim, 270 * dim);
         panneauProfilsDuPc.setMinSize(200 * dim, 270 * dim);
 
-        Button btnCreationProfil = new Button(Langue.getLangue().getString("ApplicationPrincipale_btnCreationProfil"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png"))));
+        Button btnCreationProfil = new Button(Langue.getLangue().getString("MainApp_btnProfileCreation"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png"))));
         btnCreationProfil.setLayoutX(20 * dim);
         btnCreationProfil.setLayoutY(345 * dim);
         btnCreationProfil.setPrefSize(200 * dim, 20 * dim);
@@ -203,7 +203,7 @@ public class ApplicationPrincipale extends Application
         btnCreationProfil.setMinSize(200 * dim, 20 * dim);
         btnCreationProfil.setFont(new Font(7 * dim));
         Tooltip infobulleBtnAjouter = new Tooltip();
-        infobulleBtnAjouter.setText(Langue.getLangue().getString("ApplicationPrincipale_infobulleBtnAjouter"));
+        infobulleBtnAjouter.setText(Langue.getLangue().getString("MainApp_infobulleBtnCreation"));
         btnCreationProfil.setTooltip(infobulleBtnAjouter);
 
         final ListeProfilsAEnvoyer panneauProfilsVersPad = new ListeProfilsAEnvoyer(dim, panneauProfilsDuPc);
@@ -227,10 +227,10 @@ public class ApplicationPrincipale extends Application
         btnafraichirListeLecteurs.setMaxSize(20 * dim, 20 * dim);
         btnafraichirListeLecteurs.setMinSize(20 * dim, 20 * dim);
         Tooltip infobulleBtnRafraichir = new Tooltip();
-        infobulleBtnRafraichir.setText(Langue.getLangue().getString("ApplicationPrincipale_btnafraichirListeLecteurs"));
+        infobulleBtnRafraichir.setText(Langue.getLangue().getString("MainApp_btnrefreshDevicesList"));
         btnafraichirListeLecteurs.setTooltip(infobulleBtnRafraichir);
 
-        Button btnEnvoiVersCarteSD = new Button(Langue.getLangue().getString("ApplicationPrincipale_btnEnvoiVersCarteSD"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
+        Button btnEnvoiVersCarteSD = new Button(Langue.getLangue().getString("MainApp_btnSendToSDCard"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
         btnEnvoiVersCarteSD.setLayoutX(550 * dim);
         btnEnvoiVersCarteSD.setLayoutY(280 * dim);
         btnEnvoiVersCarteSD.setPrefSize(100 * dim, 20 * dim);
@@ -238,7 +238,7 @@ public class ApplicationPrincipale extends Application
         btnEnvoiVersCarteSD.setMinSize(100 * dim, 20 * dim);
         btnEnvoiVersCarteSD.setFont(new Font(7 * dim));
         Tooltip infobulleBtnEnvoi = new Tooltip();
-        infobulleBtnEnvoi.setText(Langue.getLangue().getString("ApplicationPrincipale_infobulleBtnEnvoi"));
+        infobulleBtnEnvoi.setText(Langue.getLangue().getString("MainApp_infobulleBtnSend"));
         btnEnvoiVersCarteSD.setTooltip(infobulleBtnEnvoi);
 
         // Pour l'exemple
@@ -449,7 +449,7 @@ public class ApplicationPrincipale extends Application
         Scene scene = new Scene(root, 720 * dim, 380 * dim, new LinearGradient(0, 1, 1, 0, true, CycleMethod.NO_CYCLE, new Stop[]{new Stop(0, Color.web("#FFFFFF", 1.0)), new Stop(1, Color.web("#B4B4B4", 1.0))}));
 
         // Configuration de Stage
-        stage.setTitle(Langue.getLangue().getString("ApplicationPrincipale_titreStage"));
+        stage.setTitle(Langue.getLangue().getString("MainApp_title"));
         stage.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/icone.png")));
         stage.setScene(scene);
         stage.setResizable(false);

@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
@@ -54,7 +54,7 @@ import javafx.util.Duration;
 public class PanneauEditionCombinaison extends AnchorPane implements InterfaceEditionAssociation, InterfacePanneauTypeCombinaison
 {
 
-    public final static String MESSAGE_INVALIDITE = Langue.getLangue().getString("PanneauEditionCombinaison_MESSAGE_INVALIDITE");
+    public final static String MESSAGE_INVALIDITE = Langue.getLangue().getString("CombinaisonEditionPane_ERROR_MESSAGE");
     private final ArrayList<PanneauToucheMachinePourCombinaison> combinaison;
     private final ArrayList<ToucheMachine> touchesDisponiblesAffichables;
     private final Button btnAjouterCmb;
@@ -76,20 +76,20 @@ public class PanneauEditionCombinaison extends AnchorPane implements InterfaceEd
         texteCombinaison.setFont(new Font(15 * i));
         texteCombinaison.setFill(Color.web("#696969", 1.0));
         texteCombinaison.setTextAlignment(TextAlignment.CENTER);
-        texteCombinaison.setText(Langue.getLangue().getString("PanneauEditionCombinaison_texteCombinaison"));
+        texteCombinaison.setText(Langue.getLangue().getString("CombinaisonEditionPane_textCombinaison"));
         this.getChildren().add(texteCombinaison);
 
         // Configuration des contrôles
         this.combinaison = new ArrayList();
 
-        this.btnAjouterCmb = new Button(Langue.getLangue().getString("PanneauEditionCombinaison_btnAjouterCmb"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png"))));
+        this.btnAjouterCmb = new Button(Langue.getLangue().getString("CombinaisonEditionPane_btnAddCmb"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png"))));
         this.btnAjouterCmb.setLayoutX(90 * i);
         this.btnAjouterCmb.setLayoutY(155 * i);
         this.btnAjouterCmb.setMaxSize(105 * i, 20 * i);
         this.btnAjouterCmb.setMinSize(105 * i, 20 * i);
         this.btnAjouterCmb.setPrefSize(105 * i, 20 * i);
         Tooltip infobulleBtnAjouterCmb = new Tooltip();
-        infobulleBtnAjouterCmb.setText(Langue.getLangue().getString("PanneauEditionCombinaison_infobulleBtnAjouterCmb"));
+        infobulleBtnAjouterCmb.setText(Langue.getLangue().getString("CombinaisonEditionPane_infobulleBtnAddCmb"));
         this.btnAjouterCmb.setTooltip(infobulleBtnAjouterCmb);
         this.getChildren().add(this.btnAjouterCmb);
 

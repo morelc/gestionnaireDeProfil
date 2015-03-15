@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
@@ -49,7 +49,7 @@ public class StageMessageErreur extends Stage
     public StageMessageErreur(double i, Stage stageParent, String messageComplementaireErreur)
     {
         // configuration des dépendances
-        this.setTitle(Langue.getLangue().getString("StageMessageErreur_title"));
+        this.setTitle(Langue.getLangue().getString("ErrorWindow_title"));
         this.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/cancel.png")));
         this.initModality(Modality.WINDOW_MODAL);
         this.initOwner(stageParent);
@@ -63,7 +63,7 @@ public class StageMessageErreur extends Stage
         texteErreur.setFont(new Font(15 * i));
         texteErreur.setFill(Color.web("#696969", 1.0));
         texteErreur.setTextAlignment(TextAlignment.CENTER);
-        texteErreur.setText(Langue.getLangue().getString("StageMessageErreur_texteErreur") + "\n"
+        texteErreur.setText(Langue.getLangue().getString("ErrorWindow_textError") + "\n"
                 + messageComplementaireErreur);
 
         ImageView fondErreur = new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/info.png")));
@@ -74,7 +74,7 @@ public class StageMessageErreur extends Stage
 
         // Configuration des contrôles
 
-        Button btnOk = new Button(Langue.getLangue().getString("StageMessageErreur_btnOk"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
+        Button btnOk = new Button(Langue.getLangue().getString("ErrorWindow_btnOk"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
         btnOk.setLayoutX(325 * i);
         btnOk.setLayoutY(100 * i);
         btnOk.setPrefSize(50 * i, 25 * i);

@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
@@ -77,7 +77,7 @@ public class PanneauProfilDisponible extends Pane
         btnEditer.setPrefSize(25 * dim, 15 * dim);
         btnEditer.setOpacity(0);
         Tooltip infobulleBtnEditer = new Tooltip();
-        infobulleBtnEditer.setText(Langue.getLangue().getString("PanneauProfilDisponible_infobulleBtnEditer"));
+        infobulleBtnEditer.setText(Langue.getLangue().getString("PaneProfileAvailable_infobulleBtnEdit"));
         btnEditer.setTooltip(infobulleBtnEditer);
         this.getChildren().add(btnEditer);
 
@@ -89,7 +89,7 @@ public class PanneauProfilDisponible extends Pane
         btnSupprimer.setPrefSize(25 * dim, 15 * dim);
         btnSupprimer.setOpacity(0);
         Tooltip infobulleBtnSupprimer = new Tooltip();
-        infobulleBtnSupprimer.setText(Langue.getLangue().getString("PanneauProfilDisponible_infobulleBtnSupprimer"));
+        infobulleBtnSupprimer.setText(Langue.getLangue().getString("PaneProfileAvailable_infobulleBtnDelete"));
         btnSupprimer.setTooltip(infobulleBtnSupprimer);
         this.getChildren().add(btnSupprimer);
 
@@ -101,7 +101,7 @@ public class PanneauProfilDisponible extends Pane
         this.btnAjouterALaListeDEnvoi.setPrefSize(25 * dim, 15 * dim);
         this.btnAjouterALaListeDEnvoi.setOpacity(0);
         Tooltip infobulleBtnAjouterALaListeDEnvoi = new Tooltip();
-        infobulleBtnAjouterALaListeDEnvoi.setText(Langue.getLangue().getString("PanneauProfilDisponible_infobulleBtnAjouterALaListeDEnvoi"));
+        infobulleBtnAjouterALaListeDEnvoi.setText(Langue.getLangue().getString("PaneProfileAvailable_infobulleBtnAddToSEndList"));
         this.btnAjouterALaListeDEnvoi.setTooltip(infobulleBtnAjouterALaListeDEnvoi);
         this.getChildren().add(this.btnAjouterALaListeDEnvoi);
 

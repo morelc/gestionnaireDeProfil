@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
@@ -75,7 +75,7 @@ public class StageEnvoiProfilSurCarteSD extends Stage
     public StageEnvoiProfilSurCarteSD(final double i, Stage stageParent, String emplacement, ArrayList<Profil> listeDesProfilsAEnvoyer)
     {
         // configuration des dépendances
-        this.setTitle(Langue.getLangue().getString("StageEnvoiProfilSurCarteSD_title"));
+        this.setTitle(Langue.getLangue().getString("SendOnSDCardWindow_title"));
         this.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/saveToSDCard.png")));
         this.initModality(Modality.WINDOW_MODAL);
         this.initOwner(stageParent);
@@ -87,11 +87,11 @@ public class StageEnvoiProfilSurCarteSD extends Stage
         this.fichierProfil = new File(emplacement + StageEnvoiProfilSurCarteSD.NOM_FICHIER_PROFIL);
         if (listeDesProfilsAEnvoyer.isEmpty()) {
             this.etape = -1;
-            this.texteErreur.setText(Langue.getLangue().getString("StageEnvoiProfilSurCarteSD_texteErreur1"));
+            this.texteErreur.setText(Langue.getLangue().getString("SendOnSDCardWindow_textrror1"));
         }
         else if (!racineProfil.exists()) {
             this.etape = -1;
-            this.texteErreur.setText(Langue.getLangue().getString("StageEnvoiProfilSurCarteSD_texteErreur2"));
+            this.texteErreur.setText(Langue.getLangue().getString("SendOnSDCardWindow_textrror2"));
         }
         else if (this.fichierProfil.exists()) {
             this.etape = 0;
@@ -132,7 +132,7 @@ public class StageEnvoiProfilSurCarteSD extends Stage
         texteAttention.setFont(new Font(15 * i));
         texteAttention.setFill(Color.web("#696969", 1.0));
         texteAttention.setTextAlignment(TextAlignment.CENTER);
-        texteAttention.setText(Langue.getLangue().getString("StageEnvoiProfilSurCarteSD_texteAttention"));
+        texteAttention.setText(Langue.getLangue().getString("SendOnSDCardWindow_textDanger"));
 
         ProgressBar pbPlacebo = new ProgressBar();
         pbPlacebo.setLayoutX(820 * i);
@@ -148,7 +148,7 @@ public class StageEnvoiProfilSurCarteSD extends Stage
         textePlocebo.setFont(new Font(15 * i));
         textePlocebo.setFill(Color.web("#696969", 1.0));
         textePlocebo.setTextAlignment(TextAlignment.LEFT);
-        textePlocebo.setText(Langue.getLangue().getString("StageEnvoiProfilSurCarteSD_textePlocebo"));
+        textePlocebo.setText(Langue.getLangue().getString("SendOnSDCardWindow_textWait"));
 
         Text texteNePasRetirerCarteSD = new Text();
         texteNePasRetirerCarteSD.setLayoutX(900 * i);
@@ -156,7 +156,7 @@ public class StageEnvoiProfilSurCarteSD extends Stage
         texteNePasRetirerCarteSD.setFont(new Font(8 * i));
         texteNePasRetirerCarteSD.setFill(Color.web("#696969", 1.0));
         texteNePasRetirerCarteSD.setTextAlignment(TextAlignment.LEFT);
-        texteNePasRetirerCarteSD.setText(Langue.getLangue().getString("StageEnvoiProfilSurCarteSD_texteNePasRetirerCarteSD"));
+        texteNePasRetirerCarteSD.setText(Langue.getLangue().getString("SendOnSDCardWindow_textDoNotRemove"));
 
         ImageView fondFin = new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/saveToSDCard.png")));
         fondFin.setFitHeight(78 * i);
@@ -171,11 +171,11 @@ public class StageEnvoiProfilSurCarteSD extends Stage
         texteFin.setFont(new Font(15 * i));
         texteFin.setFill(Color.web("#696969", 1.0));
         texteFin.setTextAlignment(TextAlignment.LEFT);
-        texteFin.setText(Langue.getLangue().getString("StageEnvoiProfilSurCarteSD_texteFin"));
+        texteFin.setText(Langue.getLangue().getString("SendOnSDCardWindow_textDone"));
 
         // Configuration des contrôles
 
-        Button btnFermerFenetreErreur = new Button(Langue.getLangue().getString("StageEnvoiProfilSurCarteSD_btnFermerFenetreErreur"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
+        Button btnFermerFenetreErreur = new Button(Langue.getLangue().getString("SendOnSDCardWindow_btnCloseWindowError"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
         btnFermerFenetreErreur.setLayoutX(325 * i);
         btnFermerFenetreErreur.setLayoutY(45 * i);
         btnFermerFenetreErreur.setPrefSize(50 * i, 25 * i);
@@ -183,7 +183,7 @@ public class StageEnvoiProfilSurCarteSD extends Stage
         btnFermerFenetreErreur.setMinSize(50 * i, 25 * i);
         btnFermerFenetreErreur.setFont(new Font(7 * i));
 
-        Button btnContinuerEnvoi = new Button(Langue.getLangue().getString("StageEnvoiProfilSurCarteSD_btnContinuerEnvoi"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
+        Button btnContinuerEnvoi = new Button(Langue.getLangue().getString("SendOnSDCardWindow_btnContinueSend"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
         btnContinuerEnvoi.setLayoutX(700 * i);
         btnContinuerEnvoi.setLayoutY(50 * i);
         btnContinuerEnvoi.setPrefSize(75 * i, 25 * i);
@@ -191,7 +191,7 @@ public class StageEnvoiProfilSurCarteSD extends Stage
         btnContinuerEnvoi.setMinSize(75 * i, 25 * i);
         btnContinuerEnvoi.setFont(new Font(7 * i));
 
-        Button btnAnnulerEnvoi = new Button(Langue.getLangue().getString("StageEnvoiProfilSurCarteSD_btnAnnulerEnvoi"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/cancel.png"))));
+        Button btnAnnulerEnvoi = new Button(Langue.getLangue().getString("SendOnSDCardWindow_btnCancelSend"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/cancel.png"))));
         btnAnnulerEnvoi.setLayoutX(600 * i);
         btnAnnulerEnvoi.setLayoutY(50 * i);
         btnAnnulerEnvoi.setPrefSize(75 * i, 25 * i);
@@ -199,7 +199,7 @@ public class StageEnvoiProfilSurCarteSD extends Stage
         btnAnnulerEnvoi.setMinSize(75 * i, 25 * i);
         btnAnnulerEnvoi.setFont(new Font(7 * i));
 
-        Button btnOk = new Button(Langue.getLangue().getString("StageEnvoiProfilSurCarteSD_btnOk"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
+        Button btnOk = new Button(Langue.getLangue().getString("SendOnSDCardWindow_btnOkDoneSend"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
         btnOk.setLayoutX(1500 * i);
         btnOk.setLayoutY(50 * i);
         btnOk.setPrefSize(75 * i, 25 * i);
@@ -324,7 +324,7 @@ public class StageEnvoiProfilSurCarteSD extends Stage
                 this.etape = 2;
             }
             catch (IOException exception) {
-                this.texteErreur.setText("Une erreur s'est produite, veuillez réessayer!");
+                this.texteErreur.setText(Langue.getLangue().getString("SendOnSDCardWindow_textrror3"));
                 System.out.println(exception.getMessage());
                 this.etape = -1;
             }

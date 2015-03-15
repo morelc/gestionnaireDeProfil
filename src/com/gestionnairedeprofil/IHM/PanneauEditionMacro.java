@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
@@ -120,7 +120,7 @@ public class PanneauEditionMacro extends AnchorPane implements InterfaceEditionA
             replacerElement(this.combinaisons.get(i), i);
         }
         redimensionnerPourNAssociations(this.combinaisons.get(panneauCourrant).getTailleDeLaCombinaison());
-        this.texteEditionMacro.setText(Langue.getLangue().getString("PanneauEditionMacro_texteEditionMacro") + " (" + (this.panneauCourrant + 1) + "/" + this.combinaisons.size() + ")");
+        this.texteEditionMacro.setText(Langue.getLangue().getString("MacorEditionPane_textMacroEdition") + " (" + (this.panneauCourrant + 1) + "/" + this.combinaisons.size() + ")");
     }
 
     private void replacerElement(PanneauCombinaisonPourMacro panneauAReplacer, int idEmplacementDansCollection)
@@ -275,16 +275,16 @@ public class PanneauEditionMacro extends AnchorPane implements InterfaceEditionA
         for (int x = 0; x < this.combinaisons.size(); x++) {
             PanneauCombinaisonPourMacro assocATester = this.combinaisons.get(x);
             if (!assocATester.associationValide()) {
-                return Langue.getLangue().getString("PanneauEditionMacro_messageDInvalidite1") + " " + (x + 1);
+                return Langue.getLangue().getString("MacorEditionPane_textError1") + " " + (x + 1);
             }
             if (instants.contains(assocATester.getNumInstant())) {
-                return Langue.getLangue().getString("PanneauEditionMacro_messageDInvalidite2A") + " " + (x + 1) + Langue.getLangue().getString("PanneauEditionMacro_messageDInvalidite2B") + " " + (instants.indexOf(assocATester.getNumInstant()) + 1);
+                return Langue.getLangue().getString("MacorEditionPane_textError2A") + " " + (x + 1) + Langue.getLangue().getString("MacorEditionPane_textError2B") + " " + (instants.indexOf(assocATester.getNumInstant()) + 1);
             }
             else {
                 instants.add(assocATester.getNumInstant());
             }
         }
-        return Langue.getLangue().getString("PanneauEditionMacro_messageDInvalidite3");
+        return Langue.getLangue().getString("MacorEditionPane_textError3");
     }
 
 }

@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.configuration;
 
@@ -59,7 +59,7 @@ public class StageDeConfiguration extends Stage
     public StageDeConfiguration(double i, final Stage stageAppPrincipal)
     {
         // configuration des dépendances
-        this.setTitle(Langue.getLangue().getString("StageDeConfiguration_title"));
+        this.setTitle(Langue.getLangue().getString("ConfigWindow_title"));
         this.initModality(Modality.WINDOW_MODAL);
         this.initStyle(StageStyle.UTILITY);
         this.initOwner(stageAppPrincipal);
@@ -72,7 +72,7 @@ public class StageDeConfiguration extends Stage
         texteSelection.setFont(new Font(15 * i));
         texteSelection.setFill(Color.web("#696969", 1.0));
         texteSelection.setTextAlignment(TextAlignment.CENTER);
-        texteSelection.setText(Langue.getLangue().getString("StageDeConfiguration_texteSelection"));
+        texteSelection.setText(Langue.getLangue().getString("ConfigWindow_textLanguageSelection"));
 
         Text texteRedemarrage = new Text();
         texteRedemarrage.setLayoutX(25 * i);
@@ -80,7 +80,7 @@ public class StageDeConfiguration extends Stage
         texteRedemarrage.setFont(new Font(10 * i));
         texteRedemarrage.setFill(Color.web("#696969", 1.0));
         texteRedemarrage.setTextAlignment(TextAlignment.CENTER);
-        texteRedemarrage.setText(Langue.getLangue().getString("StageDeConfiguration_texteRedemarrage"));
+        texteRedemarrage.setText(Langue.getLangue().getString("ConfigWindow_textReboot"));
 
         // Configuration des contrôles
         final ComboBox cbSelectionMachine = new ComboBox();

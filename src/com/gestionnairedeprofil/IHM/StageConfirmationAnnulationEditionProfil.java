@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
@@ -49,7 +49,7 @@ public class StageConfirmationAnnulationEditionProfil extends Stage
     public StageConfirmationAnnulationEditionProfil(final StageEditionProfil profilConcerne)
     {
         // configuration des dépendances
-        this.setTitle(Langue.getLangue().getString("StageConfirmationAnnulationEditionProfil_title"));
+        this.setTitle(Langue.getLangue().getString("CancelProfileEditionWindow_title"));
         this.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/cancel.png")));
         this.initModality(Modality.APPLICATION_MODAL);
         this.initOwner(profilConcerne);
@@ -64,7 +64,7 @@ public class StageConfirmationAnnulationEditionProfil extends Stage
         texteDanger.setFont(new Font(15 * i));
         texteDanger.setFill(Color.web("#696969", 1.0));
         texteDanger.setTextAlignment(TextAlignment.CENTER);
-        texteDanger.setText(Langue.getLangue().getString("StageConfirmationAnnulationEditionProfil_texteDanger"));
+        texteDanger.setText(Langue.getLangue().getString("CancelProfileEditionWindow_textDanger"));
 
         ImageView fond_Danger = new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/warning.png")));
         fond_Danger.setFitHeight(185 * i);
@@ -74,7 +74,7 @@ public class StageConfirmationAnnulationEditionProfil extends Stage
 
         // Configuration des contrôles
 
-        Button btnOk = new Button(Langue.getLangue().getString("StageConfirmationAnnulationEditionProfil_btnOk"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
+        Button btnOk = new Button(Langue.getLangue().getString("CancelProfileEditionWindow_btnOk"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
         btnOk.setLayoutX(170 * i);
         btnOk.setLayoutY(100 * i);
         btnOk.setPrefSize(50 * i, 25 * i);
@@ -82,7 +82,7 @@ public class StageConfirmationAnnulationEditionProfil extends Stage
         btnOk.setMinSize(50 * i, 25 * i);
         btnOk.setFont(new Font(7 * i));
 
-        Button btnNon = new Button(Langue.getLangue().getString("StageConfirmationAnnulationEditionProfil_btnNon"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/cancel.png"))));
+        Button btnNon = new Button(Langue.getLangue().getString("CancelProfileEditionWindow_btnNon"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/cancel.png"))));
         btnNon.setLayoutX(250 * i);
         btnNon.setLayoutY(100 * i);
         btnNon.setPrefSize(50 * i, 25 * i);

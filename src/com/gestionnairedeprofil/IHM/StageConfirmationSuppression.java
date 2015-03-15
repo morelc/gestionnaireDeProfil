@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
@@ -49,7 +49,7 @@ public class StageConfirmationSuppression extends Stage
     public StageConfirmationSuppression(double i, final PanneauProfilDisponible profilConcerne, Stage stageParent, String nomProfilASupprimer, String nomMachineDuProfil)
     {
         // configuration des dépendances
-        this.setTitle(Langue.getLangue().getString("StageConfirmationSuppression_title"));
+        this.setTitle(Langue.getLangue().getString("DeletionConfirmationWindow_title"));
         this.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/del.png")));
         this.initModality(Modality.APPLICATION_MODAL);
         this.initOwner(stageParent);
@@ -79,7 +79,7 @@ public class StageConfirmationSuppression extends Stage
             nomMachineAAfiicher = nomMachineDuProfil;
         }
 
-        texteDanger.setText(Langue.getLangue().getString("StageConfirmationSuppression_texteDanger") + "\n" + nomProfilAAfiicher + " (" + nomMachineAAfiicher + ") ?");
+        texteDanger.setText(Langue.getLangue().getString("DeletionConfirmationWindow_textDanger") + "\n" + nomProfilAAfiicher + " (" + nomMachineAAfiicher + ") ?");
 
         ImageView fondDanger = new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/warning.png")));
         fondDanger.setFitHeight(185 * i);
@@ -89,7 +89,7 @@ public class StageConfirmationSuppression extends Stage
 
         // Configuration des contrôles
 
-        Button btnOk = new Button(Langue.getLangue().getString("StageConfirmationSuppression_btnOk"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
+        Button btnOk = new Button(Langue.getLangue().getString("DeletionConfirmationWindow_btnOk"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
         btnOk.setLayoutX(170 * i);
         btnOk.setLayoutY(100 * i);
         btnOk.setPrefSize(50 * i, 25 * i);
@@ -97,7 +97,7 @@ public class StageConfirmationSuppression extends Stage
         btnOk.setMinSize(50 * i, 25 * i);
         btnOk.setFont(new Font(7 * i));
 
-        Button btnNon = new Button(Langue.getLangue().getString("StageConfirmationSuppression_btnNon"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/del.png"))));
+        Button btnNon = new Button(Langue.getLangue().getString("DeletionConfirmationWindow_btnNon"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/del.png"))));
         btnNon.setLayoutX(250 * i);
         btnNon.setLayoutY(100 * i);
         btnNon.setPrefSize(50 * i, 25 * i);

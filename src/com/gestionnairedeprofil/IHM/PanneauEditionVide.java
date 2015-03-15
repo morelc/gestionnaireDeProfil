@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
@@ -66,7 +66,7 @@ public class PanneauEditionVide extends AnchorPane implements InterfaceEditionAs
         texteAppuiSimple.setFont(new Font(15 * i));
         texteAppuiSimple.setFill(Color.web("#696969", 1.0));
         texteAppuiSimple.setTextAlignment(TextAlignment.CENTER);
-        texteAppuiSimple.setText(Langue.getLangue().getString("PanneauEditionVide_texteAppuiSimple"));
+        texteAppuiSimple.setText(Langue.getLangue().getString("EmptyAssociationEditionPane_text"));
         this.getChildren().add(texteAppuiSimple);
     }
 

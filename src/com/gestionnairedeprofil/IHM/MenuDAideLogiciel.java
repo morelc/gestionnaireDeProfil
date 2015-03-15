@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
@@ -58,13 +58,13 @@ public class MenuDAideLogiciel extends Group
 
         // Configuration des contrôles
         final ContextMenu menuContextuel = new ContextMenu();
-        Menu menuAide = new Menu(Langue.getLangue().getString("MenuDAideLogiciel_menuAide"));
+        Menu menuAide = new Menu(Langue.getLangue().getString("SoftwareHelpMenu_helpMenu"));
         menuContextuel.getItems().add(menuAide);
-        MenuItem sousMenuAide1 = new MenuItem(Langue.getLangue().getString("MenuDAideLogiciel_sousMenuAide1"));
+        MenuItem sousMenuAide1 = new MenuItem(Langue.getLangue().getString("SoftwareHelpMenu_subMenuHelp1"));
         menuAide.getItems().add(sousMenuAide1);
-        MenuItem menuChangerLangue = new MenuItem(Langue.getLangue().getString("MenuDAideLogiciel_menuChangerLangue"));
+        MenuItem menuChangerLangue = new MenuItem(Langue.getLangue().getString("SoftwareHelpMenu_menuChangeLanguage"));
         menuContextuel.getItems().add(menuChangerLangue);
-        MenuItem menuAPropos = new MenuItem(Langue.getLangue().getString("MenuDAideLogiciel_menuAPropos"));
+        MenuItem menuAPropos = new MenuItem(Langue.getLangue().getString("SoftwareHelpMenu_menuAbout"));
         menuContextuel.getItems().add(menuAPropos);
 
         // Configuration des noeuds statiques
