@@ -151,10 +151,13 @@ public class ProfilDAO {
 
                 for (int numToucheTraite = 0; numToucheTraite < nbrTouche; numToucheTraite++) {
                     boolean estAutoFire = profil.getAssociationsAt(numAssociationsDansProfil).get(numAssociationTraite).isEstAutofire();
+                    int estAutoFireInt = 0;
+                    if (estAutoFire)
+                        estAutoFireInt=1;
                     int timer = profil.getAssociationsAt(numAssociationsDansProfil).get(numAssociationTraite).getTimer();
                     int idTouche = profil.getAssociationsAt(numAssociationsDansProfil).get(numAssociationTraite).getTouches().get(numToucheTraite).getId();
                     String query = "INSERT INTO Associations (estAutoFire,timer,toucheNumIHM,idProfil,idToucheMachine) "
-                            + "VALUES ('" + estAutoFire + "'," + timer + "," + numAssociationsDansProfil + "," + max + "," + idTouche + ")";
+                            + "VALUES ('" + estAutoFireInt + "'," + timer + "," + numAssociationsDansProfil + "," + max + "," + idTouche + ")";
                     Connection c = null;
                     Statement stmt = null;
                     try {

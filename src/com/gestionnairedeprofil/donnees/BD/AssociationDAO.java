@@ -54,7 +54,7 @@ public class AssociationDAO
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 int id = rs.getInt("id");
-                Boolean estAutoFire = rs.getBoolean("estAutoFire");
+                Boolean estAutoFire = rs.getInt("estAutoFire")>0;
                 int timer = rs.getInt("timer");
                 Association assoc = new Association(id, estAutoFire, timer);
                 ToucheMachineDAO.getToucheByAssociation(assoc, idP, i);
@@ -67,6 +67,8 @@ public class AssociationDAO
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
+        if(adp.size()==0)
+            adp.add(new Association());
         return adp;
     }
 }
