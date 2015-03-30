@@ -23,8 +23,6 @@ package com.gestionnairedeprofil.donnees.BD;
 
 import com.gestionnairedeprofil.donnees.structures.Association;
 import com.gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -34,9 +32,6 @@ import java.sql.Statement;
 public class AssociationDAO
 {
 
-    // JDBC driver name and database URL
-    static final String JDBC_DRIVER = "org.sqlite.JDBC";
-
     public static AssociationsDansProfil getAssociationByIdProfilAndIdAssociation(int idP, int i)
     {
         AssociationsDansProfil adp = new AssociationsDansProfil();
@@ -45,47 +40,38 @@ public class AssociationDAO
                 + "WHERE idProfil=" + idP
                 + " AND toucheNumIHM=" + i
                 + " GROUP BY timer";
-        Connection c = null;
-        Statement stmt = null;
         try {
-            Class.forName(JDBC_DRIVER);
-            c = DriverManager.getConnection("jdbc:sqlite:dbsqlite");
-            stmt = c.createStatement();
+            Statement stmt = Connexion.getNewStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 int id = rs.getInt("id");
-                Boolean estAutoFire = rs.getInt("estAutoFire")>0;
+                Boolean estAutoFire = rs.getInt("estAutoFire") > 0;
                 int timer = rs.getInt("timer");
                 Association assoc = new Association(id, estAutoFire, timer);
                 ToucheMachineDAO.getToucheByAssociation(assoc, idP, i);
                 adp.add(assoc);
             }
             stmt.close();
-            c.close();
         }
         catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        if(adp.size()==0)
+        if (adp.size() == 0) {
             adp.add(new Association());
+        }
         return adp;
     }
-    
-      public static void deleteOnCascade(int idP){
+
+    public static void deleteOnCascade(int idP)
+    {
         String query = "DELETE FROM Associations WHERE idProfil=" + idP;
-        Connection c = null;
-        Statement stmt = null;
         try {
-            Class.forName(JDBC_DRIVER);
-            c = DriverManager.getConnection("jdbc:sqlite:dbsqlite");
-            c.setAutoCommit(false);
-            stmt = c.createStatement();
+            Statement stmt = Connexion.getNewStatement();
             stmt.executeUpdate(query);
-            c.commit();
             stmt.close();
-            c.close();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }

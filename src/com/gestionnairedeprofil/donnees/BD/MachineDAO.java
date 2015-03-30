@@ -24,8 +24,6 @@ package com.gestionnairedeprofil.donnees.BD;
 import com.gestionnairedeprofil.donnees.structures.Machine;
 import com.gestionnairedeprofil.donnees.structures.Profil;
 import com.gestionnairedeprofil.donnees.structures.ToucheMachine;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -36,20 +34,13 @@ import java.util.ArrayList;
 public class MachineDAO
 {
 
-    // JDBC driver name and database URL
-    static final String JDBC_DRIVER = "org.sqlite.JDBC";
-
     public static ArrayList getAll()
     {
         ArrayList<Machine> ArrayListMachine = new ArrayList();
         String query = "SELECT * "
                 + "FROM machine";
-        Connection c = null;
-        Statement stmt = null;
         try {
-            Class.forName(JDBC_DRIVER);
-            c = DriverManager.getConnection("jdbc:sqlite:dbsqlite");
-            stmt = c.createStatement();
+            Statement stmt = Connexion.getNewStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 /*récuperation de l'id et du nom de la machine*/
@@ -71,7 +62,6 @@ public class MachineDAO
                 ArrayListMachine.add(machine);
             }
             stmt.close();
-            c.close();
         }
         catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());

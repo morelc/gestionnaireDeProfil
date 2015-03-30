@@ -44,12 +44,8 @@ public class ToucheMachineDAO
         String query = "SELECT * "
                 + "FROM TouchesMachines "
                 + "WHERE idMachine = " + idMachine;
-        Connection c = null;
-        Statement stmt = null;
         try {
-            Class.forName(JDBC_DRIVER);
-            c = DriverManager.getConnection("jdbc:sqlite:dbsqlite");
-            stmt = c.createStatement();
+            Statement stmt = Connexion.getNewStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 /*récuperation de l'id et du nom de la machine*/
@@ -61,7 +57,6 @@ public class ToucheMachineDAO
                 ArrayTouchesMachine.add(touche);
             }
             stmt.close();
-            c.close();
         }
         catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -81,12 +76,8 @@ public class ToucheMachineDAO
                 + "WHERE Associations.timer=" + timerAssoc
                 + " AND Associations.toucheNumIHM=" + idTIHM
                 + " AND Associations.idProfil=" + idP + ")";
-        Connection c = null;
-        Statement stmt = null;
         try {
-            Class.forName(JDBC_DRIVER);
-            c = DriverManager.getConnection("jdbc:sqlite:dbsqlite");
-            stmt = c.createStatement();
+            Statement stmt = Connexion.getNewStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -96,7 +87,6 @@ public class ToucheMachineDAO
                 assoc.ajouterTouche(touche);
             }
             stmt.close();
-            c.close();
         }
         catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
