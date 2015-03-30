@@ -22,6 +22,7 @@
 package com.gestionnairedeprofil.IHM;
 
 import com.gestionnairedeprofil.configuration.Langue;
+import com.gestionnairedeprofil.donnees.BD.ProfilDAO;
 import com.gestionnairedeprofil.donnees.structures.Association;
 import com.gestionnairedeprofil.donnees.structures.Machine;
 import com.gestionnairedeprofil.donnees.structures.Profil;
@@ -176,8 +177,6 @@ public class StageCreationProfil extends Stage
 
     private void lancerAjoutSurBD(Machine machineSelectionee, String nomProfil, ListeProfilsDisponiblesMachine panneauMachine)
     {
-        System.err.println("FN lancerAjoutSurBD() NON TERMINEE");
-
         Profil nvProfil = new Profil(-1, nomProfil);
         for (int x = 0; x < 12; x++) {
             nvProfil.getAssociationsAt(x).add(new Association());

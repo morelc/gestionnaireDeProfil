@@ -63,8 +63,8 @@ public class Machine
     {
         return nom;
     }
-    
-        /**
+
+    /**
      * @return the nom
      */
     public String getFichier()

@@ -17,10 +17,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.donnees.BD;
 
+import com.gestionnairedeprofil.configuration.Configuration;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -35,16 +37,15 @@ import java.sql.Statement;
  */
 public class Connexion
 {
-    
+
     private static Connection CONNEXION_COURRANTE;
     private final static String JDBC_DRIVER = "org.sqlite.JDBC";
-    
+
     public static Statement getNewStatement() throws ClassNotFoundException, SQLException
     {
-        if(Connexion.CONNEXION_COURRANTE == null)
-        {
+        if (Connexion.CONNEXION_COURRANTE == null) {
             Class.forName(JDBC_DRIVER);
-            Connexion.CONNEXION_COURRANTE = DriverManager.getConnection("jdbc:sqlite:dbsqlite");
+            Connexion.CONNEXION_COURRANTE = DriverManager.getConnection("jdbc:sqlite:" + Configuration.DOSSIER_DES_DEPENDANCES + File.separator + Configuration.NOM_FICHIER_BASE_DE_DONNEES);
         }
         return Connexion.CONNEXION_COURRANTE.createStatement();
     }

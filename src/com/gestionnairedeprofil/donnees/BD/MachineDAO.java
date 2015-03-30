@@ -2,6 +2,7 @@
  * Programme used to manage all profils from a database and send them
  * to a SD Card
  * Copyright (C) 2014-2015 TIS Fakri
+ * (DB connection implementation by MOREL Charles)
  * See COPYING for Details
  * 
  * This file is part of Gestionnaire de profil.

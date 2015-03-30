@@ -23,6 +23,7 @@ package com.gestionnairedeprofil.IHM;
 
 import com.gestionnairedeprofil.configuration.Configuration;
 import com.gestionnairedeprofil.configuration.Langue;
+import com.gestionnairedeprofil.donnees.BD.ProfilDAO;
 import com.gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 import com.gestionnairedeprofil.donnees.structures.Machine;
 import com.gestionnairedeprofil.donnees.structures.Profil;
@@ -474,10 +475,8 @@ public class StageEditionProfil extends Stage
             }
         }
         this.panneauProfilAModifier.rafraichirNomProfil();
-        
+
         ProfilDAO.saveProfil(profilAModifier, this.machineDuProfilAModifier.getId());
-        System.err.println("FN sauvgarderProfilCourrant() NON TERMINEE");
-        
         return true;
     }
 
