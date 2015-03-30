@@ -21,12 +21,18 @@
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.configuration.Configuration;
 import com.gestionnairedeprofil.configuration.Langue;
 import com.gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 import com.gestionnairedeprofil.donnees.structures.Machine;
 import com.gestionnairedeprofil.donnees.structures.Profil;
 import com.gestionnairedeprofil.donnees.structures.ToucheMachine;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -45,6 +51,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javax.imageio.ImageIO;
 
 /**
  * Fenêtre de modification de profil.
@@ -120,6 +127,19 @@ public class StageEditionProfil extends Stage
         zoneImgManette.setFill(Color.gray(0.85));
         zoneImgManette.setStroke(Color.web("#696969", 1.0));
         zoneImgManette.setStrokeWidth(1 * i);
+
+        FileInputStream stream = null;
+        try {
+            File fichierDuStream = new File(Configuration.DOSSIER_DES_DEPENDANCES + File.separator + Configuration.DOSSIER_DES_IMAGES_DE_PAD + File.separator + machineDuProfil.getFichier());
+            stream = new FileInputStream(fichierDuStream.getAbsolutePath());
+        }
+        catch (FileNotFoundException ex) {
+        }
+        ImageView imgManette = new ImageView(new Image(stream));
+        imgManette.setFitHeight(145 * i);
+        imgManette.setPreserveRatio(true);
+        imgManette.setLayoutX(12 * i);
+        imgManette.setLayoutY(72 * i);
 
         Text textePad = new Text();
         textePad.setLayoutX(10 * i);
@@ -365,6 +385,7 @@ public class StageEditionProfil extends Stage
         root.getChildren().add(texteNomMachine);
         root.getChildren().add(texteManette);
         root.getChildren().add(zoneImgManette);
+        root.getChildren().add(imgManette);
         root.getChildren().add(textePad);
         root.getChildren().add(zoneImgPad);
         root.getChildren().add(btnPad1);

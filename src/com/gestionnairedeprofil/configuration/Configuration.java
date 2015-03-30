@@ -41,6 +41,7 @@ public class Configuration
 {
 
     public final static String DOSSIER_DES_DEPENDANCES = "Dependencies";
+    public final static String DOSSIER_DES_IMAGES_DE_PAD = "ControllerPictures";
     private final static String NOM_FICHIER_DE_CONFIGURATION = "config.properties";
     private final static String LANGUAGE_PAR_DEFAUT = "NOT_SET";
 

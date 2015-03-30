@@ -36,7 +36,7 @@ public class Machine
     private final String nom;
     private ArrayList<Profil> profils;
     private ArrayList<ToucheMachine> touches;
-    private String nomImage;
+    private final String nomImage;
 
     public Machine(int idMachine, String nomMachine, String nomImg)
     {
@@ -62,6 +62,14 @@ public class Machine
     public String getNom()
     {
         return nom;
+    }
+    
+        /**
+     * @return the nom
+     */
+    public String getFichier()
+    {
+        return nomImage;
     }
 
     /**

@@ -246,14 +246,14 @@ public class ApplicationPrincipale extends Application
         final ArrayList<Machine> toutesLesMachines = new ArrayList();
 
 
-        Machine machine1 = new Machine(2, "Sega Master System", "img1");
+        Machine machine1 = new Machine(2, "Sega Master System", "SMS.png");
 
-        ToucheMachine touche2 = new ToucheMachine(2, "Action", 2);
-        ToucheMachine touche6 = new ToucheMachine(2, "Saut", 8);
-        ToucheMachine touche7 = new ToucheMachine(2, "Droite", 16);
-        ToucheMachine touche8 = new ToucheMachine(2, "Gauche", 32);
-        ToucheMachine touche9 = new ToucheMachine(2, "Bas", 64);
-        ToucheMachine touche10 = new ToucheMachine(2, "Haut", 128);
+        ToucheMachine touche2 = new ToucheMachine(0, "←", 2);
+        ToucheMachine touche6 = new ToucheMachine(1, "↑", 8);
+        ToucheMachine touche7 = new ToucheMachine(2, "→", 16);
+        ToucheMachine touche8 = new ToucheMachine(3, "↓", 32);
+        ToucheMachine touche9 = new ToucheMachine(4, "1 - START", 64);
+        ToucheMachine touche10 = new ToucheMachine(5, "2", 128);
 
         machine1.ajouterTouche(touche2);
         machine1.ajouterTouche(touche6);
@@ -306,70 +306,6 @@ public class ApplicationPrincipale extends Application
         machine1.ajouterProfil(profil1);
 
         toutesLesMachines.add(machine1);
-
-
-        Machine machine2 = new Machine(1, "Test", "img2");
-
-        ToucheMachine toucheA1 = new ToucheMachine(3, "Signal 1", 1);
-        ToucheMachine toucheA2 = new ToucheMachine(4, "Signal 2", 2);
-        ToucheMachine toucheA3 = new ToucheMachine(4, "Signal 3", 4);
-        ToucheMachine toucheA4 = new ToucheMachine(4, "Signal 4", 8);
-        ToucheMachine toucheA5 = new ToucheMachine(4, "Signal 5", 16);
-        ToucheMachine toucheA6 = new ToucheMachine(4, "Signal 6", 32);
-        ToucheMachine toucheA7 = new ToucheMachine(4, "Signal 7", 64);
-        ToucheMachine toucheA8 = new ToucheMachine(4, "Signal 8", 128);
-
-        machine2.ajouterTouche(toucheA1);
-        machine2.ajouterTouche(toucheA2);
-        machine2.ajouterTouche(toucheA3);
-        machine2.ajouterTouche(toucheA4);
-        machine2.ajouterTouche(toucheA5);
-        machine2.ajouterTouche(toucheA6);
-        machine2.ajouterTouche(toucheA7);
-        machine2.ajouterTouche(toucheA8);
-
-        Profil profil2 = new Profil(1, "Profil 2");
-        Association assocA1 = new Association(21, false, 0);
-        assocA1.getTouches().add(machine1.getTouches().get(0));
-        profil2.getAssociationsAt(0).add(assocA1);
-        Association assocA2 = new Association(22, false, 0);
-        assocA2.getTouches().add(machine1.getTouches().get(0));
-        profil2.getAssociationsAt(1).add(assocA2);
-        Association assocA3 = new Association(23, false, 0);
-        assocA3.getTouches().add(machine1.getTouches().get(0));
-        profil2.getAssociationsAt(2).add(assocA3);
-        Association assocA4 = new Association(24, false, 0);
-        assocA4.getTouches().add(machine1.getTouches().get(0));
-        profil2.getAssociationsAt(3).add(assocA4);
-        Association assocA5 = new Association(25, false, 0);
-        assocA5.getTouches().add(machine1.getTouches().get(0));
-        profil2.getAssociationsAt(4).add(assocA5);
-        Association assocA6 = new Association(26, false, 0);
-        assocA6.getTouches().add(machine1.getTouches().get(0));
-        profil2.getAssociationsAt(5).add(assocA6);
-        Association assocA7 = new Association(27, false, 0);
-        assocA7.getTouches().add(machine1.getTouches().get(0));
-        profil2.getAssociationsAt(6).add(assocA7);
-        Association assocA8 = new Association(28, false, 0);
-        assocA8.getTouches().add(machine1.getTouches().get(0));
-        profil2.getAssociationsAt(7).add(assocA8);
-        Association assocA9 = new Association(29, false, 0);
-        assocA9.getTouches().add(machine1.getTouches().get(0));
-        profil2.getAssociationsAt(8).add(assocA9);
-        Association assocA10 = new Association(30, false, 0);
-        assocA10.getTouches().add(machine1.getTouches().get(0));
-        profil2.getAssociationsAt(9).add(assocA10);
-        Association assocA11 = new Association(31, false, 0);
-        assocA11.getTouches().add(machine1.getTouches().get(0));
-        profil2.getAssociationsAt(10).add(assocA11);
-        Association assocA12 = new Association(32, false, 0);
-        assocA12.getTouches().add(machine1.getTouches().get(0));
-        profil2.getAssociationsAt(11).add(assocA12);
-        machine2.ajouterProfil(profil2);
-
-        toutesLesMachines.add(machine2);
-
-
 
         btnCreationProfil.setOnAction(new EventHandler<ActionEvent>()
         {
