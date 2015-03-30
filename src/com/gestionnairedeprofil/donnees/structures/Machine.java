@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.donnees.structures;
 
@@ -36,7 +36,7 @@ public class Machine
     private final String nom;
     private ArrayList<Profil> profils;
     private ArrayList<ToucheMachine> touches;
-    private String nomImage;
+    private final String nomImage;
 
     public Machine(int idMachine, String nomMachine, String nomImg)
     {
@@ -62,6 +62,14 @@ public class Machine
     public String getNom()
     {
         return nom;
+    }
+    
+        /**
+     * @return the nom
+     */
+    public String getFichier()
+    {
+        return nomImage;
     }
 
     /**

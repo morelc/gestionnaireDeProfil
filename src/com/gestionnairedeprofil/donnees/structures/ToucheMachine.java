@@ -17,9 +17,11 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.donnees.structures;
+
+import com.gestionnairedeprofil.configuration.Langue;
 
 /**
  * Classe de représentation des données liées à une touche à simuler. Class used
@@ -31,7 +33,7 @@ public class ToucheMachine
 {
 
     public final static int ID_TOUCHE_NON_ASSOCIEE = -1;
-    public final static String NON_TOUCHE_NON_ASSOCIEE = "(aucune touche)";
+    public final static String NON_TOUCHE_NON_ASSOCIEE = Langue.getLangue().getString("MachineButton_BUTTON_NON_ASSOCIATED");
     public final static int SIGNAL_TOUCHE_NON_ASSOCIEE = 0;
     private final int id;
     private final String nom;

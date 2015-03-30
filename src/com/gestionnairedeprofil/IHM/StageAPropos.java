@@ -17,10 +17,11 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.configuration.Langue;
 import java.net.URI;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -50,7 +51,7 @@ class StageAPropos extends Stage
     StageAPropos(double i, Stage stageParent)
     {
         // configuration des dépendances
-        this.setTitle("À propos...");
+        this.setTitle(Langue.getLangue().getString("AboutWindow_title"));
         this.initModality(Modality.APPLICATION_MODAL);
         this.initStyle(StageStyle.UTILITY);
         this.initOwner(stageParent);
@@ -63,7 +64,7 @@ class StageAPropos extends Stage
         texteTitreLogiciel.setFont(new Font(20 * i));
         texteTitreLogiciel.setFill(Color.web("#696969", 1.0));
         texteTitreLogiciel.setTextAlignment(TextAlignment.CENTER);
-        texteTitreLogiciel.setText("Gestionnaire de profil V1.0");
+        texteTitreLogiciel.setText(Langue.getLangue().getString("AboutWindow_textSoftwareName"));
 
         Text texteRealisePar = new Text();
         texteRealisePar.setX(60 * i);
@@ -71,7 +72,7 @@ class StageAPropos extends Stage
         texteRealisePar.setFont(new Font(16 * i));
         texteRealisePar.setFill(Color.web("#696969", 1.0));
         texteRealisePar.setTextAlignment(TextAlignment.CENTER);
-        texteRealisePar.setText("Application réalisée par...");
+        texteRealisePar.setText(Langue.getLangue().getString("AboutWindow_textRealisedBy"));
 
         ImageView iconeRealisation = new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/Logo_Team.png")));
         iconeRealisation.setFitHeight(80 * i);
@@ -85,10 +86,7 @@ class StageAPropos extends Stage
         texteNoms.setFont(new Font(14 * i));
         texteNoms.setFill(Color.web("#696969", 1.0));
         texteNoms.setTextAlignment(TextAlignment.CENTER);
-        texteNoms.setText("MOREL Charles"
-                + "\nIHM & Envoi des données"
-                + "\n\nTIS Fakri"
-                + "\nBase de données SQLite");
+        texteNoms.setText("MOREL Charles\n" + Langue.getLangue().getString("AboutWindow_textNamesA") + "\n\nTis Fakri\n" + Langue.getLangue().getString("AboutWindow_textNamesB"));
 
         Text texteLicense = new Text();
         texteLicense.setX(15 * i);
@@ -96,14 +94,9 @@ class StageAPropos extends Stage
         texteLicense.setFont(new Font(12 * i));
         texteLicense.setFill(Color.web("#696969", 1.0));
         texteLicense.setTextAlignment(TextAlignment.CENTER);
-        texteLicense.setText("Ce programme est libre, vous pouvez le redistribuer"
-                + "\net/ou le modifer selon les termes de la License"
-                + "\nPublique Générale GNU (V2 ou ultérieure)"
-                + "\n\nIl est distribué car potentiellement utile,"
-                + "\nmais sans AUCUNE GARANTIE."
-                + "\n\nPour plus de détails: www.gnu.org");
+        texteLicense.setText(Langue.getLangue().getString("AboutWindow_textLicense"));
 
-        Button btnOk = new Button("Ok", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
+        Button btnOk = new Button(Langue.getLangue().getString("AboutWindow_btnOk"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
         btnOk.setLayoutX(125 * i);
         btnOk.setLayoutY(310 * i);
         btnOk.setPrefSize(50 * i, 25 * i);
@@ -130,13 +123,6 @@ class StageAPropos extends Stage
             public void handle(ActionEvent event)
             {
                 StageAPropos.this.close();
-                try {
-                    URI u = new URI("test.fr");
-                    java.awt.Desktop.getDesktop().browse(u);
-                }
-                catch (Exception e) {
-                    e.getMessage();
-                }
             }
         });
 

@@ -17,10 +17,11 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.configuration.Langue;
 import com.gestionnairedeprofil.donnees.structures.Association;
 import com.gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 import com.gestionnairedeprofil.donnees.structures.ToucheMachine;
@@ -69,7 +70,7 @@ public class StageEditionAssociationTouche extends Stage
     public StageEditionAssociationTouche(final double i, final StageEditionProfil profilConcerne, final int numDuBtnAModifier)
     {
         // configuration des dépendances
-        this.setTitle("Edition de l'association");
+        this.setTitle(Langue.getLangue().getString("AssociationEditionWindow_title"));
         this.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/edit.png")));
         this.initModality(Modality.WINDOW_MODAL);
         this.initOwner(profilConcerne);
@@ -90,11 +91,11 @@ public class StageEditionAssociationTouche extends Stage
         texteTypeAssoc.setFont(new Font(12 * i));
         texteTypeAssoc.setFill(Color.web("#696969", 1.0));
         texteTypeAssoc.setTextAlignment(TextAlignment.RIGHT);
-        texteTypeAssoc.setText("Type d'association:");
+        texteTypeAssoc.setText(Langue.getLangue().getString("AssociationEditionWindow_textAssocType"));
 
         // Configuration des contrôles
 
-        Button btnAnnulerModifs = new Button("Annuler", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/cancel.png"))));
+        Button btnAnnulerModifs = new Button(Langue.getLangue().getString("AssociationEditionWindow_btnCancel"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/cancel.png"))));
         btnAnnulerModifs.setLayoutX(200 * i);
         btnAnnulerModifs.setLayoutY(315 * i);
         btnAnnulerModifs.setPrefSize(50 * i, 25 * i);
@@ -102,7 +103,7 @@ public class StageEditionAssociationTouche extends Stage
         btnAnnulerModifs.setMinSize(50 * i, 25 * i);
         btnAnnulerModifs.setFont(new Font(7 * i));
 
-        Button btnModifier = new Button("Modifier", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
+        Button btnModifier = new Button(Langue.getLangue().getString("AssociationEditionWindow_btnOk"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
         btnModifier.setLayoutX(260 * i);
         btnModifier.setLayoutY(315 * i);
         btnModifier.setPrefSize(55 * i, 25 * i);
@@ -116,7 +117,11 @@ public class StageEditionAssociationTouche extends Stage
         this.cbTypeAssoc.setPrefSize(200 * i, 20 * i);
         this.cbTypeAssoc.setMaxSize(200 * i, 20 * i);
         this.cbTypeAssoc.setMinSize(200 * i, 20 * i);
-        this.cbTypeAssoc.getItems().addAll("(aucune action)", "Appui simple", "Combinaison", "Autofire", "Macro");
+        this.cbTypeAssoc.getItems().addAll(Langue.getLangue().getString("AssociationEditionWindow_cbTypeAssocA"),
+                Langue.getLangue().getString("AssociationEditionWindow_cbTypeAssocB"),
+                Langue.getLangue().getString("AssociationEditionWindow_cbTypeAssocC"),
+                Langue.getLangue().getString("AssociationEditionWindow_cbTypeAssocD"),
+                Langue.getLangue().getString("AssociationEditionWindow_cbTypeAssocE"));
         this.cbTypeAssoc.getSelectionModel().select(this.associationsAuDepart.getAssocType());
 
         // Configuration des sous-panneaux
@@ -166,7 +171,7 @@ public class StageEditionAssociationTouche extends Stage
             public void handle(ActionEvent event)
             {
                 if (!panneauEditionAssocCourrant.associationValide()) {
-                    new StageMessageErreur(i, StageEditionAssociationTouche.this, "Votre association est impossible car\n" + panneauEditionAssocCourrant.getMessageDInvalidite());
+                    new StageMessageErreur(i, StageEditionAssociationTouche.this, Langue.getLangue().getString("AssociationEditionWindow_error") + "\n" + panneauEditionAssocCourrant.getMessageDInvalidite());
                 }
                 else {
                     profilConcerne.setAssociationsModifiesAt(panneauEditionAssocCourrant.getAssociations(), numDuBtnAModifier);

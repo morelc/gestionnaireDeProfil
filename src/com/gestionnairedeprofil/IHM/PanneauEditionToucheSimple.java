@@ -17,10 +17,11 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.configuration.Langue;
 import com.gestionnairedeprofil.donnees.structures.Association;
 import com.gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 import com.gestionnairedeprofil.donnees.structures.ToucheMachine;
@@ -34,15 +35,16 @@ import javafx.scene.text.TextAlignment;
 
 /**
  * Panneau d'édition d'association touche simple (utilisé dans la fenêtre
- * d'édition d'associations). Pane used for an simple association (used in the
- * association edition window)
+ * d'édition d'associations).
+ *
+ * Pane used for an simple association (used in the association edition window)
  *
  * @author MOREL Charles
  */
 public class PanneauEditionToucheSimple extends AnchorPane implements InterfaceEditionAssociation
 {
 
-    public final static String MESSAGE_INVALIDITE = " au moins une touche doit être\nselectionnée dans la liste!";
+    public final static String MESSAGE_INVALIDITE = Langue.getLangue().getString("SimpleButtonEditionPane_ERROR_MESSAGE");
     ComboBox cbTocuheSimpleAppuyee;
 
     public PanneauEditionToucheSimple(double i, ArrayList<ToucheMachine> touchesDisponibles, AssociationsDansProfil associationsDeBase)
@@ -60,7 +62,7 @@ public class PanneauEditionToucheSimple extends AnchorPane implements InterfaceE
         texteAppuiSimple.setFont(new Font(15 * i));
         texteAppuiSimple.setFill(Color.web("#696969", 1.0));
         texteAppuiSimple.setTextAlignment(TextAlignment.CENTER);
-        texteAppuiSimple.setText("Appui simple\nsur la touche:");
+        texteAppuiSimple.setText(Langue.getLangue().getString("SimpleButtonEditionPane_textAppuiSimple"));
         this.getChildren().add(texteAppuiSimple);
 
         // Configuration des contrôles

@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
@@ -36,8 +36,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
- * Panneau utilisé pour définir une machine disponible et ses profils. Pane used
- * to define an availible machine and his profils.
+ * Panneau utilisé pour définir une machine disponible et ses profils.
+ *
+ * Pane used to define an availible machine and his profils.
  *
  * @author MOREL Charles
  */

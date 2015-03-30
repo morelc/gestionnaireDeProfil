@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
@@ -26,8 +26,10 @@ import java.util.ArrayList;
 
 /**
  * Interface utilisée pour définir tous les panneaux de type combinaison
- * (combinaison, autofire, combinaison dans macro). Interface used to define all
- * pnanes of type combinaison (combinaison, autofire, combinaison in autofire)
+ * (combinaison, autofire, combinaison dans macro).
+ *
+ * Interface used to define all pnanes of type combinaison (combinaison,
+ * autofire, combinaison in autofire)
  *
  * @author MOREL Charles
  */

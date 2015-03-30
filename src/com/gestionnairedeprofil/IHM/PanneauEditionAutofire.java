@@ -17,10 +17,11 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.configuration.Langue;
 import com.gestionnairedeprofil.donnees.structures.Association;
 import com.gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 import com.gestionnairedeprofil.donnees.structures.ToucheMachine;
@@ -44,15 +45,17 @@ import javafx.util.Duration;
 
 /**
  * Panneau d'édition d'association autofire (utilisé dans la fenêtre d'édition
- * d'associations). Pane used for an autofire association (used in the
- * association edition window)
+ * d'associations).
+ *
+ * Pane used for an autofire association (used in the association edition
+ * window)
  *
  * @author MOREL Charles
  */
 public class PanneauEditionAutofire extends AnchorPane implements InterfaceEditionAssociation, InterfacePanneauTypeCombinaison
 {
 
-    public final static String MESSAGE_INVALIDITE = "au moins une touche doit être\nselectionnée et le laps de répétition\nsuperieur ou égal\nà 10 ms";
+    public final static String MESSAGE_INVALIDITE = Langue.getLangue().getString("AutofireEditionPane_ERROR_MESSAGE");
     private final ArrayList<PanneauToucheMachinePourCombinaison> combinaison;
     private final ArrayList<ToucheMachine> touchesDisponiblesAffichables;
     private final Button btnAjouterCmb;
@@ -75,7 +78,7 @@ public class PanneauEditionAutofire extends AnchorPane implements InterfaceEditi
         texeTimer.setFont(new Font(15 * i));
         texeTimer.setFill(Color.web("#696969", 1.0));
         texeTimer.setTextAlignment(TextAlignment.CENTER);
-        texeTimer.setText("Répéter toutes les :");
+        texeTimer.setText(Langue.getLangue().getString("AutofireEditionPane_textTimer"));
         this.getChildren().add(texeTimer);
 
         Text texeTimerBis = new Text();
@@ -84,7 +87,7 @@ public class PanneauEditionAutofire extends AnchorPane implements InterfaceEditi
         texeTimerBis.setFont(new Font(15 * i));
         texeTimerBis.setFill(Color.web("#696969", 1.0));
         texeTimerBis.setTextAlignment(TextAlignment.CENTER);
-        texeTimerBis.setText("ms");
+        texeTimerBis.setText(Langue.getLangue().getString("AutofireEditionPane_textTimerBis"));
         this.getChildren().add(texeTimerBis);
 
         Text texteCombinaison = new Text();
@@ -93,7 +96,7 @@ public class PanneauEditionAutofire extends AnchorPane implements InterfaceEditi
         texteCombinaison.setFont(new Font(15 * i));
         texteCombinaison.setFill(Color.web("#696969", 1.0));
         texteCombinaison.setTextAlignment(TextAlignment.CENTER);
-        texteCombinaison.setText("L'appui sur la\nou les touches:");
+        texteCombinaison.setText(Langue.getLangue().getString("AutofireEditionPane_textCombinaison"));
         this.getChildren().add(texteCombinaison);
 
         // Configuration des contrôles
@@ -109,14 +112,14 @@ public class PanneauEditionAutofire extends AnchorPane implements InterfaceEditi
 
         this.combinaison = new ArrayList();
 
-        this.btnAjouterCmb = new Button("Ajouter...", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png"))));
+        this.btnAjouterCmb = new Button(Langue.getLangue().getString("AutofireEditionPane_btnAddCmb"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png"))));
         this.btnAjouterCmb.setLayoutX(90 * i);
         this.btnAjouterCmb.setLayoutY(164 * i);
         this.btnAjouterCmb.setMaxSize(105 * i, 20 * i);
         this.btnAjouterCmb.setMinSize(105 * i, 20 * i);
         this.btnAjouterCmb.setPrefSize(105 * i, 20 * i);
         Tooltip infobulleBtnAjouterCmb = new Tooltip();
-        infobulleBtnAjouterCmb.setText("Ajouter une nouvelle touche à l'autofie");
+        infobulleBtnAjouterCmb.setText(Langue.getLangue().getString("AutofireEditionPane_infobulleBtnAddCmb"));
         this.btnAjouterCmb.setTooltip(infobulleBtnAjouterCmb);
         this.getChildren().add(this.btnAjouterCmb);
 

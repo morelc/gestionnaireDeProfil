@@ -17,10 +17,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.configuration.Langue;
+import com.gestionnairedeprofil.configuration.StageDeConfiguration;
 import com.gestionnairedeprofil.donnees.BD.MachineDAO;
 import com.gestionnairedeprofil.donnees.structures.Association;
 import com.gestionnairedeprofil.donnees.structures.Machine;
@@ -69,27 +71,14 @@ import javafx.util.Duration;
 public class ApplicationPrincipale extends Application
 {
 
-    /**
-     * combobox contenant la liste des lecteurs disponibles.
-     *
-     * Combobox who contains all devices
-     */
     private ComboBox cbSelectionLecteur;
 
-    /**
-     * Fonction de lancement de l'appliaction.
-     *
-     * Function who launch the application
-     *
-     * @param stage
-     */
     @Override
     public void start(final Stage stage)
     {
-        // Configuration des paramètres d'écran
+        // Configuration de l'application
 
         final double dim = (Screen.getPrimary().getBounds().getWidth() - 200) / 720;
-        System.out.println(dim);
 
         // Configuration des séparations
 
@@ -135,7 +124,7 @@ public class ApplicationPrincipale extends Application
         texteNumEtape1.setFont(new Font(20 * dim));
         texteNumEtape1.setFill(Color.WHITE);
         texteNumEtape1.setTextAlignment(TextAlignment.CENTER);
-        texteNumEtape1.setText("1");
+        texteNumEtape1.setText(Langue.getLangue().getString("MainApp_stepNum1"));
 
         Text texteNumEtape2 = new Text();
         texteNumEtape2.setX(285 * dim);
@@ -143,7 +132,7 @@ public class ApplicationPrincipale extends Application
         texteNumEtape2.setFont(new Font(20 * dim));
         texteNumEtape2.setFill(Color.WHITE);
         texteNumEtape2.setTextAlignment(TextAlignment.CENTER);
-        texteNumEtape2.setText("2");
+        texteNumEtape2.setText(Langue.getLangue().getString("MainApp_stepNum2"));
 
         Text texteNumEtape3 = new Text();
         texteNumEtape3.setX(525 * dim);
@@ -151,7 +140,7 @@ public class ApplicationPrincipale extends Application
         texteNumEtape3.setFont(new Font(20 * dim));
         texteNumEtape3.setFill(Color.WHITE);
         texteNumEtape3.setTextAlignment(TextAlignment.CENTER);
-        texteNumEtape3.setText("3");
+        texteNumEtape3.setText(Langue.getLangue().getString("MainApp_stepNum3"));
 
         Text texteEtape1 = new Text();
         texteEtape1.setX(80 * dim);
@@ -159,7 +148,7 @@ public class ApplicationPrincipale extends Application
         texteEtape1.setFont(new Font(20 * dim));
         texteEtape1.setFill(Color.web("#696969", 1.0));
         texteEtape1.setTextAlignment(TextAlignment.CENTER);
-        texteEtape1.setText("Gestion des\nprofils sur PC");
+        texteEtape1.setText(Langue.getLangue().getString("MainApp_textStep1"));
 
         Text texteEtape2 = new Text();
         texteEtape2.setX(320 * dim);
@@ -167,7 +156,7 @@ public class ApplicationPrincipale extends Application
         texteEtape2.setFont(new Font(20 * dim));
         texteEtape2.setFill(Color.web("#696969", 1.0));
         texteEtape2.setTextAlignment(TextAlignment.CENTER);
-        texteEtape2.setText("Profils à envoyer\nsur le JoyPad");
+        texteEtape2.setText(Langue.getLangue().getString("MainApp_textStep2"));
 
         Text texteEtape3 = new Text();
         texteEtape3.setX(575 * dim);
@@ -175,7 +164,7 @@ public class ApplicationPrincipale extends Application
         texteEtape3.setFont(new Font(20 * dim));
         texteEtape3.setFill(Color.web("#696969", 1.0));
         texteEtape3.setTextAlignment(TextAlignment.CENTER);
-        texteEtape3.setText("Envoi");
+        texteEtape3.setText(Langue.getLangue().getString("MainApp_textStep3"));
 
         Text texteSelectionLecteur = new Text();
         texteSelectionLecteur.setX(515 * dim);
@@ -183,7 +172,7 @@ public class ApplicationPrincipale extends Application
         texteSelectionLecteur.setFont(new Font(15 * dim));
         texteSelectionLecteur.setFill(Color.web("#696969", 1.0));
         texteSelectionLecteur.setTextAlignment(TextAlignment.CENTER);
-        texteSelectionLecteur.setText("Selectionnez le lecteur de\nla carte SD...");
+        texteSelectionLecteur.setText(Langue.getLangue().getString("MainApp_textDeviceSelection"));
 
         Text texteBoutonEnvoyer = new Text();
         texteBoutonEnvoyer.setX(550 * dim);
@@ -191,7 +180,7 @@ public class ApplicationPrincipale extends Application
         texteBoutonEnvoyer.setFont(new Font(15 * dim));
         texteBoutonEnvoyer.setFill(Color.web("#696969", 1.0));
         texteBoutonEnvoyer.setTextAlignment(TextAlignment.CENTER);
-        texteBoutonEnvoyer.setText("... et envoyez!");
+        texteBoutonEnvoyer.setText(Langue.getLangue().getString("MainApp_textBtnSend"));
 
         MenuDAideLogiciel menuDAide = new MenuDAideLogiciel(dim, stage, this);
         menuDAide.setLayoutX(700 * dim);
@@ -206,7 +195,7 @@ public class ApplicationPrincipale extends Application
         panneauProfilsDuPc.setMaxSize(200 * dim, 270 * dim);
         panneauProfilsDuPc.setMinSize(200 * dim, 270 * dim);
 
-        Button btnCreationProfil = new Button("Ajouter", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png"))));
+        Button btnCreationProfil = new Button(Langue.getLangue().getString("MainApp_btnProfileCreation"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png"))));
         btnCreationProfil.setLayoutX(20 * dim);
         btnCreationProfil.setLayoutY(345 * dim);
         btnCreationProfil.setPrefSize(200 * dim, 20 * dim);
@@ -214,7 +203,7 @@ public class ApplicationPrincipale extends Application
         btnCreationProfil.setMinSize(200 * dim, 20 * dim);
         btnCreationProfil.setFont(new Font(7 * dim));
         Tooltip infobulleBtnAjouter = new Tooltip();
-        infobulleBtnAjouter.setText("Créer un nouveau profil sur le PC");
+        infobulleBtnAjouter.setText(Langue.getLangue().getString("MainApp_infobulleBtnCreation"));
         btnCreationProfil.setTooltip(infobulleBtnAjouter);
 
         final ListeProfilsAEnvoyer panneauProfilsVersPad = new ListeProfilsAEnvoyer(dim, panneauProfilsDuPc);
@@ -238,10 +227,10 @@ public class ApplicationPrincipale extends Application
         btnafraichirListeLecteurs.setMaxSize(20 * dim, 20 * dim);
         btnafraichirListeLecteurs.setMinSize(20 * dim, 20 * dim);
         Tooltip infobulleBtnRafraichir = new Tooltip();
-        infobulleBtnRafraichir.setText("Rafraîchir la liste des lecteurs");
+        infobulleBtnRafraichir.setText(Langue.getLangue().getString("MainApp_btnrefreshDevicesList"));
         btnafraichirListeLecteurs.setTooltip(infobulleBtnRafraichir);
 
-        Button btnEnvoiVersCarteSD = new Button("Démarrer l'envoi", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
+        Button btnEnvoiVersCarteSD = new Button(Langue.getLangue().getString("MainApp_btnSendToSDCard"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
         btnEnvoiVersCarteSD.setLayoutX(550 * dim);
         btnEnvoiVersCarteSD.setLayoutY(280 * dim);
         btnEnvoiVersCarteSD.setPrefSize(100 * dim, 20 * dim);
@@ -249,25 +238,21 @@ public class ApplicationPrincipale extends Application
         btnEnvoiVersCarteSD.setMinSize(100 * dim, 20 * dim);
         btnEnvoiVersCarteSD.setFont(new Font(7 * dim));
         Tooltip infobulleBtnEnvoi = new Tooltip();
-        infobulleBtnEnvoi.setText("Envoyer les profils vers la carte SD");
+        infobulleBtnEnvoi.setText(Langue.getLangue().getString("MainApp_infobulleBtnSend"));
         btnEnvoiVersCarteSD.setTooltip(infobulleBtnEnvoi);
 
         // Pour l'exemple
 
         Machine machine1 = new Machine(2, "Sega Master System", "img1");
 
-        ToucheMachine touche1 = new ToucheMachine(1, "X1", 1);
-        ToucheMachine touche2 = new ToucheMachine(2, "Action", 2);
-        ToucheMachine touche5 = new ToucheMachine(2, "X2", 4);
-        ToucheMachine touche6 = new ToucheMachine(2, "Saut", 8);
-        ToucheMachine touche7 = new ToucheMachine(2, "Droite", 16);
-        ToucheMachine touche8 = new ToucheMachine(2, "Gauche", 32);
-        ToucheMachine touche9 = new ToucheMachine(2, "Bas", 64);
-        ToucheMachine touche10 = new ToucheMachine(2, "Haut", 128);
+        ToucheMachine touche2 = new ToucheMachine(0, "←", 2);
+        ToucheMachine touche6 = new ToucheMachine(1, "↑", 8);
+        ToucheMachine touche7 = new ToucheMachine(2, "→", 16);
+        ToucheMachine touche8 = new ToucheMachine(3, "↓", 32);
+        ToucheMachine touche9 = new ToucheMachine(4, "1 - START", 64);
+        ToucheMachine touche10 = new ToucheMachine(5, "2", 128);
 
-        machine1.ajouterTouche(touche1);
         machine1.ajouterTouche(touche2);
-        machine1.ajouterTouche(touche5);
         machine1.ajouterTouche(touche6);
         machine1.ajouterTouche(touche7);
         machine1.ajouterTouche(touche8);
@@ -451,11 +436,11 @@ public class ApplicationPrincipale extends Application
         Scene scene = new Scene(root, 720 * dim, 380 * dim, new LinearGradient(0, 1, 1, 0, true, CycleMethod.NO_CYCLE, new Stop[]{new Stop(0, Color.web("#FFFFFF", 1.0)), new Stop(1, Color.web("#B4B4B4", 1.0))}));
 
         // Configuration de Stage
-        stage.setTitle("Gestionnaire de profil");
+        stage.setTitle(Langue.getLangue().getString("MainApp_title"));
         stage.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/icone.png")));
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.show();
+        StageDeConfiguration.lancerConfiguration(dim, stage);
     }
 
     /**

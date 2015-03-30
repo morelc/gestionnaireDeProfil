@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
@@ -27,8 +27,9 @@ import javafx.scene.control.Button;
 
 /**
  * Bouton utilisé pour l'édition d'une association (dans la fenêtre d'édition de
- * profil). Button used for the edition of an association in profile edition
- * window.
+ * profil).
+ *
+ * Button used for the edition of an association in profile edition window.
  *
  * @author MOREL Charles
  */

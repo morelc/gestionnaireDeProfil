@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
@@ -34,8 +34,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 /**
- * Panneau pour la liste des profils à envoyer. Pane used for the profils to
- * send
+ * Panneau pour la liste des profils à envoyer.
+ *
+ * Pane used for the profils to send
  *
  * @author MOREL Charles
  */

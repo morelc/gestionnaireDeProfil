@@ -17,10 +17,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.configuration.Langue;
+import com.gestionnairedeprofil.configuration.StageDeConfiguration;
 import java.awt.Desktop;
 import java.net.URI;
 import java.util.logging.Level;
@@ -42,7 +44,9 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 /**
- * Menu d'aide du logiciel. Help menu
+ * Menu d'aide du logiciel.
+ *
+ * Application help menu
  *
  * @author MOREL Charles
  */
@@ -54,11 +58,13 @@ public class MenuDAideLogiciel extends Group
 
         // Configuration des contrôles
         final ContextMenu menuContextuel = new ContextMenu();
-        Menu menuAide = new Menu("Aide");
+        Menu menuAide = new Menu(Langue.getLangue().getString("SoftwareHelpMenu_helpMenu"));
         menuContextuel.getItems().add(menuAide);
-        MenuItem menuAide1 = new MenuItem("Site des développeurs...");
-        menuAide.getItems().add(menuAide1);
-        MenuItem menuAPropos = new MenuItem("À propos...");
+        MenuItem sousMenuAide1 = new MenuItem(Langue.getLangue().getString("SoftwareHelpMenu_subMenuHelp1"));
+        menuAide.getItems().add(sousMenuAide1);
+        MenuItem menuChangerLangue = new MenuItem(Langue.getLangue().getString("SoftwareHelpMenu_menuChangeLanguage"));
+        menuContextuel.getItems().add(menuChangerLangue);
+        MenuItem menuAPropos = new MenuItem(Langue.getLangue().getString("SoftwareHelpMenu_menuAbout"));
         menuContextuel.getItems().add(menuAPropos);
 
         // Configuration des noeuds statiques
@@ -101,6 +107,16 @@ public class MenuDAideLogiciel extends Group
             }
         });
 
+        menuChangerLangue.setOnAction(new EventHandler<ActionEvent>()
+        {
+
+            @Override
+            public void handle(ActionEvent event)
+            {
+                new StageDeConfiguration(i, stageParent);
+            }
+        });
+
         menuAPropos.setOnAction(new EventHandler<ActionEvent>()
         {
 
@@ -111,7 +127,7 @@ public class MenuDAideLogiciel extends Group
             }
         });
 
-        menuAide1.setOnAction(new EventHandler<ActionEvent>()
+        sousMenuAide1.setOnAction(new EventHandler<ActionEvent>()
         {
 
             @Override

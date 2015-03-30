@@ -17,10 +17,11 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
+import com.gestionnairedeprofil.configuration.Langue;
 import com.gestionnairedeprofil.donnees.structures.Association;
 import com.gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 import javafx.scene.image.Image;
@@ -33,8 +34,9 @@ import javafx.scene.text.TextAlignment;
 
 /**
  * Panneau d'édition d'association vide (utilisé dans la fenêtre d'édition
- * d'associations). Pane used for an empty association (used in the association
- * edition window)
+ * d'associations).
+ *
+ * Pane used for an empty association (used in the association edition window)
  *
  * @author MOREL Charles
  */
@@ -64,10 +66,7 @@ public class PanneauEditionVide extends AnchorPane implements InterfaceEditionAs
         texteAppuiSimple.setFont(new Font(15 * i));
         texteAppuiSimple.setFill(Color.web("#696969", 1.0));
         texteAppuiSimple.setTextAlignment(TextAlignment.CENTER);
-        texteAppuiSimple.setText("Aucun signal n'est"
-                + "\nenvoyé à l'appui de ce bouton!"
-                + "\npour changer cet état, choisissez un"
-                + "\ntype d'association...");
+        texteAppuiSimple.setText(Langue.getLangue().getString("EmptyAssociationEditionPane_text"));
         this.getChildren().add(texteAppuiSimple);
     }
 

@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
@@ -25,8 +25,9 @@ import com.gestionnairedeprofil.donnees.structures.AssociationsDansProfil;
 
 /**
  * Interface utilisée pour déinir tous les panneaux d'édition d'association dans
- * profil. Interface used to define all panes for editing all association in
- * profile.
+ * profil.
+ *
+ * Interface used to define all panes for editing all association in profile.
  *
  * @author MOREL Charles
  */

@@ -17,11 +17,11 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Gestionnaire de profil.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.gestionnairedeprofil.IHM;
 
-import com.gestionnairedeprofil.donnees.BD.ProfilDAO;
+import com.gestionnairedeprofil.configuration.Langue;
 import com.gestionnairedeprofil.donnees.structures.Association;
 import com.gestionnairedeprofil.donnees.structures.Machine;
 import com.gestionnairedeprofil.donnees.structures.Profil;
@@ -57,7 +57,7 @@ public class StageCreationProfil extends Stage
     public StageCreationProfil(final double i, Stage stageParent, ArrayList<Machine> machinesDisponibles, final Accordion panneauxDesProfils)
     {
         // configuration des dépendances
-        this.setTitle("Création d'un profil");
+        this.setTitle(Langue.getLangue().getString("ProfileCreationWindow_title"));
         this.getIcons().add(new Image(getClass().getResourceAsStream("ressourcesGraphiques/add.png")));
         this.initModality(Modality.WINDOW_MODAL);
         this.initOwner(stageParent);
@@ -71,7 +71,7 @@ public class StageCreationProfil extends Stage
         texteNomProfil.setFont(new Font(15 * i));
         texteNomProfil.setFill(Color.web("#696969", 1.0));
         texteNomProfil.setTextAlignment(TextAlignment.RIGHT);
-        texteNomProfil.setText("Nom du profil:");
+        texteNomProfil.setText(Langue.getLangue().getString("ProfileCreationWindow_textProfileName"));
 
         Text texteNomMachine = new Text();
         texteNomMachine.setLayoutX(100 * i);
@@ -79,7 +79,7 @@ public class StageCreationProfil extends Stage
         texteNomMachine.setFont(new Font(15 * i));
         texteNomMachine.setFill(Color.web("#696969", 1.0));
         texteNomMachine.setTextAlignment(TextAlignment.RIGHT);
-        texteNomMachine.setText("Machine associée:");
+        texteNomMachine.setText(Langue.getLangue().getString("ProfileCreationWindow_textMachineName"));
 
         ImageView fondCreation = new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/create.png")));
         fondCreation.setFitHeight(100 * i);
@@ -89,7 +89,7 @@ public class StageCreationProfil extends Stage
 
         // Configuration des contrôles
 
-        Button btnNon = new Button("Annuler", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/cancel.png"))));
+        Button btnNon = new Button(Langue.getLangue().getString("ProfileCreationWindow_btnNo"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/cancel.png"))));
         btnNon.setLayoutX(220 * i);
         btnNon.setLayoutY(110 * i);
         btnNon.setPrefSize(50 * i, 25 * i);
@@ -97,7 +97,7 @@ public class StageCreationProfil extends Stage
         btnNon.setMinSize(50 * i, 25 * i);
         btnNon.setFont(new Font(7 * i));
 
-        Button btnCreer = new Button("Créer", new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
+        Button btnCreer = new Button(Langue.getLangue().getString("ProfileCreationWindow_btnCreate"), new ImageView(new Image(getClass().getResourceAsStream("ressourcesGraphiques/ok.png"))));
         btnCreer.setLayoutX(300 * i);
         btnCreer.setLayoutY(110 * i);
         btnCreer.setPrefSize(50 * i, 25 * i);
@@ -143,7 +143,7 @@ public class StageCreationProfil extends Stage
             public void handle(ActionEvent event)
             {
                 if (textAreaNomProfil.getText().length() == 0 || textAreaNomProfil.getText().length() >= 50) {
-                    new StageMessageErreur(i, StageCreationProfil.this, "Veuillez entrer un nom\nde profil valide.");
+                    new StageMessageErreur(i, StageCreationProfil.this, Langue.getLangue().getString("ProfileCreationWindow_msgError"));
                     event.consume();
                 }
                 else {
