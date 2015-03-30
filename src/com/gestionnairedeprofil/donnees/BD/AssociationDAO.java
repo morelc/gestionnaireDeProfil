@@ -71,4 +71,23 @@ public class AssociationDAO
             adp.add(new Association());
         return adp;
     }
+    
+      public static void deleteOnCascade(int idP){
+        String query = "DELETE FROM Associations WHERE idProfil=" + idP;
+        Connection c = null;
+        Statement stmt = null;
+        try {
+            Class.forName(JDBC_DRIVER);
+            c = DriverManager.getConnection("jdbc:sqlite:dbsqlite");
+            c.setAutoCommit(false);
+            stmt = c.createStatement();
+            stmt.executeUpdate(query);
+            c.commit();
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
 }

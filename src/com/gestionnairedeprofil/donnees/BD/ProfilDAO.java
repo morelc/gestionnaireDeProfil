@@ -82,7 +82,7 @@ public class ProfilDAO {
     }
 
     public static void deleteProfilById(int id) {
-        String query = "DELETE FROM 'Profils' WHERE id=" + id;
+        String query = "DELETE FROM Profils WHERE id=" + id;
         Connection c = null;
         Statement stmt = null;
         try {
@@ -98,6 +98,7 @@ public class ProfilDAO {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
+        AssociationDAO.deleteOnCascade(id);
     }
 
     private static int getMaxProfil() {
